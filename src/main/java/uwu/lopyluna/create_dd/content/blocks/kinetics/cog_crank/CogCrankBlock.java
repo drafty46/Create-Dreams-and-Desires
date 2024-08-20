@@ -2,11 +2,8 @@ package uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
-import com.simibubi.create.AllShapes;
-import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
-import com.simibubi.create.content.kinetics.simpleRelays.CogWheelBlock;
 import com.simibubi.create.content.kinetics.simpleRelays.CogwheelBlockItem;
 import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;
 import com.simibubi.create.content.kinetics.speedController.SpeedControllerBlock;
@@ -35,16 +32,11 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.checkerframework.checker.units.qual.A;
-import uwu.lopyluna.create_dd.content.blocks.kinetics.worm_gear.WormGearBlock;
 import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
 import uwu.lopyluna.create_dd.registry.DesiresBlockEntityTypes;
 import uwu.lopyluna.create_dd.registry.DesiresShapes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-
-import static com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock.AXIS;
-import static com.simibubi.create.content.kinetics.simpleRelays.CogWheelBlock.isValidCogwheelPosition;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -57,7 +49,7 @@ public class CogCrankBlock extends RotatedPillarKineticBlock implements IBE<CogC
         registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false));
         isLarge = large;
     }
-    
+
     @Override
     public boolean isDedicatedCogWheel() {
         return true;
@@ -91,6 +83,8 @@ public class CogCrankBlock extends RotatedPillarKineticBlock implements IBE<CogC
         if (player.isSpectator())
             return InteractionResult.PASS;
         if (player.getItemInHand(handIn).getItem() instanceof CogwheelBlockItem)
+            return InteractionResult.PASS;
+        if (player.getItemInHand(handIn).getItem() instanceof CogCrankBlockItem)
             return InteractionResult.PASS;
         withBlockEntityDo(worldIn, pos, be -> be.turn(player.isShiftKeyDown()));
         if (!player.getItemInHand(handIn)
