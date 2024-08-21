@@ -5,6 +5,7 @@ import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -20,8 +21,8 @@ public class DesiresRegistrateTags {
 	public static void addGenerators() {
 		DesiresCreate.REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, DesiresRegistrateTags::genBlockTags);
 		DesiresCreate.REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, DesiresRegistrateTags::genItemTags);
+		DesiresCreate.REGISTRATE.addDataGenerator(ProviderType.ENTITY_TAGS, DesiresRegistrateTags::genEntityTags);
 		//DesiresCreate.REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, DesiresRegistrateTags::genFluidTags);*
-		//DesiresCreate.REGISTRATE.addDataGenerator(ProviderType.ENTITY_TAGS, DesiresRegistrateTags::genEntityTags);*
 	}
 	private static void genItemTags(RegistrateTagsProvider<Item> prov) {
 
@@ -103,6 +104,9 @@ public class DesiresRegistrateTags {
 
 	private static void genBlockTags(RegistrateTagsProvider<Block> prov) {
 
+		prov.tag(DesiresTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_DRAGON_BREATHING.tag)
+				.add(Blocks.DRAGON_WALL_HEAD);
+
 		prov.tag(DesiresTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SANDING.tag)
 				.add(Blocks.SAND)
 				.add(Blocks.RED_SAND);
@@ -125,6 +129,24 @@ public class DesiresRegistrateTags {
 
 		prov.tag(DesiresTags.AllBlockTags.INDUSTRIAL_FAN_TRANSPARENT.tag)
 				.addTag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag);
+
+	}
+
+
+	private static void genEntityTags(RegistrateTagsProvider<EntityType<?>> prov) {
+		prov.tag(DesiresTags.AllEntityTags.FAN_PROCESSING_IMMUNE_DRAGON_BREATHING.tag)
+				.add(EntityType.ENDERMITE)
+				.add(EntityType.ENDERMAN)
+				.add(EntityType.ENDER_DRAGON)
+				.add(EntityType.ENDER_PEARL)
+				.add(EntityType.EYE_OF_ENDER)
+				.add(EntityType.END_CRYSTAL)
+				.add(EntityType.WANDERING_TRADER)
+				.add(EntityType.WITHER)
+				.add(EntityType.WITHER_SKELETON)
+				.add(EntityType.WITHER_SKULL)
+				.add(EntityType.DRAGON_FIREBALL)
+				.add(EntityType.SILVERFISH);
 
 	}
 }

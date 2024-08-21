@@ -8,6 +8,7 @@ import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.foundation.config.ConfigBase;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import uwu.lopyluna.create_dd.content.jei.*;
+import uwu.lopyluna.create_dd.content.recipes.DragonBreathingRecipe;
 import uwu.lopyluna.create_dd.registry.helper.Lang;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -69,6 +70,12 @@ public class DesiresJEI implements IModPlugin {
 				.emptyBackground(177, 103)
 				.build("hydraulic_compacting", HydraulicCompactingCategory::new),
 
+		dragon_breathing = builder(DragonBreathingRecipe.class)
+				.addTypedRecipes(DesiresRecipeTypes.DRAGON_BREATHING)
+				.catalystStack(DProcessingViaFanCategory.getFan("fan_dragon_breathing"))
+				.doubleItemIcon(AllItems.PROPELLER.get(), Items.END_CRYSTAL)
+				.emptyBackground(178, 72)
+				.build("fan_dragon_breathing", FanDragonBreathingCategory::new),
 		sanding = builder(SandingRecipe.class)
 				.addTypedRecipes(DesiresRecipeTypes.SANDING)
 				.catalystStack(DProcessingViaFanCategory.getFan("fan_sanding"))

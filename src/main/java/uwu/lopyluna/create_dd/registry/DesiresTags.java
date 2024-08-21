@@ -77,6 +77,7 @@ public class DesiresTags {
 
 	public enum AllBlockTags {
 
+		FAN_PROCESSING_CATALYSTS_DRAGON_BREATHING(NameSpace.MOD, "fan_processing_catalysts/dragon_breathing"),
 		FAN_PROCESSING_CATALYSTS_SANDING(NameSpace.MOD, "fan_processing_catalysts/sanding"),
 		FAN_PROCESSING_CATALYSTS_FREEZING(NameSpace.MOD, "fan_processing_catalysts/freezing"),
 		FAN_PROCESSING_CATALYSTS_SEETHING(NameSpace.MOD, "fan_processing_catalysts/seething"),
@@ -201,6 +202,7 @@ public class DesiresTags {
 
 	public enum AllFluidTags {
 
+		FAN_PROCESSING_CATALYSTS_DRAGON_BREATHING(NameSpace.MOD, "fan_processing_catalysts/dragon_breathing"),
 		FAN_PROCESSING_CATALYSTS_SANDING(NameSpace.MOD, "fan_processing_catalysts/sanding"),
 		FAN_PROCESSING_CATALYSTS_FREEZING(NameSpace.MOD, "fan_processing_catalysts/freezing"),
 		FAN_PROCESSING_CATALYSTS_SEETHING(NameSpace.MOD, "fan_processing_catalysts/seething"),
@@ -252,30 +254,32 @@ public class DesiresTags {
 		
 	}
 	
-	public enum DesiresEntityTags {
+	public enum AllEntityTags {
+
+		FAN_PROCESSING_IMMUNE_DRAGON_BREATHING(NameSpace.MOD, "fan_processing_immune/dragon_breathing"),
 
 		;
 
 		public final TagKey<EntityType<?>> tag;
 		public final boolean alwaysDatagen;
 
-		DesiresEntityTags() {
+		AllEntityTags() {
 			this(NameSpace.MOD);
 		}
 
-		DesiresEntityTags(NameSpace namespace) {
+		AllEntityTags(NameSpace namespace) {
 			this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
 		}
 
-		DesiresEntityTags(NameSpace namespace, String path) {
+		AllEntityTags(NameSpace namespace, String path) {
 			this(namespace, path, namespace.optionalDefault, namespace.alwaysDatagenDefault);
 		}
 
-		DesiresEntityTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
+		AllEntityTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
 			this(namespace, null, optional, alwaysDatagen);
 		}
 
-		DesiresEntityTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
+		AllEntityTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
 			ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
 			if (optional) {
 				tag = optionalTag(ForgeRegistries.ENTITY_TYPES, id);
@@ -341,7 +345,7 @@ public class DesiresTags {
 		AllBlockTags.init();
 		AllItemTags.init();
 		AllFluidTags.init();
-		DesiresEntityTags.init();
+		AllEntityTags.init();
 		DesiresRecipeSerializerTags.init();
 	}
 }

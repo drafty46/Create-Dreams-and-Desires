@@ -1,0 +1,16 @@
+{
+  "values": [
+    "minecraft:endermite",
+    "minecraft:enderman",
+    "minecraft:ender_dragon",
+    "minecraft:ender_pearl",
+    "minecraft:eye_of_ender",
+    "minecraft:end_crystal",
+    "minecraft:wandering_trader",
+    "minecraft:wither",
+    "minecraft:wither_skeleton",
+    "minecraft:wither_skull",
+    "minecraft:dragon_fireball",
+    "minecraft:silverfish"
+  ]
+}

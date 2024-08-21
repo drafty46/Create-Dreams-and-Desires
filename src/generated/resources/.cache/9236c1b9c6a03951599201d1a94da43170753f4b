@@ -1,4 +1,4 @@
-// 1.19.2	2024-08-07T13:34:15.6679364	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2024-08-20T16:21:56.2846616	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 9452bed2fb7ba829ea35644054add91456d3f5d9 assets/create_dd/blockstates/amethyst_block_pillar.json
 64dc32722d3ad05720fa9a200df1de7179cfd890 assets/create_dd/blockstates/basalt_pillar.json
 5fd6e80fe77786dd8fd0c5cfd6d866b44365aa96 assets/create_dd/blockstates/blackstone_pillar.json
@@ -2708,11 +2708,13 @@ e909cbaebb3d7cd1990527ce83fa030e56291b9d data/create_dd/recipes/yellow_padded_mo
 a4105789090b5f2b8289b07beaf604c202b0e9c5 data/create_dd/recipes/yellow_padded_rubber_stairs_from_yellow_rubber_decor_stonecutting.json
 28456cf1348dc45620d21850744fdb6d59e286f0 data/create_dd/recipes/yellow_padded_tiled_rubber_from_yellow_rubber_decor_stonecutting.json
 c8be540378605702c1812113dfe8164d76420bee data/create_dd/tags/blocks/blueprints.json
+1f059872d949a82aeceda3d02ccc9789b1cbb2af data/create_dd/tags/blocks/fan_processing_catalysts/dragon_breathing.json
 c3b1249655c494b0afe6fd49fc0c18d7732c5ada data/create_dd/tags/blocks/fan_processing_catalysts/freezing.json
 aeb286fcc73073ae8499b61127aac68756c6d928 data/create_dd/tags/blocks/fan_processing_catalysts/sanding.json
 82f719989659817dcd75949cc3a59122b3444784 data/create_dd/tags/blocks/fan_processing_catalysts/seething.json
 422e72fad05fccde29d0bc684eeb1339a4d2611d data/create_dd/tags/blocks/industrial_fan_heater.json
 636205e8f4f879824788cc9cc61dbc08448c1aef data/create_dd/tags/blocks/industrial_fan_transparent.json
+f08be7028db866acd6602cdf9591fd560471bfe0 data/create_dd/tags/entity_types/fan_processing_immune/dragon_breathing.json
 252647f9fab0a76f593c4afa23f38fd0f6fe4c27 data/create_dd/tags/items/additional_drops_tool.json
 26f34cb9e9f42abbe74105d3c73337016ed524e7 data/create_dd/tags/items/asphalt_blocks.json
 d1a2142e9481f58235461967f4571a6d747c815e data/create_dd/tags/items/black_rubber_decor.json

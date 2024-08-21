@@ -23,6 +23,7 @@ import java.util.function.Supplier;
 public enum DesiresRecipeTypes implements IRecipeTypeInfo {
 
 	HYDRAULIC_COMPACTING(HydraulicCompactingRecipe::new),
+	DRAGON_BREATHING(DragonBreathingRecipe::new),
 	SANDING(SandingRecipe::new),
 	FREEZING(FreezingRecipe::new),
 	SEETHING(SeethingRecipe::new);
