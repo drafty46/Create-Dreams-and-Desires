@@ -5,7 +5,6 @@ import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import uwu.lopyluna.create_dd.registry.DesiresPaletteStoneTypes;
 
@@ -32,10 +31,6 @@ public class WashingRecipeGen extends DesireProcessingRecipeGen {
 			EXPOSED_CUT_COPPER_STAIRS = convert(Blocks.CUT_COPPER_STAIRS, Blocks.EXPOSED_CUT_COPPER_STAIRS),
 			WEATHERED_CUT_COPPER_STAIRS = convert(Blocks.EXPOSED_CUT_COPPER_STAIRS, Blocks.WEATHERED_CUT_COPPER_STAIRS),
 			OXIDIZED_CUT_COPPER_STAIRS = convert(Blocks.WEATHERED_CUT_COPPER_STAIRS, Blocks.OXIDIZED_CUT_COPPER_STAIRS);
-
-	public GeneratedRecipe convert(Block block, Block result) {
-		return create(() -> block, b -> b.output(result));
-	}
 
 	public WashingRecipeGen(DataGenerator dataGenerator) {
 		super(dataGenerator);

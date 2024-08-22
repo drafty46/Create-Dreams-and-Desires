@@ -1,4 +1,4 @@
-// 1.19.2	2024-08-03T22:25:48.6983265	Create: Dreams n' Desires Processing Recipes
+// 1.19.2	2024-08-22T08:30:47.1922675	Create: Dreams n' Desires Processing Recipes
 b8d00ac2807aff46d5d01626bad8d2858960a4e6 data/create_dd/recipes/freezing/blaze_cake.json
 360b8d3644c9aa6e4e8314814b7dbbf81a674866 data/create_dd/recipes/freezing/crying_obsidian.json
 0320e91da26b5e9b946db92fe7c45c0389a1bafb data/create_dd/recipes/freezing/ice.json
@@ -79,6 +79,7 @@ c80034b9c4cf8c87bd15b3e1134ef0a2a5ed06dc data/create_dd/recipes/sanding/weathere
 e9abd0a8bbac29e3941f9067a34d6f10bdc5be4c data/create_dd/recipes/sanding/weathered_cut_copper.json
 1a70dbdab4427f60a12978fb033cdcfd116f1448 data/create_dd/recipes/sanding/weathered_cut_copper_slab.json
 fb286805156112f47fa801269720abef8fb0e756 data/create_dd/recipes/sanding/weathered_cut_copper_stairs.json
+f5bf1c17950b4bab887cf1949e6cbb34ce3d7fcf data/create_dd/recipes/seething/ancient_debris.json
 1a9eb975d775250d2d019d6004f9b22b8c57bfc6 data/create_dd/recipes/seething/cobblestone.json
 44fb9544f462a73407603e37fb6ed160b42a8eec data/create_dd/recipes/seething/crushed_raw_copper.json
 5d06b521cc62d04905722c961a1edf8f6d1282a8 data/create_dd/recipes/seething/crushed_raw_gold.json
@@ -97,9 +98,7 @@ b49032b7c9f84fdbb64653202acf1d0723eaa0de data/create_dd/recipes/seething/immersi
 c0430b520de1f7679e262666d4792f9a68a98a75 data/create_dd/recipes/seething/mekanism/crushed_raw_osmium.json
 3a741b615ef03a57e6cd600452d0e801880922ac data/create_dd/recipes/seething/mekanism/crushed_raw_tin.json
 30fa15f29b3141d342f0867da0814066f2bace82 data/create_dd/recipes/seething/mekanism/crushed_raw_uranium.json
-881257d1b23e7e9baca86b93d5ac4c4d2d0ba4b3 data/create_dd/recipes/seething/netherite_scrap_from_ancient_debris.json
 97f4a8b9c4e38dcfa1c0fc2ef12c35770b317e49 data/create_dd/recipes/seething/netherrack.json
-6d26494905cc61921f67acda2f0eb17af85ed413 data/create_dd/recipes/seething/obsidian.json
 d616d19f8c012d423976e803b2d539eb58984c69 data/create_dd/recipes/seething/slime_ball.json
 c116ba7c175734e1a5f630d0ed31d98fd7f94f31 data/create_dd/recipes/seething/thermal/crushed_raw_lead.json
 13c72c2a96086ea51389c519b3cd2bac508fe749 data/create_dd/recipes/seething/thermal/crushed_raw_nickel.json
