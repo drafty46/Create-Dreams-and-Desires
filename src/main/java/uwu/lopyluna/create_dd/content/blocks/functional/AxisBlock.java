@@ -1,85 +1,86 @@
 package uwu.lopyluna.create_dd.content.blocks.functional;
 
-import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
-import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
-import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import uwu.lopyluna.create_dd.registry.DesiresBlockEntityTypes;
+import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+@SuppressWarnings("deprecation")
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-@SuppressWarnings({"unused", "deprecation"})
-public class AxisBlock extends RotatedPillarKineticBlock implements IBE<KineticBlockEntity> {
+public class AxisBlock extends RotatedPillarBlock {
+    boolean hasStrippedWood;
+    BlockState strippedWood;
+    boolean isFlammable;
+    int getFlammability;
+    int getFireSpreadSpeed;
 
-    boolean isLarge;
+    public static AxisBlock create(Properties properties) {
+        return new AxisBlock(properties, false, Blocks.AIR.defaultBlockState(), false, 0, 0);
+    }
+    public static AxisBlock create(Properties properties, int getFlammability, int getFireSpreadSpeed) {
+        return new AxisBlock(properties, false, Blocks.AIR.defaultBlockState(), true, getFlammability, getFireSpreadSpeed);
+    }
+    public static AxisBlock createWithStripped(Properties properties, BlockState strippedWood) {
+        return new AxisBlock(properties, true, strippedWood, false, 0, 0);
+    }
+    public static AxisBlock createWithStripped(Properties properties, BlockState strippedWood, int getFlammability, int getFireSpreadSpeed) {
+        return new AxisBlock(properties, true, strippedWood, true, getFlammability, getFireSpreadSpeed);
+    }
 
-    public AxisBlock(boolean large, Properties properties) {
+    public AxisBlock(Properties properties, boolean hasStrippedWood, BlockState strippedWood, boolean isFlammable, int getFlammability, int getFireSpreadSpeed) {
         super(properties);
-        isLarge = large;
-    }
-
-    public static AxisBlock small(Properties properties) {
-        return new AxisBlock(false, properties);
-    }
-
-    public static AxisBlock large(Properties properties) {
-        return new AxisBlock(true, properties);
-    }
-
-    public boolean isLarge() {
-        return isLarge;
-    }
-
-    public boolean isSmall() {
-        return !isLarge;
+        this.hasStrippedWood = hasStrippedWood;
+        this.strippedWood = strippedWood;
+        this.isFlammable = isFlammable;
+        this.getFlammability = getFlammability;
+        this.getFireSpreadSpeed = getFireSpreadSpeed;
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.ENTITYBLOCK_ANIMATED;
+    public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+        return isFlammable;
     }
 
     @Override
-    public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
-        return state.getValue(AXIS) == face.getAxis();
+    public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+        return getFlammability;
     }
 
     @Override
-    public Direction.Axis getRotationAxis(BlockState state) {
-        return state.getValue(AXIS);
-    }
-
-    @Override
-    public float getParticleTargetRadius() {
-        return isLarge() ? 2.5f : 1.125f;
-    }
-
-    @Override
-    public float getParticleInitialRadius() {
-        return isLarge() ? 2.25f : 1f;
-    }
-
-    @Override
-    public boolean hideStressImpact() {
-        return true;
+    public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+        return getFireSpreadSpeed;
     }
 
 
     @Override
-    public Class<KineticBlockEntity> getBlockEntityClass() {
-        return KineticBlockEntity.class;
-    }
+    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        if (hasStrippedWood) {
+            ItemStack item = player.getItemInHand(interactionHand);
 
-    @Override
-    public BlockEntityType<? extends KineticBlockEntity> getBlockEntityType() {
-        return DesiresBlockEntityTypes.AXIS_BLOCK.get();
+            if (item.getItem() instanceof AxeItem) {
+                level.setBlockAndUpdate(blockPos, strippedWood.setValue(AXIS, blockState.getValue(AXIS)));
+                item.hurtAndBreak(1, player, playerEntity -> playerEntity.broadcastBreakEvent(interactionHand));
+
+                player.playSound(SoundEvents.AXE_STRIP);
+
+                return InteractionResult.SUCCESS;
+            }
+        }
+
+        return InteractionResult.PASS;
     }
 }

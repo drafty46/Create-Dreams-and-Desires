@@ -22,7 +22,6 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
@@ -40,7 +39,7 @@ import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.content.blocks.contraptions.bore_block.BoreBlock;
 import uwu.lopyluna.create_dd.content.blocks.contraptions.bore_block.BoreBlockMovementBehaviour;
 import uwu.lopyluna.create_dd.content.blocks.contraptions.contraption_block.HelmBlock;
-import uwu.lopyluna.create_dd.content.blocks.functional.AxisBlock;
+import uwu.lopyluna.create_dd.content.blocks.functional.AxisKineticBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.brass_gearbox.BrassGearboxBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankBlockItem;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.multimeter.MultiMeterBlock;
@@ -434,7 +433,7 @@ public class DesiresBlocks {
 			.transform(customItemModel())
 			.register();
 
-	public static final BlockEntry<AxisBlock> INCOMPLETE_WATER_WHEEL = REGISTRATE.block("incomplete_water_wheel", AxisBlock::small)
+	public static final BlockEntry<AxisKineticBlock> INCOMPLETE_WATER_WHEEL = REGISTRATE.block("incomplete_water_wheel", AxisKineticBlock::small)
 			.initialProperties(SharedProperties::wooden)
 			.properties(p -> p.noOcclusion().color(MaterialColor.DIRT))
 			.transform(axeOrPickaxe())
@@ -445,7 +444,7 @@ public class DesiresBlocks {
 			.transform(customItemModel())
 			.register();
 
-	public static final BlockEntry<AxisBlock> INCOMPLETE_LARGE_WATER_WHEEL = REGISTRATE.block("incomplete_large_water_wheel", AxisBlock::large)
+	public static final BlockEntry<AxisKineticBlock> INCOMPLETE_LARGE_WATER_WHEEL = REGISTRATE.block("incomplete_large_water_wheel", AxisKineticBlock::large)
 			.initialProperties(SharedProperties::wooden)
 			.properties(p -> p.noOcclusion().color(MaterialColor.DIRT))
 			.transform(axeOrPickaxe())
