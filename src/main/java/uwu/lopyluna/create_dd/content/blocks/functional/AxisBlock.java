@@ -34,10 +34,10 @@ public class AxisBlock extends RotatedPillarBlock {
     public static AxisBlock create(Properties properties, int getFlammability, int getFireSpreadSpeed) {
         return new AxisBlock(properties, false, Blocks.AIR.defaultBlockState(), true, getFlammability, getFireSpreadSpeed);
     }
-    public static AxisBlock createWithStripped(Properties properties, BlockState strippedWood) {
+    public static AxisBlock create(Properties properties, BlockState strippedWood) {
         return new AxisBlock(properties, true, strippedWood, false, 0, 0);
     }
-    public static AxisBlock createWithStripped(Properties properties, BlockState strippedWood, int getFlammability, int getFireSpreadSpeed) {
+    public static AxisBlock create(Properties properties, BlockState strippedWood, int getFlammability, int getFireSpreadSpeed) {
         return new AxisBlock(properties, true, strippedWood, true, getFlammability, getFireSpreadSpeed);
     }
 
