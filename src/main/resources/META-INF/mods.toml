@@ -34,7 +34,7 @@ logoFile="pack.png" #optional
 authors="LopyLuna" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-YIPPEE WASSUP THIS HURTS MY HEAD LMAO
+Create: Dreams & Desires is an addon for the Create mod that add random QoL, items, & blocks features that relates to old Create & New Create versions!
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.create_dd]] #optional
