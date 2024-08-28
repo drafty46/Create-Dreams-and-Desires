@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "create_dd:block/palettes/wood_types/rose/rose_log_top",
+    "side": "create_dd:block/palettes/wood_types/rose/stripped_rose_log"
+  }
+}

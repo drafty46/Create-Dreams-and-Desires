@@ -79,6 +79,7 @@ public class DesiresCreate {
         DesiresClassicStuffPorting.register();
         DesiresCreativeModeTabs.init();
         DesiresSpriteShifts.register();
+        DesiresWoodType.register();
         DesiresBlocks.register();
         DesiresItems.register();
         DesiresFluids.register();

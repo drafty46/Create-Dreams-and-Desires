@@ -1,9 +1,12 @@
 package uwu.lopyluna.create_dd.content.blocks.functional;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -14,6 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -70,12 +74,18 @@ public class AxisBlock extends RotatedPillarBlock {
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if (hasStrippedWood) {
             ItemStack item = player.getItemInHand(interactionHand);
+            BlockState newState = strippedWood.setValue(AXIS, blockState.getValue(AXIS));
 
             if (item.getItem() instanceof AxeItem) {
-                level.setBlockAndUpdate(blockPos, strippedWood.setValue(AXIS, blockState.getValue(AXIS)));
+                level.setBlock(blockPos, newState, 11);
+                level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, newState));
                 item.hurtAndBreak(1, player, playerEntity -> playerEntity.broadcastBreakEvent(interactionHand));
 
-                player.playSound(SoundEvents.AXE_STRIP);
+                level.playSound(player, blockPos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
+
+                if (player instanceof ServerPlayer) {
+                    CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer)player, blockPos, item);
+                }
 
                 return InteractionResult.SUCCESS;
             }

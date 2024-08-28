@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button_pressed",
+  "textures": {
+    "texture": "create_dd:block/palettes/wood_types/spirit/spirit_planks"
+  }
+}
