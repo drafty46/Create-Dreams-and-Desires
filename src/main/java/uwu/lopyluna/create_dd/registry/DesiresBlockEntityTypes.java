@@ -8,6 +8,9 @@ import uwu.lopyluna.create_dd.content.blocks.contraptions.contraption_block.Helm
 import uwu.lopyluna.create_dd.content.blocks.kinetics.brass_gearbox.BrassGearboxBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.brass_gearbox.BrassGearboxInstance;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.brass_gearbox.BrassGearboxRenderer;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.modular_drill.ModularDrillBlockEntity;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.modular_drill.ModularDrillInstance;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.modular_drill.ModularDrillRenderer;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.multimeter.MultiMeterBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.hydraulic_press.HydraulicPressBlockEntity;
@@ -138,6 +141,13 @@ public class DesiresBlockEntityTypes {
 	public static final BlockEntityEntry<HelmBlockEntity> HELM = REGISTRATE
 			.blockEntity("helm", HelmBlockEntity::new)
 			.validBlocks(DesiresBlocks.HELM)
+			.register();
+
+	public static final BlockEntityEntry<ModularDrillBlockEntity> DRILL = REGISTRATE
+			.blockEntity("drill", ModularDrillBlockEntity::new)
+			.instance(() -> ModularDrillInstance::new, false)
+			.validBlocks(DesiresBlocks.MODULAR_DRILL)
+			.renderer(() -> ModularDrillRenderer::new)
 			.register();
 
 	public static void register() {}

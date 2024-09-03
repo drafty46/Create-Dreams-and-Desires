@@ -3,6 +3,7 @@ package uwu.lopyluna.create_dd.registry;
 import com.simibubi.create.*;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
+import com.simibubi.create.content.kinetics.drill.DrillMovementBehaviour;
 import com.simibubi.create.content.kinetics.gauge.GaugeGenerator;
 import com.simibubi.create.content.kinetics.motor.CreativeMotorGenerator;
 import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
@@ -42,6 +43,7 @@ import uwu.lopyluna.create_dd.content.blocks.contraptions.contraption_block.Helm
 import uwu.lopyluna.create_dd.content.blocks.functional.AxisKineticBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.brass_gearbox.BrassGearboxBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank.CogCrankBlockItem;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.modular_drill.ModularDrillBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.multimeter.MultiMeterBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear.GiantGearBlockItem;
@@ -219,6 +221,18 @@ public class DesiresBlocks {
 			.item()
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.build()
+			.register();
+
+	public static final BlockEntry<ModularDrillBlock> MODULAR_DRILL = REGISTRATE.block("modular_drill", ModularDrillBlock::new)
+			.initialProperties(SharedProperties::stone)
+			.properties(p -> p.color(MaterialColor.PODZOL))
+			.transform(axeOrPickaxe())
+			.blockstate(BlockStateGen.directionalBlockProvider(true))
+			.transform(BlockStressDefaults.setImpact(8.0))
+			.onRegister(movementBehaviour(new DrillMovementBehaviour()))
+			.item()
+			.tag(AllTags.AllItemTags.CONTRAPTION_CONTROLLED.tag)
+			.transform(customItemModel())
 			.register();
 
 	public static final BlockEntry<MultiMeterBlock> MULTIMETER = REGISTRATE.block("multimeter", MultiMeterBlock::new)

@@ -18,11 +18,13 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.content.blocks.kinetics.modular_drill.ModularDrillHeadItem;
 import uwu.lopyluna.create_dd.content.items.equipment.NameableRecordItem;
 import uwu.lopyluna.create_dd.content.items.equipment.clockwork_crossbow.ClockworkCrossbow;
 import uwu.lopyluna.create_dd.content.items.equipment.deforester_saw.DeforesterSawItem;
 import uwu.lopyluna.create_dd.content.items.equipment.excavation_drill.ExcavationDrillItem;
 import uwu.lopyluna.create_dd.content.items.equipment.gilded_rose_tools.*;
+import uwu.lopyluna.create_dd.content.items.equipment.portable_fan.PortableFanItem;
 
 import static com.tterrag.registrate.providers.RegistrateRecipeProvider.has;
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
@@ -287,6 +289,36 @@ public class DesiresItems {
 					new ResourceLocation("item/crossbow")).texture("layer0",
 					new ResourceLocation("minecraft","item/crossbow_standby")))
 			.tag(DesiresTags.AllItemTags.CROSSBOW.tag)
+			.register();
+
+	public static final ItemEntry<PortableFanItem> PORTABLE_FAN = REGISTRATE.item("portable_fan", PortableFanItem::new)
+			.model(AssetLookup.itemModelWithPartials())
+			.properties(p -> p.rarity(Rarity.UNCOMMON))
+			.register();
+
+	public static final ItemEntry<ModularDrillHeadItem> DRILL_VEIN_HEAD = REGISTRATE.item("drill_vein_head",
+					p -> new ModularDrillHeadItem(p, ModularDrillHeadItem.DrillType.VEIN))
+			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
+					new ResourceLocation("item/handheld")).texture("layer0",
+					new ResourceLocation(DesiresCreate.MOD_ID,"item/bury_blend")))
+			.register();
+	public static final ItemEntry<ModularDrillHeadItem> DRILL_CRUSHER_HEAD = REGISTRATE.item("drill_crusher_head",
+					p -> new ModularDrillHeadItem(p, ModularDrillHeadItem.DrillType.CRUSHER))
+			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
+					new ResourceLocation("item/handheld")).texture("layer0",
+					new ResourceLocation(DesiresCreate.MOD_ID,"item/bury_blend")))
+			.register();
+	public static final ItemEntry<ModularDrillHeadItem> DRILL_ENCHANTABLE_HEAD = REGISTRATE.item("drill_enchantable_head",
+					p -> new ModularDrillHeadItem(p, ModularDrillHeadItem.DrillType.ENCHANTABLE))
+			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
+					new ResourceLocation("item/handheld")).texture("layer0",
+					new ResourceLocation(DesiresCreate.MOD_ID,"item/bury_blend")))
+			.register();
+	public static final ItemEntry<ModularDrillHeadItem> DRILL_SMELTING_HEAD = REGISTRATE.item("drill_smelting_head",
+					p -> new ModularDrillHeadItem(p, ModularDrillHeadItem.DrillType.SMELTING))
+			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
+					new ResourceLocation("item/handheld")).texture("layer0",
+					new ResourceLocation(DesiresCreate.MOD_ID,"item/bury_blend")))
 			.register();
 
 	public static final ItemEntry<NameableRecordItem> MUSIC_DISC_WALTZ_OF_THE_FLOWERS = REGISTRATE.item("music_disc_waltz_of_the_flowers",

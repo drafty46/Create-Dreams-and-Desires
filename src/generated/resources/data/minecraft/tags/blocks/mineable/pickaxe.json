@@ -196,6 +196,7 @@
     "create_dd:industrial_fan",
     "create_dd:hydraulic_press",
     "create_dd:bore_block",
+    "create_dd:modular_drill",
     "create_dd:multimeter",
     "create_dd:brass_gearbox",
     "create_dd:redstone_divider",

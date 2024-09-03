@@ -1,12 +1,7 @@
 package uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear;
 
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
-import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;
 import com.simibubi.create.foundation.block.IBE;
-import com.simibubi.create.foundation.placement.IPlacementHelper;
-import com.simibubi.create.foundation.placement.PlacementHelpers;
-import com.simibubi.create.foundation.placement.PlacementOffset;
 import com.simibubi.create.foundation.utility.Iterate;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
@@ -16,7 +11,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -29,24 +23,19 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
-import uwu.lopyluna.create_dd.DesireClient;
 import uwu.lopyluna.create_dd.registry.DesiresBlockEntityTypes;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-@SuppressWarnings({"deprecation"})
+@SuppressWarnings({"deprecation", "all"})
 public class GiantGearBlock extends RotatedPillarKineticBlock implements IBE<GiantGearBlockEntity> {
     
     private static HashMap<Direction.Axis, HashMap<Vec3i, BlockState>> STRUCTURE_BY_AXIS;
-    
+
     /**
      * Quick iteration of the structure, result is cached
      */

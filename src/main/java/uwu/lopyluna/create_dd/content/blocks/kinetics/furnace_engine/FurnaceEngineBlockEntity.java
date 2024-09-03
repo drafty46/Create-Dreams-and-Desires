@@ -31,6 +31,7 @@ import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 import javax.annotation.Nullable;
 import java.lang.ref.WeakReference;
 import java.util.List;
+import java.util.Objects;
 
 @SuppressWarnings({"unchecked", "unused", "rawtypes"})
 public class FurnaceEngineBlockEntity extends SmartBlockEntity {
@@ -58,6 +59,11 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
     @Override
     public void tick() {
         super.tick();
+        //this might help with the fps drop
+        if (Objects.requireNonNull(getLevel()).isClientSide || (getLevel().getGameTime() % 10 != 0)) {
+            return;
+        }
+
         PoweredFlywheelBlockEntity flywheel = this.getFlywheel();
         AbstractFurnaceBlockEntity furnace = this.getFurnace();
 
@@ -89,7 +95,7 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
                 if (delayedEfficiency > 0.0F) {
                     this.award(AllAdvancements.STEAM_ENGINE);
                 }
-                int conveyedSpeedLevel = delayedEfficiency == 0.0F ? 1 : (verticalTarget ? 1 : (int)GeneratingKineticBlockEntity.convertToDirection(1.0F, facing));
+                int conveyedSpeedLevel = delayedEfficiency == 0.0F ? 1 : (verticalTarget ? 1 : (int) GeneratingKineticBlockEntity.convertToDirection(1.0F, facing));
                 if (targetAxis == Direction.Axis.Z) {
                     conveyedSpeedLevel *= -1;
                 }
@@ -136,7 +142,7 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
         if (ste != null) {
             if (ste.isPoweredBy(this.worldPosition)) {
                 if (targetAngle != null) {
-                    float angle = AngleHelper.deg((double)targetAngle);
+                    float angle = AngleHelper.deg((double) targetAngle);
                     angle += angle < 0.0F ? -105.0F : 285.0F;
                     angle %= 360.0F;
                     PoweredFlywheelBlockEntity flywheel = this.getFlywheel();
@@ -194,6 +200,7 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
 
         return flywheel;
     }
+
     public AbstractFurnaceBlockEntity getFurnace() {
         AbstractFurnaceBlockEntity furnace = this.source.get();
         if (furnace == null || furnace.isRemoved()) {
@@ -212,6 +219,7 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
 
         return furnace;
     }
+
     @Nullable
     @OnlyIn(Dist.CLIENT)
     public Float getTargetAngle() {
