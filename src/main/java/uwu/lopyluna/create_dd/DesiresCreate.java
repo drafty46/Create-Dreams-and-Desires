@@ -94,6 +94,7 @@ public class DesiresCreate {
         DesiresParticleTypes.register(modEventBus);
         DesiresEntityDataSerializers.register(modEventBus);
         DesiresPackets.registerPackets();
+        DesiresBlockMovementChecks.register();
 
         if (DesiresMods.CREATECASING.isLoaded()) {
             EncasedCompat.register();
