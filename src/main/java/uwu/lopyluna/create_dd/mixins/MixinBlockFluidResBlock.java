@@ -16,7 +16,6 @@ import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidRese
 
 @Mixin(value = Block.class)
 public class MixinBlockFluidResBlock {
-
     @Inject(at = @At("HEAD"), method = "shouldRenderFace", cancellable = true)
     private static void create_dd$shouldRenderFace(BlockState pState, BlockGetter pLevel, BlockPos pOffset, Direction pFace, BlockPos pPos, CallbackInfoReturnable<Boolean> cir) {
         if (pState.getBlock() instanceof FluidReservoirBlock) {
@@ -35,5 +34,4 @@ public class MixinBlockFluidResBlock {
             return be1.getController().equals(be2.getController());
         } else return false;
     }
-
 }

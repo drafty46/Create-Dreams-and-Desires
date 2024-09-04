@@ -1,5 +1,7 @@
 package uwu.lopyluna.create_dd.mixins;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.simibubi.create.content.contraptions.MountedStorage;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.ItemStackHandler;
@@ -25,13 +27,10 @@ public class MixinMountedStorage {
             cir.setReturnValue(true);
     }
 
-
-    @Inject(at = @At("TAIL"), method = "<init>(Lnet/minecraft/world/level/block/entity/BlockEntity;)V")
-    private void MountedStorage(BlockEntity be, CallbackInfo ci) {
-        noFuel = noFuel || be instanceof ItemStockpileBlockEntity;
+    @WrapOperation(method = "<init>(Lnet/minecraft/world/level/block/entity/BlockEntity;)V", at = @At(value = "CONSTANT", args = "classValue=com/simibubi/create/content/logistics/vault/ItemVaultBlockEntity"))
+    private boolean MountedStorage(Object object, Operation<Boolean> original) {
+        return original.call(object) || object instanceof ItemStockpileBlockEntity;
     }
-
-
 
     @Inject(at = @At("HEAD"), method = "removeStorageFromWorld()V", cancellable = true)
     private void removeStorageFromWorld(CallbackInfo ci) {
@@ -49,8 +48,4 @@ public class MixinMountedStorage {
             ci.cancel();
         }
     }
-
-
-
-
 }

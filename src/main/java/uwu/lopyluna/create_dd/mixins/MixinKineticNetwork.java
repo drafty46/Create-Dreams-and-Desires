@@ -10,9 +10,9 @@ import uwu.lopyluna.create_dd.content.blocks.kinetics.kinetic_motor.KineticMotor
 
 @Mixin(value = KineticNetwork.class,remap = false)
 public class MixinKineticNetwork {
-
     @Inject(method = "getActualCapacityOf",at=@At("HEAD"),cancellable = true)
     private void getActualCapacityOf(KineticBlockEntity be, CallbackInfoReturnable<Float> cir){
-        if (be instanceof KineticMotorBlockEntity motor) cir.setReturnValue(motor.calculateAddedStressCapacity());
+        if (be instanceof KineticMotorBlockEntity motor)
+            cir.setReturnValue(motor.calculateAddedStressCapacity());
     }
 }

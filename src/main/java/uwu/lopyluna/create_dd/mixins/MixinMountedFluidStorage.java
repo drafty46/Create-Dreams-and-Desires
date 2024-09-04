@@ -16,18 +16,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirBlockEntity;
 
-@SuppressWarnings({"all"})
+
 @Mixin(value = MountedFluidStorage.class, remap = false)
 public class MixinMountedFluidStorage {
-
     @Shadow SmartFluidTank tank;
     @Shadow private BlockEntity blockEntity;
     @Shadow private boolean sendPacket = false;
 
     @Inject(at = @At("RETURN"), method = "tick(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/BlockPos;Z)V")
     public void tick(Entity entity, BlockPos pos, boolean isRemote, CallbackInfo ci) {
-        if (blockEntity instanceof FluidReservoirBlockEntity tank) {
-            tank.getFluidLevel().tickChaser();
+        if (blockEntity instanceof FluidReservoirBlockEntity fluidReservoirBlockEntity) {
+            fluidReservoirBlockEntity.getFluidLevel().tickChaser();
         }
     }
 

@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(value = GearshiftBlockEntity.class)
 public abstract class MixinGearshiftBlockEntity extends SplitShaftBlockEntity {
-
     private MixinGearshiftBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
