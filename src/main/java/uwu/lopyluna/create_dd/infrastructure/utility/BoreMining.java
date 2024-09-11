@@ -26,7 +26,10 @@ public class BoreMining {
         if(traceResult.getDirection() == Direction.DOWN || traceResult.getDirection() == Direction.UP) {
             for(int x = -range; x <= range; x++) {
                 for(int y = -range; y <= range; y++) {
-                    positions.add(new BlockPos(initalBlockPos.getX() + x, initalBlockPos.getY(), initalBlockPos.getZ() + y));
+                    BlockPos pos = expandPos(x, 0, y, initalBlockPos);
+                    if (player.level.getWorldBorder().isWithinBounds(pos)) {
+                        positions.add(pos);
+                    }
                 }
             }
         }
@@ -34,7 +37,10 @@ public class BoreMining {
         if(traceResult.getDirection() == Direction.NORTH || traceResult.getDirection() == Direction.SOUTH) {
             for(int x = -range; x <= range; x++) {
                 for(int y = -range; y <= range; y++) {
-                    positions.add(new BlockPos(initalBlockPos.getX() + x, initalBlockPos.getY() + y, initalBlockPos.getZ()));
+                    BlockPos pos = expandPos(x, y, 0, initalBlockPos);
+                    if (player.level.getWorldBorder().isWithinBounds(pos)) {
+                        positions.add(pos);
+                    }
                 }
             }
         }
@@ -42,10 +48,17 @@ public class BoreMining {
         if(traceResult.getDirection() == Direction.EAST || traceResult.getDirection() == Direction.WEST) {
             for(int x = -range; x <= range; x++) {
                 for(int y = -range; y <= range; y++) {
-                    positions.add(new BlockPos(initalBlockPos.getX(), initalBlockPos.getY() + y, initalBlockPos.getZ() + x));
+                    BlockPos pos = expandPos(0, y, x, initalBlockPos);
+                    if (player.level.getWorldBorder().isWithinBounds(pos)) {
+                        positions.add(pos);
+                    }
                 }
             }
         }
         return positions;
+    }
+
+    public static BlockPos expandPos(int x, int y, int z, BlockPos initalBlockPos) {
+        return new BlockPos(initalBlockPos.getX() + x, initalBlockPos.getY() + y, initalBlockPos.getZ() + z);
     }
 }

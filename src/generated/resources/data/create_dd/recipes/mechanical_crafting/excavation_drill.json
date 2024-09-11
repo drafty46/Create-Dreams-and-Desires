@@ -2,9 +2,6 @@
   "type": "create:mechanical_crafting",
   "acceptMirrored": true,
   "key": {
-    "#": {
-      "tag": "forge:ingots/brass"
-    },
     "A": {
       "item": "create:andesite_alloy"
     },
@@ -14,14 +11,23 @@
     "I": {
       "item": "minecraft:iron_ingot"
     },
-    "P": {
+    "M": {
       "item": "create:precision_mechanism"
+    },
+    "P": {
+      "tag": "forge:plates/brass"
+    },
+    "S": {
+      "tag": "forge:storage_blocks/brass"
+    },
+    "Y": {
+      "tag": "forge:ingots/brass"
     }
   },
   "pattern": [
-    " I   ",
-    "IABP ",
-    " IB##"
+    " APPP  ",
+    "AIMBB  ",
+    " ASYYYY"
   ],
   "result": {
     "item": "create_dd:excavation_drill"

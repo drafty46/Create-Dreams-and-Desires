@@ -29,11 +29,15 @@ import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngi
 import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
 import uwu.lopyluna.create_dd.infrastructure.data.DesiresDatagen;
 import uwu.lopyluna.create_dd.registry.*;
+import uwu.lopyluna.create_dd.registry.addons.DreamsAddons;
+import uwu.lopyluna.create_dd.registry.darkness.MagicItems;
+import uwu.lopyluna.create_dd.registry.delighted.EndItems;
+import uwu.lopyluna.create_dd.registry.destinies.ExtrasItems;
 
 import java.util.Random;
 
 
-@SuppressWarnings({"removal","all"})
+@SuppressWarnings({"deprecation", "unused"})
 @Mod(DesiresCreate.MOD_ID)
 public class DesiresCreate {
     
@@ -57,14 +61,11 @@ public class DesiresCreate {
     }
 
     static {
-        REGISTRATE.setTooltipModifierFactory(item -> {
-            return new ItemDescription.Modifier(item, TooltipHelper.Palette.STANDARD_CREATE)
-                    .andThen(TooltipModifier.mapNull(DesiresCreate.create(item)));
-        });
+        REGISTRATE.setTooltipModifierFactory(item -> new ItemDescription.Modifier(item, TooltipHelper.Palette.STANDARD_CREATE)
+                .andThen(TooltipModifier.mapNull(DesiresCreate.create(item))));
     }
 
-    public DesiresCreate()
-    {
+    public DesiresCreate() {
         ModLoadingContext modLoadingContext = ModLoadingContext.get();
 
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -74,9 +75,9 @@ public class DesiresCreate {
 
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> DesiresPartialModels::init);
 
+        //DesiresAllSoundEvents.prepare();
         DesiresSoundEvents.register(modEventBus);
         DesiresTags.init();
-        DesiresClassicStuffPorting.register();
         DesiresCreativeModeTabs.init();
         DesiresSpriteShifts.register();
         DesiresWoodType.register();
@@ -94,8 +95,21 @@ public class DesiresCreate {
         DesiresParticleTypes.register(modEventBus);
         DesiresEntityDataSerializers.register(modEventBus);
         DesiresPackets.registerPackets();
+        DesiresOreFeaturesEntries.init();
         DesiresBlockMovementChecks.register();
 
+        //ADDONS
+        if (DreamsAddons.EXTRAS.isLoaded()) {
+            ExtrasItems.register();
+        }
+        if (DreamsAddons.MAGIC.isLoaded()) {
+            MagicItems.register();
+        }
+        if (DreamsAddons.ENDGAME.isLoaded()) {
+            EndItems.register();
+        }
+
+        //COMPAT
         if (DesiresMods.CREATECASING.isLoaded()) {
             EncasedCompat.register();
         }
@@ -105,6 +119,7 @@ public class DesiresCreate {
 
         modEventBus.addListener(DesiresCreate::init);
         modEventBus.addListener(EventPriority.LOWEST, DesiresDatagen::gatherData);
+        //modEventBus.addListener(DesiresAllSoundEvents::register);
 
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> DesireClient.onCtorClient(modEventBus, forgeEventBus));
 

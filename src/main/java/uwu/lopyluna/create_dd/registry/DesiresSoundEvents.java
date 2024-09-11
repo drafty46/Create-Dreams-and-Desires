@@ -19,6 +19,7 @@ public class DesiresSoundEvents {
 	public static RegistryObject<SoundEvent> CREATVEDITE_FALL = registerSoundEvent("creatvedite_fall");
 	public static RegistryObject<SoundEvent> RUBBER_BREAK = registerSoundEvent("rubber_break");
 	public static RegistryObject<SoundEvent> RUBBER_PLACE = registerSoundEvent("rubber_place");
+	public static RegistryObject<SoundEvent> BLOCK_ZAPPER_UPGRADE = registerSoundEvent("block_zapper_upgrade");
 	public static RegistryObject<SoundEvent> MUSIC_DISC_WALTZ_OF_THE_FLOWERS = registerSoundEvent("music_disc.waltz_of_the_flowers");
 
 	private static RegistryObject<SoundEvent> registerSoundEvent(String name) {

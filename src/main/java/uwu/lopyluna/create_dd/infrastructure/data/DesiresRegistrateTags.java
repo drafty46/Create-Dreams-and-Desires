@@ -3,8 +3,10 @@ package uwu.lopyluna.create_dd.infrastructure.data;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
+import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -12,8 +14,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
+import uwu.lopyluna.create_dd.registry.DesiresPaletteStoneTypes;
 import uwu.lopyluna.create_dd.registry.DesiresTags;
 
+import static uwu.lopyluna.create_dd.registry.DesiresTags.forgeBlockTag;
 import static uwu.lopyluna.create_dd.registry.DesiresTags.forgeItemTag;
 
 public class DesiresRegistrateTags {
@@ -103,6 +107,73 @@ public class DesiresRegistrateTags {
 	}
 
 	private static void genBlockTags(RegistrateTagsProvider<Block> prov) {
+
+		prov.tag(DesiresTags.AllBlockTags.BLOCK_ZAPPER_BLACKLIST.tag)
+				.add(Blocks.BEDROCK)
+				.add(Blocks.MOVING_PISTON)
+				.add(Blocks.NETHER_PORTAL)
+				.add(Blocks.END_PORTAL)
+				.add(Blocks.END_PORTAL_FRAME)
+				.add(Blocks.DRAGON_EGG)
+				.add(Blocks.COMMAND_BLOCK)
+				.add(Blocks.BARRIER)
+				.add(Blocks.END_GATEWAY)
+				.add(Blocks.REPEATING_COMMAND_BLOCK)
+				.add(Blocks.CHAIN_COMMAND_BLOCK)
+				.add(Blocks.STRUCTURE_BLOCK)
+				.add(Blocks.JIGSAW)
+				.add(Blocks.REINFORCED_DEEPSLATE)
+				.add(Blocks.BEACON)
+				.add(Blocks.NETHERITE_BLOCK)
+		;
+
+		prov.tag(DesiresTags.AllBlockTags.EXCAVATION_DRILL_VEIN_LARGE.tag)
+				.addTag(forgeBlockTag("ores"))
+		;
+		prov.tag(DesiresTags.AllBlockTags.EXCAVATION_DRILL_VEIN_VALID.tag)
+				.addTag(forgeBlockTag("ores"))
+				.add(AllPaletteStoneTypes.ASURINE.baseBlock.get())
+				.add(AllPaletteStoneTypes.CRIMSITE.baseBlock.get())
+				.add(AllPaletteStoneTypes.OCHRUM.baseBlock.get())
+				.add(AllPaletteStoneTypes.VERIDIUM.baseBlock.get())
+				.add(AllPaletteStoneTypes.ASURINE.baseBlock.get())
+		;
+		prov.tag(DesiresTags.AllBlockTags.MODULAR_VEIN.tag)
+				.addTag(forgeBlockTag("ores"))
+				.add(AllPaletteStoneTypes.ASURINE.baseBlock.get())
+				.add(AllPaletteStoneTypes.CRIMSITE.baseBlock.get())
+				.add(AllPaletteStoneTypes.OCHRUM.baseBlock.get())
+				.add(AllPaletteStoneTypes.VERIDIUM.baseBlock.get())
+				.add(AllPaletteStoneTypes.ASURINE.baseBlock.get())
+				.add(AllPaletteStoneTypes.SCORCHIA.baseBlock.get())
+				.add(AllPaletteStoneTypes.SCORIA.baseBlock.get())
+				.add(AllPaletteStoneTypes.LIMESTONE.baseBlock.get())
+				.add(DesiresPaletteStoneTypes.DOLOMITE.baseBlock.get())
+				.add(DesiresPaletteStoneTypes.GABBRO.baseBlock.get())
+				.add(DesiresPaletteStoneTypes.WEATHERED_LIMESTONE.baseBlock.get())
+				.addTag(BlockTags.BASE_STONE_OVERWORLD)
+				.addTag(BlockTags.BASE_STONE_NETHER)
+		;
+		prov.tag(DesiresTags.AllBlockTags.MODULAR_VEIN_LARGE.tag)
+				.addTag(forgeBlockTag("ores"))
+		;
+		prov.tag(DesiresTags.AllBlockTags.MODULAR_VEIN_MEDIUM.tag)
+				.add(AllPaletteStoneTypes.ASURINE.baseBlock.get())
+				.add(AllPaletteStoneTypes.CRIMSITE.baseBlock.get())
+				.add(AllPaletteStoneTypes.OCHRUM.baseBlock.get())
+				.add(AllPaletteStoneTypes.VERIDIUM.baseBlock.get())
+				.add(AllPaletteStoneTypes.ASURINE.baseBlock.get())
+		;
+		prov.tag(DesiresTags.AllBlockTags.MODULAR_VEIN_SMALL.tag)
+				.add(AllPaletteStoneTypes.SCORCHIA.baseBlock.get())
+				.add(AllPaletteStoneTypes.SCORIA.baseBlock.get())
+				.add(AllPaletteStoneTypes.LIMESTONE.baseBlock.get())
+				.add(DesiresPaletteStoneTypes.DOLOMITE.baseBlock.get())
+				.add(DesiresPaletteStoneTypes.GABBRO.baseBlock.get())
+				.add(DesiresPaletteStoneTypes.WEATHERED_LIMESTONE.baseBlock.get())
+				.addTag(BlockTags.BASE_STONE_OVERWORLD)
+				.addTag(BlockTags.BASE_STONE_NETHER)
+		;
 
 		prov.tag(DesiresTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_DRAGON_BREATHING.tag)
 				.add(Blocks.DRAGON_WALL_HEAD);

@@ -1,5 +1,6 @@
 package uwu.lopyluna.create_dd.content.items.equipment.excavation_drill;
 
+import com.simibubi.create.AllItems;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import com.simibubi.create.foundation.utility.BlockHelper;
@@ -7,7 +8,10 @@ import com.simibubi.create.foundation.utility.VecHelper;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -25,10 +29,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 import uwu.lopyluna.create_dd.content.items.equipment.BackTankPickaxeItem;
+import uwu.lopyluna.create_dd.content.items.equipment.InvertFunctionPacket;
 import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
 import uwu.lopyluna.create_dd.infrastructure.utility.BoreMining;
 import uwu.lopyluna.create_dd.registry.DesiresItems;
-import uwu.lopyluna.create_dd.registry.DesiresTags;
+import uwu.lopyluna.create_dd.registry.DesiresPackets;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -39,6 +44,7 @@ import java.util.function.Consumer;
 
 import static uwu.lopyluna.create_dd.infrastructure.utility.VeinMining.findVein;
 import static uwu.lopyluna.create_dd.registry.DesireTiers.Drill;
+import static uwu.lopyluna.create_dd.registry.DesiresTags.AllBlockTags.*;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -50,8 +56,9 @@ public class ExcavationDrillItem extends BackTankPickaxeItem {
         super(Drill, 1, -2.8F, pProperties);
     }
 
+    @Override
     public float getDestroySpeed(ItemStack pStack, BlockState pState) {
-        return pState.is(DesiresTags.forgeBlockTag("ores")) ? this.speed * 0.75f : this.speed;
+        return pState.is(EXCAVATION_DRILL_VEIN_VALID.tag) ? super.getDestroySpeed(pStack, pState) * 0.5f : super.getDestroySpeed(pStack, pState);
     }
 
     @Override
@@ -59,16 +66,18 @@ public class ExcavationDrillItem extends BackTankPickaxeItem {
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
     }
 
-    public static void destroyVein(Level pLevel, BlockState state, BlockPos pos,
-                                   Player player) {
-        boolean playerHeldShift = pLevel.isClientSide() ? DesiresConfigs.client().invertDeforesterSawFunction.get() != player.isShiftKeyDown() : player.isShiftKeyDown();
+    public static void destroyVein(Level pLevel, BlockState state, BlockPos pos, Player player) {
+        DesiresPackets.getChannel().sendToServer(new InvertFunctionPacket());
 
-        if (veinExcavating || !(state.is(DesiresTags.forgeBlockTag("ores"))) || !playerHeldShift)
+        boolean inverted = DesiresConfigs.client().invertDeforesterSawFunction.get();
+        boolean playerHeldShift = inverted != player.isShiftKeyDown();
+
+        if (veinExcavating || !(state.is(EXCAVATION_DRILL_VEIN_VALID.tag)) || !playerHeldShift)
             return;
         Vec3 vec = player.getLookAngle();
 
         veinExcavating = true;
-        findVein(pLevel, pos).destroyBlocks(pLevel, player, (dropPos, item) -> dropItemFromExcavatedVein(pLevel, pos, vec, dropPos, item));
+        findVein(pLevel, pos, EXCAVATION_DRILL_VEIN_VALID.tag, state.is(EXCAVATION_DRILL_VEIN_LARGE.tag) ? 32 : 12).destroyBlocks(pLevel, player, (dropPos, item) -> dropItemFromExcavatedVein(pLevel, pos, vec, dropPos, item));
         veinExcavating = false;
     }
 
@@ -81,22 +90,19 @@ public class ExcavationDrillItem extends BackTankPickaxeItem {
         world.addFreshEntity(entity);
     }
 
-    //public static boolean validBlocks(BlockState pState, BlockEvent.BreakEvent event, BlockPos blockPos) {\
-    //    ItemStack heldItemMainhand = event.getPlayer().getItemInHand(InteractionHand.MAIN_HAND);
-    //    return pState.getDestroySpeed(event.getLevel(), blockPos) != 0.0F ||
-    //                !pState.is(DesiresTags.forgeBlockTag("ores")) ||
-    //                DesiresItems.EXCAVATION_DRILL.get().isCorrectToolForDrops(heldItemMainhand, pState);
-    //}
-
     @SubscribeEvent
     public static void onBlockDestroyed(BlockEvent.BreakEvent event) {
         Player player = event.getPlayer();
-        boolean playerHeldShift = player.getLevel().isClientSide() ? DesiresConfigs.client().invertDeforesterSawFunction.get() != player.isShiftKeyDown() : player.isShiftKeyDown();
+        DesiresPackets.getChannel().sendToServer(new InvertFunctionPacket());
+
+        boolean inverted = DesiresConfigs.client().invertDeforesterSawFunction.get();
+        boolean playerHeldShift = inverted != player.isShiftKeyDown();
+
         Level level = (Level) event.getLevel();
         ItemStack heldItemMainhand = event.getPlayer().getItemInHand(InteractionHand.MAIN_HAND);
         BlockPos blockPos = event.getPos();
 
-        boolean validOres = event.getLevel().getBlockState(blockPos).is(DesiresTags.forgeBlockTag("ores"));
+        boolean validOres = event.getLevel().getBlockState(blockPos).is(EXCAVATION_DRILL_VEIN_VALID.tag);
 
         if (DesiresItems.EXCAVATION_DRILL.isIn(heldItemMainhand) && validOres) {
             destroyVein((Level) event.getLevel(), event.getState(), event.getPos(), event.getPlayer());
@@ -111,7 +117,7 @@ public class ExcavationDrillItem extends BackTankPickaxeItem {
 
             for (BlockPos pos : Objects.requireNonNull(BoreMining.getBlocksToBeDestroyed(1, initalBlockPos, serverPlayer))) {
                 if(pos == initalBlockPos || !(event.getLevel().getBlockState(pos).getDestroySpeed(event.getLevel(), pos) != 0.0F) ||
-                        event.getLevel().getBlockState(pos).is(DesiresTags.forgeBlockTag("ores")) ||
+                        event.getLevel().getBlockState(pos).is(EXCAVATION_DRILL_VEIN_VALID.tag) ||
                         !DesiresItems.EXCAVATION_DRILL.get().isCorrectToolForDrops(heldItemMainhand, event.getLevel().getBlockState(pos))) {
                     continue;
                 }
@@ -137,20 +143,42 @@ public class ExcavationDrillItem extends BackTankPickaxeItem {
         }
     }
 
+    public void repairTool(ItemStack tool, int value) {
+        tool.setDamageValue(tool.getDamageValue() - value);
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+        ItemStack tool = pPlayer.getItemInHand(pUsedHand);
+        ItemStack repairStack = pPlayer.getItemInHand(InteractionHand.MAIN_HAND == pUsedHand ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
+
+        if (!pPlayer.isShiftKeyDown() && (repairStack.is(DesiresItems.BURY_BLEND.get()) || repairStack.is(AllItems.BRASS_INGOT.get())) && tool.isDamaged()) {
+            if (pPlayer.getMainHandItem().getItem() == this && tool.getMaxDamage() != tool.getDamageValue()) {
+                repairTool(tool, ((tool.getMaxDamage() - 10) >= tool.getDamageValue()) ? 10 : tool.getMaxDamage() - tool.getDamageValue());
+
+                if (!pPlayer.isCreative()) {
+                    repairStack.shrink(1);
+                }
+            }
+            if (pLevel.isClientSide()) {
+                float r = (pPlayer.random.nextFloat() - pPlayer.random.nextFloat()) * 0.2F;
+                pPlayer.playSound(SoundEvents.IRON_GOLEM_REPAIR, .25f + r, 1.25f + r);
+                pPlayer.playSound(SoundEvents.NETHERITE_BLOCK_HIT, .25f, .75f + r);
+                pPlayer.playSound(SoundEvents.COPPER_BREAK, .9f, 1.45f + r);
+                pPlayer.playSound(SoundEvents.WOOD_BREAK, .9f, 1.05f + r);
+                return new InteractionResultHolder<>(InteractionResult.SUCCESS, pPlayer.getItemInHand(pUsedHand));
+            } else {
+                return new InteractionResultHolder<>(InteractionResult.FAIL, pPlayer.getItemInHand(pUsedHand));
+            }
+        } else {
+            return super.use(pLevel, pPlayer, pUsedHand);
+        }
+    }
+
     @Override
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
         return true;
     }
-
-    //@Override;
-    //@OnlyIn(Dist.CLIENT);
-    //public HumanoidModel.ArmPose getArmPose(ItemStack stack, AbstractClientPlayer player, InteractionHand hand) {;l
-    //    if (!player.swinging) {
-    //        return HumanoidModel.ArmPose.CROSSBOW_HOLD;
-    //    } else {
-    //        return HumanoidModel.ArmPose.ITEM;
-    //    }
-    //}
 
     @Override
     @OnlyIn(Dist.CLIENT)

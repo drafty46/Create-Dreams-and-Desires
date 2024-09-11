@@ -41,6 +41,12 @@
     {"name": "create_dd:rubber/place3","volume": 0.9},
     {"name": "create_dd:rubber/place4","volume": 0.9}
   ]},
+  "block_zapper_upgrade": {"sounds": [
+    {"name": "create_dd:block_zapper/upgrade1","volume": 0.9},
+    {"name": "create_dd:block_zapper/upgrade2","volume": 0.9},
+    {"name": "create_dd:block_zapper/upgrade3","volume": 0.9},
+    {"name": "create_dd:block_zapper/upgrade4","volume": 0.9}
+  ]},
   "music_disc.waltz_of_the_flowers": {"sounds": [
     {"name": "create_dd:disc/waltz_of_the_flowers_by_tchaikovsk","volume": 0.9}
   ]}

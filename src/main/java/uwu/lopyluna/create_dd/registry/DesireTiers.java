@@ -94,7 +94,7 @@ public class DesireTiers {
 
         @Override
         public int getLevel() {
-            return 2;
+            return 3;
         }
 
         @Override
@@ -105,7 +105,7 @@ public class DesireTiers {
         @NotNull
         @Override
         public Ingredient getRepairIngredient() {
-            return Ingredient.of(DesiresItems.BURY_BLEND.get());
+            return Ingredient.of(DesiresItems.BURY_BLEND.get(), AllItems.BRASS_INGOT.get());
         }
     };
 }

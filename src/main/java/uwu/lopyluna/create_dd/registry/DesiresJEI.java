@@ -7,7 +7,7 @@ import com.simibubi.create.compat.jei.category.*;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.foundation.config.ConfigBase;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
-import uwu.lopyluna.create_dd.content.jei.*;
+import uwu.lopyluna.create_dd.content.jei.category.*;
 import uwu.lopyluna.create_dd.content.recipes.DragonBreathingRecipe;
 import uwu.lopyluna.create_dd.registry.helper.Lang;
 import mezz.jei.api.IModPlugin;
@@ -94,7 +94,6 @@ public class DesiresJEI implements IModPlugin {
 				.doubleItemIcon(AllItems.PROPELLER.get(), AllItems.BLAZE_CAKE.get())
 				.emptyBackground(178, 72)
 				.build("fan_seething", FanSeethingCategory::new);
-
 	}
 
 	@Override

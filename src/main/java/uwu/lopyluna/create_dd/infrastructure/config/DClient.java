@@ -13,6 +13,8 @@ public class DClient extends ConfigBase {
 			Comments.invertDeforesterSawFunction);
 	public final ConfigBool invertExcavationDrillFunction = b(false, "invertExcavationDrillFunction",
 			Comments.invertDeforesterSawFunction);
+	public final ConfigBool disableBlocksVoidZapperMessage = b(false, "disableBlocksVoidZapperMessage",
+			Comments.disableBlocksVoidZapperMessage);
 
 
 	public final ConfigBool equipmentsDebug = b(false, "equipmentsDebug",
@@ -39,8 +41,9 @@ public class DClient extends ConfigBase {
 		static String equipments = "Configure Equipment settings";
 		static String invertDeforesterSawFunction = "Invert Deforester Saw activation function";
 		static String invertExcavationDrillFunction = "Invert Excavation Drill activation function";
-		static String equipmentsDebug = "Debug Equipments (only works in Creative mode)";
+		static String disableBlocksVoidZapperMessage = "Disables the blocks will be voided warning for the Block Zapper";
 
+		static String equipmentsDebug = "Debug Equipments (only works in Creative mode)";
 
 		static String fluidFogSettings = "Configure your vision range when submerged in Create Dream n' Desire's custom fluids";
 		static String sapTransparencyMultiplier = "The vision range through honey will be multiplied by this factor";

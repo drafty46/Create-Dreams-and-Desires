@@ -13,6 +13,8 @@ import net.minecraftforge.network.PacketDistributor.TargetPoint;
 import net.minecraftforge.network.simple.SimpleChannel;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.multimeter.GaugeObservedPacket;
+import uwu.lopyluna.create_dd.content.items.equipment.InvertFunctionPacket;
+import uwu.lopyluna.create_dd.content.items.equipment.block_zapper.ConfigureBlockZapperPacket;
 
 import java.util.function.BiConsumer;
 import java.util.function.Function;
@@ -26,7 +28,8 @@ public enum DesiresPackets {
 	// Client to Server
 	OBSERVER_GAUGEOMETER(GaugeObservedPacket.class, GaugeObservedPacket::new, PLAY_TO_SERVER),
 
-	//CONFIGURE_WORLDSHAPER(ConfigureWorldshaperPacket.class, ConfigureWorldshaperPacket::new, PLAY_TO_SERVER),
+	CONFIGURE_BLOCKZAPPER(ConfigureBlockZapperPacket.class, ConfigureBlockZapperPacket::new, PLAY_TO_SERVER),
+	INVERT_CONFIGURE(InvertFunctionPacket.class, InvertFunctionPacket::new, PLAY_TO_SERVER),
 	//TOOLBOX_EQUIP(ToolboxEquipPacket.class, ToolboxEquipPacket::new, PLAY_TO_SERVER),
 	//TOOLBOX_DISPOSE_ALL(ToolboxDisposeDesiresPacket.class, ToolboxDisposeDesiresPacket::new, PLAY_TO_SERVER),
 

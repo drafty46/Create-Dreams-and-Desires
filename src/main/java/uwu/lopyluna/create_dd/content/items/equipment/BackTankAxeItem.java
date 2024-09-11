@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -104,11 +105,24 @@ public class BackTankAxeItem extends AxeItem {
             return false;
         if (enchantment == Enchantments.MENDING)
             return false;
+        if (enchantment == Enchantments.BLOCK_EFFICIENCY)
+            return true;
+        if (enchantment == Enchantments.BLOCK_FORTUNE)
+            return true;
+        if (enchantment == Enchantments.SILK_TOUCH)
+            return true;
         return enchantment == Enchantments.VANISHING_CURSE;
     }
 
     @Override
-    public boolean isEnchantable(ItemStack pStack) {
-        return false;
+    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
+        pStack.getOrCreateTagElement("Valid");
+        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
+    }
+
+    @Override
+    public boolean isEnchantable(@NotNull ItemStack pStack) {
+        assert pStack.getTag() != null;
+        return !pStack.getTag().contains("Damage") || pStack.getTag().contains("Valid");
     }
 }

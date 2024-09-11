@@ -8,11 +8,11 @@ import com.simibubi.create.content.kinetics.millstone.MillingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.utility.BlockHelper;
 import com.simibubi.create.foundation.utility.VecHelper;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -33,6 +33,8 @@ import uwu.lopyluna.create_dd.registry.DesiresTags;
 
 import java.util.*;
 import java.util.function.Consumer;
+
+import static uwu.lopyluna.create_dd.infrastructure.utility.VeinMining.findVein;
 
 public class ModularDrillBlockEntity extends BlockBreakingKineticBlockEntity {
 
@@ -159,45 +161,40 @@ public class ModularDrillBlockEntity extends BlockBreakingKineticBlockEntity {
     }
 
     private void performVeinMining(BlockPos breakingPos, BlockState stateToBreak) {
-        int maxBlocks;
-        if (stateToBreak.is(DesiresTags.AllBlockTags.MODULAR_VEIN_SMALL.tag)) {
-            maxBlocks = 16;
-        } else if (stateToBreak.is(DesiresTags.AllBlockTags.MODULAR_VEIN_MEDIUM.tag)) {
-            maxBlocks = 32;
-        } else if (stateToBreak.is(DesiresTags.AllBlockTags.MODULAR_VEIN_LARGE.tag)) {
-            maxBlocks = 64;
+        if (stateToBreak.is(DesiresTags.AllBlockTags.MODULAR_VEIN.tag) ||
+                stateToBreak.is(DesiresTags.AllBlockTags.MODULAR_VEIN_SMALL.tag) ||
+                stateToBreak.is(DesiresTags.AllBlockTags.MODULAR_VEIN_MEDIUM.tag) ||
+                stateToBreak.is(DesiresTags.AllBlockTags.MODULAR_VEIN_LARGE.tag)) {
+
+            if (stateToBreak.is(DesiresTags.AllBlockTags.MODULAR_VEIN_LARGE.tag)) {
+                veinMine(Objects.requireNonNull(getLevel()), breakingPos, DesiresTags.AllBlockTags.MODULAR_VEIN_LARGE.tag, 64);
+                defaultBlockBreaking(stateToBreak);
+            } else if (stateToBreak.is(DesiresTags.AllBlockTags.MODULAR_VEIN_MEDIUM.tag)) {
+                veinMine(Objects.requireNonNull(getLevel()), breakingPos, DesiresTags.AllBlockTags.MODULAR_VEIN_MEDIUM.tag, 32);
+                defaultBlockBreaking(stateToBreak);
+            } else if (stateToBreak.is(DesiresTags.AllBlockTags.MODULAR_VEIN_SMALL.tag)) {
+                veinMine(Objects.requireNonNull(getLevel()), breakingPos, DesiresTags.AllBlockTags.MODULAR_VEIN_SMALL.tag, 16);
+                defaultBlockBreaking(stateToBreak);
+            } else {
+                veinMine(Objects.requireNonNull(getLevel()), breakingPos, DesiresTags.AllBlockTags.MODULAR_VEIN.tag, 8);
+                defaultBlockBreaking(stateToBreak);
+            }
         } else {
             defaultBlockBreaking(stateToBreak);
-            return;
-        }
-
-        Block block = stateToBreak.getBlock();
-        List<BlockPos> connectedBlocks = findConnectedBlocks(breakingPos, block, maxBlocks);
-
-        for (BlockPos pos : connectedBlocks) {
-            defaultBlockBreaking(Objects.requireNonNull(getLevel()).getBlockState(pos));
         }
     }
 
-    private List<BlockPos> findConnectedBlocks(BlockPos startPos, Block targetBlock, int maxBlocks) {
-        Set<BlockPos> visited = new HashSet<>();
-        Stack<BlockPos> stack = new Stack<>();
-        stack.push(startPos);
-        visited.add(startPos);
+    public static void veinMine(Level pLevel, BlockPos startPos, TagKey<Block> filterTag, int maxBlocks) {
+        if (!(pLevel.getBlockState(startPos).is(filterTag)))
+            return;
 
-        while (!stack.isEmpty() && visited.size() < maxBlocks) {
-            BlockPos current = stack.pop();
-            for (Direction direction : Direction.values()) {
-                BlockPos next = current.relative(direction);
-                if (!visited.contains(next) && Objects.requireNonNull(getLevel()).getBlockState(next).getBlock() == targetBlock) {
-                    stack.push(next);
-                    visited.add(next);
-                    if (visited.size() >= maxBlocks) break;
-                }
-            }
-        }
-
-        return List.copyOf(visited);
+        findVein(pLevel, startPos, filterTag, maxBlocks).destroyBlocks(pLevel, null, (dropPos, item) -> dropItemFromExcavatedVein(pLevel, dropPos, item));
+    }
+    public static void dropItemFromExcavatedVein(Level world, BlockPos pos,
+                                                 ItemStack stack) {
+        Vec3 dropPos = VecHelper.getCenterOf(pos);
+        ItemEntity entity = new ItemEntity(world, dropPos.x, dropPos.y, dropPos.z, stack);
+        world.addFreshEntity(entity);
     }
 
     private void performEnchantableMining(BlockPos breakingPos, BlockState stateToBreak) {

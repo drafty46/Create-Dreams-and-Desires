@@ -19,6 +19,9 @@ public class DesiresDatagen {
 
 		DataGenerator generator = event.getGenerator();
 
+		//if (event.includeClient()) {
+			//generator.addProvider(true, DesiresAllSoundEvents.provider(generator));
+		//}
 		if (event.includeServer()) {
 
 			generator.addProvider(true, new SequencedAssemblyRecipeGen(generator));

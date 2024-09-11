@@ -3,6 +3,7 @@ package uwu.lopyluna.create_dd.content.items.equipment;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -12,6 +13,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -48,11 +50,24 @@ public class BackTankPickaxeItem extends PickaxeItem {
             return false;
         if (enchantment == Enchantments.MENDING)
             return false;
+        if (enchantment == Enchantments.BLOCK_EFFICIENCY)
+            return true;
+        if (enchantment == Enchantments.BLOCK_FORTUNE)
+            return true;
+        if (enchantment == Enchantments.SILK_TOUCH)
+            return true;
         return enchantment == Enchantments.VANISHING_CURSE;
     }
 
     @Override
-    public boolean isEnchantable(ItemStack pStack) {
-        return false;
+    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
+        pStack.getOrCreateTagElement("Valid");
+        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
+    }
+
+    @Override
+    public boolean isEnchantable(@NotNull ItemStack pStack) {
+        assert pStack.getTag() != null;
+        return !pStack.getTag().contains("Damage") || pStack.getTag().contains("Valid");
     }
 }

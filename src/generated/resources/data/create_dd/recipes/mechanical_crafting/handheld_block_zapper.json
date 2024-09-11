@@ -1,0 +1,38 @@
+{
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": true,
+  "key": {
+    "B": {
+      "tag": "forge:ingots/bury_blend"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "M": {
+      "item": "create:precision_mechanism"
+    },
+    "N": {
+      "tag": "forge:nether_stars"
+    },
+    "P": {
+      "tag": "forge:plates/brass"
+    },
+    "S": {
+      "tag": "forge:storage_blocks/brass"
+    },
+    "Y": {
+      "tag": "forge:ingots/brass"
+    },
+    "Z": {
+      "tag": "forge:ingots/zinc"
+    }
+  },
+  "pattern": [
+    "ZBSYYY",
+    " MNPPP",
+    "II    "
+  ],
+  "result": {
+    "item": "create_dd:handheld_block_zapper"
+  }
+}

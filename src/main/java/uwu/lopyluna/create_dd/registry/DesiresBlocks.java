@@ -227,10 +227,12 @@ public class DesiresBlocks {
 			.initialProperties(SharedProperties::stone)
 			.properties(p -> p.color(MaterialColor.PODZOL))
 			.transform(axeOrPickaxe())
-			.blockstate(BlockStateGen.directionalBlockProvider(true))
+			.blockstate((c, p) -> {})
+			//.blockstate(BlockStateGen.directionalBlockProvider(true))
 			.transform(BlockStressDefaults.setImpact(8.0))
 			.onRegister(movementBehaviour(new DrillMovementBehaviour()))
 			.item()
+			.model((c, p) -> {})
 			.tag(AllTags.AllItemTags.CONTRAPTION_CONTROLLED.tag)
 			.transform(customItemModel())
 			.register();

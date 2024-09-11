@@ -1,0 +1,20 @@
+{
+  "values": [
+    "minecraft:bedrock",
+    "minecraft:moving_piston",
+    "minecraft:nether_portal",
+    "minecraft:end_portal",
+    "minecraft:end_portal_frame",
+    "minecraft:dragon_egg",
+    "minecraft:command_block",
+    "minecraft:barrier",
+    "minecraft:end_gateway",
+    "minecraft:repeating_command_block",
+    "minecraft:chain_command_block",
+    "minecraft:structure_block",
+    "minecraft:jigsaw",
+    "minecraft:reinforced_deepslate",
+    "minecraft:beacon",
+    "minecraft:netherite_block"
+  ]
+}

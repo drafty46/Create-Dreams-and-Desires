@@ -20,18 +20,23 @@ import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.modular_drill.ModularDrillHeadItem;
 import uwu.lopyluna.create_dd.content.items.equipment.NameableRecordItem;
+import uwu.lopyluna.create_dd.content.items.equipment.block_zapper.BlockZapperItem;
 import uwu.lopyluna.create_dd.content.items.equipment.clockwork_crossbow.ClockworkCrossbow;
 import uwu.lopyluna.create_dd.content.items.equipment.deforester_saw.DeforesterSawItem;
 import uwu.lopyluna.create_dd.content.items.equipment.excavation_drill.ExcavationDrillItem;
 import uwu.lopyluna.create_dd.content.items.equipment.gilded_rose_tools.*;
 import uwu.lopyluna.create_dd.content.items.equipment.portable_fan.PortableFanItem;
+import uwu.lopyluna.create_dd.content.items.materials.ChromaticCompound;
+import uwu.lopyluna.create_dd.content.items.materials.RefinedRadiance;
+import uwu.lopyluna.create_dd.content.items.materials.ShadowSteel;
+import uwu.lopyluna.create_dd.registry.addons.DreamsAddons;
 
 import static com.tterrag.registrate.providers.RegistrateRecipeProvider.has;
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 import static uwu.lopyluna.create_dd.registry.DesiresTags.forgeItemTag;
 import static uwu.lopyluna.create_dd.registry.DesiresTags.optionalTag;
 
-@SuppressWarnings({"unused", "deprecation", "removal", "SameParameterValue"})
+@SuppressWarnings({"unused", "deprecation", "SameParameterValue"})
 public class DesiresItems {
 
 	static {
@@ -91,6 +96,41 @@ public class DesiresItems {
 			})
 			.lang("Rubber")
 			.register();
+
+	public static final ItemEntry<ChromaticCompound> CHROMATIC_COMPOUND =
+			REGISTRATE.item("chromatic_compound", ChromaticCompound::new)
+					.properties(p -> p.stacksTo(16)
+							.rarity(Rarity.UNCOMMON)
+							.fireResistant())
+					.register();
+
+	public static final ItemEntry<ShadowSteel> SHADOW_STEEL =
+			REGISTRATE.item("shadow_steel", ShadowSteel::new)
+					.properties(p -> p.stacksTo(16)
+							.rarity(Rarity.UNCOMMON)
+							.fireResistant())
+					.register();
+
+	public static final ItemEntry<ShadowSteel> SHADOW_STEEL_SHEET = !DreamsAddons.EXTRAS.isLoaded() ? null :
+			REGISTRATE.item("shadow_steel_sheet", ShadowSteel::new)
+					.properties(p -> p.stacksTo(16)
+							.rarity(Rarity.UNCOMMON)
+							.fireResistant())
+					.register();
+
+	public static final ItemEntry<RefinedRadiance> REFINED_RADIANCE =
+			REGISTRATE.item("refined_radiance", RefinedRadiance::new)
+					.properties(p -> p.stacksTo(16)
+							.rarity(Rarity.UNCOMMON)
+							.fireResistant())
+					.register();
+
+	public static final ItemEntry<RefinedRadiance> REFINED_RADIANCE_SHEET = !DreamsAddons.EXTRAS.isLoaded() ? null :
+			REGISTRATE.item("refined_radiance_sheet", RefinedRadiance::new)
+					.properties(p -> p.stacksTo(16)
+							.rarity(Rarity.UNCOMMON)
+							.fireResistant())
+					.register();
 
 	public static final ItemEntry<Item> BURY_BLEND = REGISTRATE.item("bury_blend", Item::new)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
@@ -167,35 +207,6 @@ public class DesiresItems {
 						.unlockedBy("has_" + c.getName(), has(c.get()))
 						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
 			})
-			.register();
-
-	public static final ItemEntry<uwu.lopyluna.create_dd.content.items.equipment.magnet.MagnetItem> MAGNET = REGISTRATE.item("magnet", uwu.lopyluna.create_dd.content.items.equipment.magnet.MagnetItem::new)
-			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
-					new ResourceLocation("item/generated")).texture("layer0",
-					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
-			.recipe((c, p) -> {
-				ShapedRecipeBuilder.shaped(c.get(), 1)
-						.pattern("I I")
-						.pattern("B Q")
-						.pattern("BNQ")
-						.define('Q', AllItems.POLISHED_ROSE_QUARTZ.get())
-						.define('B', BURY_BLEND.get())
-						.define('I', Items.IRON_INGOT)
-						.define('N', Items.NETHERITE_INGOT)
-						.unlockedBy("has_" + c.getName(), has(c.get()))
-						.save(p, DesiresCreate.asResource("crafting/equipment/flipped_" + c.getName()));
-				ShapedRecipeBuilder.shaped(c.get(), 1)
-						.pattern("I I")
-						.pattern("Q B")
-						.pattern("QNB")
-						.define('Q', AllItems.POLISHED_ROSE_QUARTZ.get())
-						.define('B', BURY_BLEND.get())
-						.define('I', Items.IRON_INGOT)
-						.define('N', Items.NETHERITE_INGOT)
-						.unlockedBy("has_" + c.getName(), has(c.get()))
-						.save(p, DesiresCreate.asResource("crafting/equipment/" + c.getName()));
-			})
-			.lang("Magnet")
 			.register();
 
 	public static final ItemEntry<GRSwordItem> GILDED_ROSE_SWORD = REGISTRATE.item("gilded_rose_sword",
@@ -292,8 +303,14 @@ public class DesiresItems {
 			.register();
 
 	public static final ItemEntry<PortableFanItem> PORTABLE_FAN = REGISTRATE.item("portable_fan", PortableFanItem::new)
-			.model(AssetLookup.itemModelWithPartials())
+			.model((c, p) -> {})
+			//.model(AssetLookup.itemModelWithPartials())
 			.properties(p -> p.rarity(Rarity.UNCOMMON))
+			.register();
+
+	public static final ItemEntry<BlockZapperItem> BLOCK_ZAPPER = REGISTRATE.item("handheld_block_zapper", BlockZapperItem::new)
+			.lang("Handheld Block Zapper")
+			.model(AssetLookup.itemModelWithPartials())
 			.register();
 
 	public static final ItemEntry<ModularDrillHeadItem> DRILL_VEIN_HEAD = REGISTRATE.item("drill_vein_head",

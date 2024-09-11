@@ -12,6 +12,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.common.Tags;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 import uwu.lopyluna.create_dd.registry.DesiresItems;
@@ -25,6 +26,21 @@ import java.util.function.UnaryOperator;
 public class MechanicalCraftingRecipeGen extends CreateRecipeProvider {
 
     GeneratedRecipe
+
+            BLOCK_ZAPPER = create(DesiresItems.BLOCK_ZAPPER::get).returns(1)
+            .recipe(b -> b
+                    .key('S', AllTags.forgeItemTag("storage_blocks/brass"))
+                    .key('Y', AllTags.forgeItemTag("ingots/brass"))
+                    .key('P', AllTags.forgeItemTag("plates/brass"))
+                    .key('Z', AllTags.forgeItemTag("ingots/zinc"))
+                    .key('B', AllTags.forgeItemTag("ingots/bury_blend"))
+                    .key('I', AllTags.forgeItemTag("ingots/iron"))
+                    .key('N', Tags.Items.NETHER_STARS)
+                    .key('M', AllItems.PRECISION_MECHANISM.get())
+                    .patternLine("ZBSYYY")
+                    .patternLine(" MNPPP")
+                    .patternLine("II    ")
+            ),
 
             FURNACE_ENGINE = create(DesiresBlocks.FURNACE_ENGINE::get).returns(1)
             .recipe(b -> b
@@ -52,14 +68,16 @@ public class MechanicalCraftingRecipeGen extends CreateRecipeProvider {
 
             EXCAVATION_DRILL = create(DesiresItems.EXCAVATION_DRILL::get).returns(1)
             .recipe(b -> b
-                            .key('#', AllTags.forgeItemTag("ingots/brass"))
-                            .key('P', AllItems.PRECISION_MECHANISM.get())
-                            .key('A', AllItems.ANDESITE_ALLOY.get())
-                            .key('B', DesiresItems.BURY_BLEND.get())
-                            .key('I', Items.IRON_INGOT)
-                            .patternLine(" I   ")
-                            .patternLine("IABP ")
-                            .patternLine(" IB##")
+                    .key('S', AllTags.forgeItemTag("storage_blocks/brass"))
+                    .key('Y', AllTags.forgeItemTag("ingots/brass"))
+                    .key('P', AllTags.forgeItemTag("plates/brass"))
+                    .key('M', AllItems.PRECISION_MECHANISM.get())
+                    .key('A', AllItems.ANDESITE_ALLOY.get())
+                    .key('B', DesiresItems.BURY_BLEND.get())
+                    .key('I', Items.IRON_INGOT)
+                    .patternLine(" APPP  ")
+                    .patternLine("AIMBB  ")
+                    .patternLine(" ASYYYY")
             ),
 
             GILDED_ROSE_SWORD = create(DesiresItems.GILDED_ROSE_SWORD::get).returns(1)
