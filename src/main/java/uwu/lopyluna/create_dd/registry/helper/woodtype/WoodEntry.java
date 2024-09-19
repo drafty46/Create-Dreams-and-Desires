@@ -1,11 +1,22 @@
 package uwu.lopyluna.create_dd.registry.helper.woodtype;
 
+import static com.simibubi.create.AllInteractionBehaviours.interactionBehaviour;
+import static com.simibubi.create.AllMovementBehaviours.movementBehaviour;
+import static com.simibubi.create.foundation.data.TagGen.axeOnly;
 import static com.simibubi.create.foundation.data.WindowGen.woodenWindowBlock;
 import static com.simibubi.create.foundation.data.WindowGen.woodenWindowPane;
+import static com.tterrag.registrate.providers.RegistrateRecipeProvider.has;
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
+import static uwu.lopyluna.create_dd.registry.DesiresTags.forgeItemTag;
+import static uwu.lopyluna.create_dd.registry.DesiresTags.modItemTag;
 
+import com.simibubi.create.AllTags;
+import com.simibubi.create.Create;
+import com.simibubi.create.content.contraptions.behaviour.DoorMovingInteraction;
+import com.simibubi.create.content.contraptions.behaviour.TrapdoorMovingInteraction;
 import com.simibubi.create.content.decoration.palettes.ConnectedGlassPaneBlock;
 import com.simibubi.create.content.decoration.palettes.WindowBlock;
+import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorMovementBehaviour;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.tterrag.registrate.util.entry.BlockEntry;
@@ -13,12 +24,14 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Holder;
+import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.vehicle.Boat;
-import net.minecraft.world.item.BoatItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SignItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -27,11 +40,15 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.content.blocks.functional.AxisBlock;
 import uwu.lopyluna.create_dd.content.blocks.functional.Combustible.*;
+import uwu.lopyluna.create_dd.content.blocks.functional.sliding_door.WoodenSlidingDoorBlock;
 import uwu.lopyluna.create_dd.registry.DesiresCreativeModeTabs;
+import uwu.lopyluna.create_dd.registry.DesiresTags;
 
 public class WoodEntry {
     public WoodType woodType;
@@ -50,7 +67,6 @@ public class WoodEntry {
     //WOOD_SLIDING_DOOR
 
     public BlockEntry<? extends Block> slidingDoor;
-    public BlockEntityEntry<? extends BlockEntity> slidingDoorBE;
 
     //fences but no tag
 
@@ -86,9 +102,8 @@ public class WoodEntry {
     public BlockEntry<WindowBlock> window;
     public BlockEntry<ConnectedGlassPaneBlock> window_pane;
 
-
     @SuppressWarnings("removal")
-    public static WoodEntry create(String name, WoodTypes type, boolean hasSlidingDoor, boolean hasBoat, boolean hasSign, boolean hasTree, boolean flammable) {
+    public static WoodEntry create(String name, WoodTypes type, boolean flammable, boolean hasSlidingDoor, boolean folds, boolean orientable, boolean hasBoat, boolean hasSign, boolean hasTree) {
         boolean isWood = type == WoodTypes.WOOD;
         boolean anyAll = isWood || type == WoodTypes.ALL;
 
@@ -110,15 +125,14 @@ public class WoodEntry {
         BlockEntry<AxisBlock> strippedWood;
 
         BlockEntry<CombustibleTrapdoorBlock> trapdoors;
-        BlockEntry<? extends Block> door;
+        BlockEntry<DoorBlock> door;
 
-        BlockEntry<? extends Block> slidingDoor;
-        BlockEntityEntry<? extends BlockEntity> slidingDoorBE;
+        BlockEntry<WoodenSlidingDoorBlock> slidingDoor;
 
         BlockEntry<CombustibleFenceBlock> fence;
         BlockEntry<CombustibleFenceGateBlock> fenceGate;
-        BlockEntry<? extends Block> pressurePlate;
-        BlockEntry<? extends Block> button;
+        BlockEntry<PressurePlateBlock> pressurePlate;
+        BlockEntry<WoodButtonBlock> button;
 
         BlockEntityEntry<? extends BlockEntity> signBE;
         BlockEntry<? extends StandingSignBlock> standingSign;
@@ -143,12 +157,21 @@ public class WoodEntry {
 
         if (anyAll) {
             woodType = WoodType.create(id);
-
             plank = REGISTRATE.block(id + "_planks", flammable ? p -> CombustibleBlock.create(p, 5, 20) : CombustibleBlock::create)
                     .initialProperties(() -> Blocks.OAK_PLANKS)
                     .lang(name + " Planks")
                     .blockstate((c, p) -> BlockStateGen.cubeAll(c, p, palettesPath))
+                    .transform(axeOnly())
+                    .tag(!flammable ? BlockTags.NON_FLAMMABLE_WOOD : DesiresTags.AllBlockTags.FLAMMABLE_WOOD.tag)
+                    .tag(BlockTags.PLANKS)
                     .item()
+                    .recipe((c, p) -> ShapelessRecipeBuilder.shapeless(c.get(), 4)
+                            .requires(modItemTag(id + "_logs")).group("planks")
+                            .unlockedBy("has_log", has(modItemTag(id + "_logs")))
+                            .save(p)
+                    )
+                    .tag(ItemTags.PLANKS)
+                    .tag(!flammable ? ItemTags.NON_FLAMMABLE_WOOD : DesiresTags.AllItemTags.FLAMMABLE_WOOD.tag)
                     .tab(tab)
                     .build()
                     .register();
@@ -157,7 +180,18 @@ public class WoodEntry {
                     .initialProperties(() -> Blocks.OAK_SLAB)
                     .lang(name + " Slab")
                     .blockstate((c, p) -> p.slabBlock(c.get(), DesiresCreate.asResource("block/" + id + "_planks"), plankTextures))
+                    .transform(axeOnly())
+                    .tag(!flammable ? BlockTags.NON_FLAMMABLE_WOOD : DesiresTags.AllBlockTags.FLAMMABLE_WOOD.tag)
+                    .tag(BlockTags.SLABS)
+                    .tag(BlockTags.WOODEN_SLABS)
                     .item()
+                    .recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 6).define('#', plank.get())
+                            .pattern("###")
+                            .group("wooden_slab")
+                            .unlockedBy("has_planks", has(plank.get())).save(p))
+                    .tag(ItemTags.SLABS)
+                    .tag(ItemTags.WOODEN_SLABS)
+                    .tag(!flammable ? ItemTags.NON_FLAMMABLE_WOOD : DesiresTags.AllItemTags.FLAMMABLE_WOOD.tag)
                     .tab(tab)
                     .build()
                     .register();
@@ -165,7 +199,20 @@ public class WoodEntry {
                     .initialProperties(() -> Blocks.OAK_STAIRS)
                     .lang(name + " Stairs")
                     .blockstate((c, p) -> p.stairsBlock(c.get(), plankTextures))
+                    .transform(axeOnly())
+                    .tag(!flammable ? BlockTags.NON_FLAMMABLE_WOOD : DesiresTags.AllBlockTags.FLAMMABLE_WOOD.tag)
+                    .tag(BlockTags.STAIRS)
+                    .tag(BlockTags.WOODEN_STAIRS)
                     .item()
+                    .recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 4).define('#', plank.get())
+                            .pattern("#  ")
+                            .pattern("## ")
+                            .pattern("###")
+                            .group("wooden_stairs")
+                            .unlockedBy("has_planks", has(plank.get())).save(p))
+                    .tag(ItemTags.STAIRS)
+                    .tag(ItemTags.WOODEN_STAIRS)
+                    .tag(!flammable ? ItemTags.NON_FLAMMABLE_WOOD : DesiresTags.AllItemTags.FLAMMABLE_WOOD.tag)
                     .tab(tab)
                     .build()
                     .register();
@@ -174,7 +221,15 @@ public class WoodEntry {
                     .initialProperties(() -> Blocks.STRIPPED_OAK_LOG)
                     .lang("Stripped " + name + " Log")
                     .blockstate((c, p) -> p.axisBlock(c.get(), DesiresCreate.asResource(strippedSuffix + "_log"), DesiresCreate.asResource(texturePathID + "_log_top")))
+                    .transform(axeOnly())
+                    .tag(flammable ? BlockTags.LOGS_THAT_BURN : BlockTags.NON_FLAMMABLE_WOOD)
+                    .tag(BlockTags.LOGS)
                     .item()
+                    .tag(flammable ? ItemTags.LOGS_THAT_BURN : ItemTags.NON_FLAMMABLE_WOOD)
+                    .tag(AllTags.AllItemTags.MODDED_STRIPPED_LOGS.tag)
+                    .tag(forgeItemTag("stripped_logs"))
+                    .tag(modItemTag(id + "_logs"))
+                    .tag(ItemTags.LOGS)
                     .tab(tab)
                     .build()
                     .register();
@@ -182,7 +237,14 @@ public class WoodEntry {
                     .initialProperties(() -> Blocks.OAK_LOG)
                     .lang(name + " Log")
                     .blockstate((c, p) -> p.axisBlock(c.get(), DesiresCreate.asResource(texturePathID + "_log"), DesiresCreate.asResource(texturePathID + "_log_top")))
+                    .transform(axeOnly())
+                    .tag(flammable ? BlockTags.LOGS_THAT_BURN : BlockTags.NON_FLAMMABLE_WOOD)
+                    .tag(BlockTags.LOGS)
                     .item()
+                    .tag(flammable ? ItemTags.LOGS_THAT_BURN : ItemTags.NON_FLAMMABLE_WOOD)
+                    .tag(forgeItemTag("logs"))
+                    .tag(modItemTag(id + "_logs"))
+                    .tag(ItemTags.LOGS)
                     .tab(tab)
                     .build()
                     .register();
@@ -190,7 +252,21 @@ public class WoodEntry {
                     .initialProperties(() -> Blocks.STRIPPED_OAK_WOOD)
                     .lang("Stripped " + name + " Wood")
                     .blockstate((c, p) -> p.axisBlock(c.get(), DesiresCreate.asResource(strippedSuffix + "_log"), DesiresCreate.asResource(strippedSuffix + "_log")))
+                    .transform(axeOnly())
+                    .tag(flammable ? BlockTags.LOGS_THAT_BURN : BlockTags.NON_FLAMMABLE_WOOD)
+                    .tag(BlockTags.LOGS)
                     .item()
+                    .recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 3).define('#', strippedLog.get())
+                            .pattern("##")
+                            .pattern("##")
+                            .group("bark")
+                            .unlockedBy("has_log", has(strippedLog.get())).save(p)
+                    )
+                    .tag(flammable ? ItemTags.LOGS_THAT_BURN : ItemTags.NON_FLAMMABLE_WOOD)
+                    .tag(AllTags.AllItemTags.MODDED_STRIPPED_WOOD.tag)
+                    .tag(forgeItemTag("stripped_wood"))
+                    .tag(modItemTag(id + "_logs"))
+                    .tag(ItemTags.LOGS)
                     .tab(tab)
                     .build()
                     .register();
@@ -198,18 +274,45 @@ public class WoodEntry {
                     .initialProperties(() -> Blocks.OAK_WOOD)
                     .lang(name + " Wood")
                     .blockstate((c, p) -> p.axisBlock(c.get(), DesiresCreate.asResource(texturePathID + "_log"), DesiresCreate.asResource(texturePathID + "_log")))
+                    .transform(axeOnly())
+                    .tag(flammable ? BlockTags.LOGS_THAT_BURN : BlockTags.NON_FLAMMABLE_WOOD)
+                    .tag(BlockTags.LOGS)
                     .item()
+                    .recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 3).define('#', log.get())
+                            .pattern("##")
+                            .pattern("##")
+                            .group("bark")
+                            .unlockedBy("has_log", has(log.get())).save(p)
+                    )
+                    .tag(flammable ? ItemTags.LOGS_THAT_BURN : ItemTags.NON_FLAMMABLE_WOOD)
+                    .tag(forgeItemTag("wood"))
+                    .tag(modItemTag(id + "_logs"))
+                    .tag(ItemTags.LOGS)
                     .tab(tab)
                     .build()
                     .register();
             fence = REGISTRATE.block(id + "_fence", flammable ? p -> CombustibleFenceBlock.create(p, 5, 20) : CombustibleFenceBlock::create)
                     .initialProperties(() -> Blocks.OAK_FENCE)
                     .lang(name + " Fence")
-
-                    .blockstate((c, p) -> p.models().cubeAll(name(c.get()), plankTextures))
-                    //.blockstate((c, p) -> p.fenceBlock(c.get(), plankTextures))
-
+                    .blockstate((c, p) -> p.fenceBlock(c.get(), plankTextures))
+                    .transform(axeOnly())
+                    .tag(!flammable ? BlockTags.NON_FLAMMABLE_WOOD : DesiresTags.AllBlockTags.FLAMMABLE_WOOD.tag)
+                    .tag(BlockTags.FENCES)
+                    .tag(BlockTags.WOODEN_FENCES)
+                    .tag(Tags.Blocks.FENCES)
+                    .tag(Tags.Blocks.FENCES_WOODEN)
                     .item()
+                    .recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 3).define('#', plank.get()).define('S', Items.STICK)
+                            .pattern("#S#")
+                            .pattern("#S#")
+                            .group("wooden_fence")
+                            .unlockedBy("has_planks", has(plank.get())).save(p))
+                    .tag(ItemTags.FENCES)
+                    .tag(ItemTags.WOODEN_FENCES)
+                    .tag(Tags.Items.FENCES)
+                    .tag(Tags.Items.FENCES_WOODEN)
+                    .tag(!flammable ? ItemTags.NON_FLAMMABLE_WOOD : DesiresTags.AllItemTags.FLAMMABLE_WOOD.tag)
+                    .model((c, p) -> p.fenceInventory(c.getName(), plankTextures))
                     .tab(tab)
                     .build()
                     .register();
@@ -217,7 +320,21 @@ public class WoodEntry {
                     .initialProperties(() -> Blocks.OAK_FENCE_GATE)
                     .lang(name + " Fence Gate")
                     .blockstate((c, p) -> p.fenceGateBlock(c.get(), plankTextures))
+                    .transform(axeOnly())
+                    .tag(!flammable ? BlockTags.NON_FLAMMABLE_WOOD : DesiresTags.AllBlockTags.FLAMMABLE_WOOD.tag)
+                    .tag(BlockTags.FENCE_GATES)
+                    .tag(Tags.Blocks.FENCE_GATES)
+                    .tag(Tags.Blocks.FENCE_GATES_WOODEN)
                     .item()
+                    .recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 1).define('#', plank.get()).define('S', Items.STICK)
+                            .pattern("S#S")
+                            .pattern("S#S")
+                            .group("wooden_fence_gate")
+                            .unlockedBy("has_planks", has(plank.get())).save(p))
+                    .tag(Tags.Items.FENCE_GATES)
+                    .tag(Tags.Items.FENCE_GATES_WOODEN)
+                    .tag(!flammable ? ItemTags.NON_FLAMMABLE_WOOD : DesiresTags.AllItemTags.FLAMMABLE_WOOD.tag)
+                    .tag()
                     .tab(tab)
                     .build()
                     .register();
@@ -225,7 +342,18 @@ public class WoodEntry {
                     .initialProperties(() -> Blocks.OAK_BUTTON)
                     .lang(name + " Pressure Plate")
                     .blockstate((c, p) -> p.pressurePlateBlock(c.get(), plankTextures))
+                    .transform(axeOnly())
+                    .tag(!flammable ? BlockTags.NON_FLAMMABLE_WOOD : DesiresTags.AllBlockTags.FLAMMABLE_WOOD.tag)
+                    .tag(BlockTags.PRESSURE_PLATES)
+                    .tag(BlockTags.WOODEN_PRESSURE_PLATES)
                     .item()
+                    .recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 1).define('#', plank.get())
+                            .pattern("##")
+                            .group("wooden_pressure_plate")
+                            .unlockedBy("has_planks", has(plank.get())).save(p))
+                    .tag(DesiresTags.optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("minecraft", "pressure_plates")))
+                    .tag(ItemTags.WOODEN_PRESSURE_PLATES)
+                    .tag(!flammable ? ItemTags.NON_FLAMMABLE_WOOD : DesiresTags.AllItemTags.FLAMMABLE_WOOD.tag)
                     .tab(tab)
                     .build()
                     .register();
@@ -233,7 +361,18 @@ public class WoodEntry {
                     .initialProperties(() -> Blocks.OAK_BUTTON)
                     .lang(name + " Button")
                     .blockstate((c, p) -> p.buttonBlock(c.get(), plankTextures))
+                    .transform(axeOnly())
+                    .tag(!flammable ? BlockTags.NON_FLAMMABLE_WOOD : DesiresTags.AllBlockTags.FLAMMABLE_WOOD.tag)
+                    .tag(BlockTags.BUTTONS)
+                    .tag(BlockTags.WOODEN_BUTTONS)
                     .item()
+                    .recipe((c, p) -> ShapelessRecipeBuilder.shapeless(c.get(), 1)
+                            .requires(plank.get()).group("wooden_button")
+                            .unlockedBy("has_planks", has(plank.get())).save(p))
+                    .tag(ItemTags.BUTTONS)
+                    .tag(ItemTags.WOODEN_BUTTONS)
+                    .tag(!flammable ? ItemTags.NON_FLAMMABLE_WOOD : DesiresTags.AllItemTags.FLAMMABLE_WOOD.tag)
+                    .model((c, p) -> p.buttonInventory(c.getName(), plankTextures))
                     .tab(tab)
                     .build()
                     .register();
@@ -242,15 +381,97 @@ public class WoodEntry {
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .addLayer(() -> RenderType::cutoutMipped)
                     .lang(name + " Trapdoor")
-                    .blockstate((c, p) -> p.models().cubeAll(name(c.get()), plankTextures))
-                    //.blockstate((c, p) -> p.trapdoorBlock(c.get(), DesiresCreate.asResource(texturePathID + "_trapdoor"), true))
+                    .blockstate((c, p) -> p.trapdoorBlock(c.get(), DesiresCreate.asResource("block/palettes/wood_types/" + id + "/" + id + "_trapdoor"), orientable))
+                    .transform(axeOnly())
+                    .tag(!flammable ? BlockTags.NON_FLAMMABLE_WOOD : DesiresTags.AllBlockTags.FLAMMABLE_WOOD.tag)
+                    .tag(BlockTags.TRAPDOORS)
+                    .tag(BlockTags.WOODEN_TRAPDOORS)
+                    .onRegister(interactionBehaviour(new TrapdoorMovingInteraction()))
                     .item()
+                    .recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 2).define('#', plank.get())
+                            .pattern("###")
+                            .pattern("###")
+                            .group("wooden_trapdoor")
+                            .unlockedBy("has_planks", has(plank.get())).save(p))
+                    .model((c, p) -> {
+                        ResourceLocation loc = DesiresCreate.asResource("block/palettes/wood_types/" + id + "/" + id + "_trapdoor");
+                        if (orientable) {
+                            p.trapdoorOrientableBottom(c.getName(), loc);
+                        } else {
+                            p.trapdoorBottom(c.getName(), loc);
+                        }
+                    })
+                    .tag(ItemTags.TRAPDOORS)
+                    .tag(ItemTags.WOODEN_TRAPDOORS)
+                    .tag(!flammable ? ItemTags.NON_FLAMMABLE_WOOD : DesiresTags.AllItemTags.FLAMMABLE_WOOD.tag)
                     .tab(tab)
                     .build()
                     .register();
             if (hasSlidingDoor) {
-                slidingDoor = null;
-                slidingDoorBE = null;
+                slidingDoor = REGISTRATE.block(id + "_door", p -> new WoodenSlidingDoorBlock(p, true))
+                        .initialProperties(() -> Blocks.OAK_DOOR)
+                        .properties(BlockBehaviour.Properties::noOcclusion)
+                        .blockstate((c, p) -> {
+                            ResourceLocation particle = DesiresCreate.asResource("block/palettes/wood_types/" + id + "/" + id + "_planks");
+                            ResourceLocation bottom = DesiresCreate.asResource("block/palettes/wood_types/" + id + "/" + id + "_door_bottom");
+                            ResourceLocation top = DesiresCreate.asResource("block/palettes/wood_types/" + id + "/" + id + "_door_top");
+                            ResourceLocation side = DesiresCreate.asResource("block/palettes/wood_types/" + id + "/" + id + "_door_side");
+
+                            ResourceLocation refModelFoldBottom = Create.asResource("block/copper_door/block_bottom");
+                            ResourceLocation refModelFoldTop = Create.asResource("block/copper_door/block_top");
+                            ResourceLocation refModelFoldLeft = Create.asResource("block/copper_door/fold_left");
+                            ResourceLocation refModelFoldRight = Create.asResource("block/copper_door/fold_right");
+
+                            ResourceLocation refModelSlideBottom = Create.asResource("block/brass_door/block_bottom");
+                            ResourceLocation refModelSlideTop = Create.asResource("block/brass_door/block_top");
+
+                            ModelFile modelTop = p.models().withExistingParent("block/" + c.getName() + "/block_top", folds ? refModelFoldTop : refModelSlideTop)
+                                    .texture("0", side)
+                                    .texture("2", top)
+                                    .texture("particle", particle);
+
+                            ModelFile modelBottom = p.models().withExistingParent("block/" + c.getName() + "/block_bottom", folds ? refModelFoldBottom : refModelSlideBottom)
+                                    .texture("0", side)
+                                    .texture("2", bottom)
+                                    .texture("particle", particle);
+                            if (folds) {
+                                p.models().withExistingParent("block/" + c.getName() + "/fold_left", refModelFoldLeft)
+                                        .texture("0", side)
+                                        .texture("2", top)
+                                        .texture("3", bottom)
+                                        .texture("particle", particle);
+                                p.models().withExistingParent("block/" + c.getName() + "/fold_right", refModelFoldRight)
+                                        .texture("0", side)
+                                        .texture("2", top)
+                                        .texture("3", bottom)
+                                        .texture("particle", particle);
+                            }
+                            p.doorBlock(c.get(), modelBottom, modelBottom, modelBottom, modelBottom, modelTop, modelTop, modelTop, modelTop);
+                        })
+                        .addLayer(() -> RenderType::cutoutMipped)
+                        .transform(axeOnly())
+                        .onRegister(interactionBehaviour(new DoorMovingInteraction()))
+                        .onRegister(movementBehaviour(new SlidingDoorMovementBehaviour()))
+                        .tag(!flammable ? BlockTags.NON_FLAMMABLE_WOOD : DesiresTags.AllBlockTags.FLAMMABLE_WOOD.tag)
+                        .tag(BlockTags.DOORS)
+                        .tag(BlockTags.WOODEN_DOORS)
+                        .tag(AllTags.AllBlockTags.NON_DOUBLE_DOOR.tag)
+                        .loot((lr, block) -> lr.add(block, BlockLoot.createDoorTable(block)))
+                        .item()
+                        .recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 3).define('#', plank.get())
+                                .pattern("##")
+                                .pattern("##")
+                                .pattern("##")
+                                .group("wooden_door")
+                                .unlockedBy("has_planks", has(plank.get())).save(p))
+                        .tag(ItemTags.DOORS)
+                        .tag(ItemTags.WOODEN_DOORS)
+                        .tag(!flammable ? ItemTags.NON_FLAMMABLE_WOOD : DesiresTags.AllItemTags.FLAMMABLE_WOOD.tag)
+                        .tag(AllTags.AllItemTags.CONTRAPTION_CONTROLLED.tag)
+                        .model((c, p) -> p.blockSprite(c, p.modLoc("item/" + id + "_door")))
+                        .tab(tab)
+                        .build()
+                        .register();
 
                 door = null;
             } else {
@@ -259,15 +480,37 @@ public class WoodEntry {
                         .properties(p -> p.sound(SoundType.WOOD).noOcclusion())
                         .addLayer(() -> RenderType::cutoutMipped)
                         .lang(name + " Door")
-                        .blockstate((c, p) -> p.models().cubeAll(name(c.get()), plankTextures))
-                        //.blockstate((c, p) -> p.doorBlock(c.get(), DesiresCreate.asResource(texturePathID + "_door_bottom"), DesiresCreate.asResource(texturePathID + "_door_top")))
+                        .loot((lr, block) -> lr.add(block, BlockLoot.createDoorTable(block)))
+                        .blockstate((c, p) -> {
+                            //ResourceLocation particle = DesiresCreate.asResource("block/palettes/wood_types/" + id + "/" + id + "_planks");*
+                            //ResourceLocation side = DesiresCreate.asResource("block/palettes/wood_types/" + id + "/" + id + "_door_side");*
+
+                            ResourceLocation bottom = DesiresCreate.asResource("block/palettes/wood_types/" + id + "/" + id + "_door_bottom");
+                            ResourceLocation top = DesiresCreate.asResource("block/palettes/wood_types/" + id + "/" + id + "_door_top");
+
+                            p.doorBlock(c.get(), bottom, top);
+                        })
+                        .transform(axeOnly())
+                        .tag(!flammable ? BlockTags.NON_FLAMMABLE_WOOD : DesiresTags.AllBlockTags.FLAMMABLE_WOOD.tag)
+                        .tag(BlockTags.DOORS)
+                        .tag(BlockTags.WOODEN_DOORS)
+                        .onRegister(interactionBehaviour(new DoorMovingInteraction()))
                         .item()
+                        .recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 3).define('#', plank.get())
+                                .pattern("##")
+                                .pattern("##")
+                                .pattern("##")
+                                .group("wooden_door")
+                                .unlockedBy("has_planks", has(plank.get())).save(p))
+                        .tag(ItemTags.DOORS)
+                        .tag(ItemTags.WOODEN_DOORS)
+                        .tag(!flammable ? ItemTags.NON_FLAMMABLE_WOOD : DesiresTags.AllItemTags.FLAMMABLE_WOOD.tag)
+                        .model((c, p) -> p.blockSprite(c, p.modLoc("item/" + id + "_door")))
                         .tab(tab)
                         .build()
                         .register();
 
                 slidingDoor = null;
-                slidingDoorBE = null;
             }
             if (plank.isPresent()) {
                 window = woodenWindowBlock(woodType, plank.get());
@@ -342,7 +585,6 @@ public class WoodEntry {
             trapdoors = null;
             door = null;
             slidingDoor = null;
-            slidingDoorBE = null;
             signBE = null;
             standingSign = null;
             wallSign = null;
@@ -360,10 +602,11 @@ public class WoodEntry {
             window_pane = null;
         }
 
-        return new WoodEntry(woodType, plank, slab, stairs, log, strippedLog, wood, strippedWood, fence, fenceGate, pressurePlate, button, trapdoors, door, slidingDoor, slidingDoorBE, signBE, standingSign, wallSign, hangingSign1_20, sign, boat, chestBoat, leaves, sapling, tree, tree_checked, tree_spawn, tree_placed, window, window_pane
+        return new WoodEntry(woodType, plank, slab, stairs, log, strippedLog, wood, strippedWood, fence, fenceGate, pressurePlate, button, trapdoors, door, slidingDoor, signBE, standingSign, wallSign, hangingSign1_20, sign, boat, chestBoat, leaves, sapling, tree, tree_checked, tree_spawn, tree_placed, window, window_pane
         );
     }
 
+    @SuppressWarnings("unused")
     private static String name(Block block) {
         return key(block).getPath();
     }
@@ -371,14 +614,12 @@ public class WoodEntry {
         return ForgeRegistries.BLOCKS.getKey(block);
     }
 
-
-
     public WoodEntry(WoodType woodType,
 
                      BlockEntry<CombustibleBlock> plank, BlockEntry<? extends Block> slab, BlockEntry<? extends Block> stairs,
                      BlockEntry<? extends Block> log, BlockEntry<? extends Block> strippedLog, BlockEntry<? extends Block> wood, BlockEntry<? extends Block> strippedWood, BlockEntry<? extends Block> fence, BlockEntry<? extends Block> fenceGate, BlockEntry<? extends Block> pressurePlate, BlockEntry<? extends Block> button,
 
-                     BlockEntry<? extends Block> trapdoors, BlockEntry<? extends Block> door, BlockEntry<? extends Block> slidingDoor, BlockEntityEntry<? extends BlockEntity> slidingDoorBE,
+                     BlockEntry<? extends Block> trapdoors, BlockEntry<? extends Block> door, BlockEntry<? extends Block> slidingDoor,
                      BlockEntityEntry<? extends BlockEntity> signBE, BlockEntry<? extends StandingSignBlock> standingSign, BlockEntry<? extends WallSignBlock> wallSign, BlockEntry<? extends Block> hangingSign1_20, ItemEntry<? extends SignItem> sign,
                      ItemEntry<? extends Item> boat, ItemEntry<? extends Item> chestBoat,
                      BlockEntry<? extends Block> leaves, BlockEntry<? extends Block> sapling,
@@ -400,7 +641,6 @@ public class WoodEntry {
         this.trapdoors = trapdoors;
         this.door = door;
         this.slidingDoor = slidingDoor;
-        this.slidingDoorBE = slidingDoorBE;
         this.signBE = signBE;
         this.standingSign = standingSign;
         this.wallSign = wallSign;

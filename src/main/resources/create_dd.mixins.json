@@ -12,7 +12,6 @@
     "MixinBlockFluidResBlock",
     "MixinClutchBlock",
     "MixinClutchBlockEntity",
-    "MixinContraption",
     "MixinFluidPipeBlock",
     "MixinFluidPropagator",
     "MixinForgeHooks",

@@ -1,0 +1,37 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:sugar"
+    },
+    [
+      {
+        "item": "minecraft:pumpkin"
+      },
+      {
+        "item": "minecraft:pumpkin_pie"
+      },
+      {
+        "item": "minecraft:carved_pumpkin"
+      }
+    ],
+    [
+      {
+        "item": "minecraft:snow_block"
+      },
+      {
+        "item": "minecraft:packed_ice"
+      }
+    ],
+    {
+      "amount": 250,
+      "fluidTag": "forge:milk"
+    }
+  ],
+  "results": [
+    {
+      "amount": 250,
+      "fluid": "create_dd:pumpkin_milkshake"
+    }
+  ]
+}

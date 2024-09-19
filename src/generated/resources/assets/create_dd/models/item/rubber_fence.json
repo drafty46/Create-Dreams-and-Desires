@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_inventory",
+  "textures": {
+    "texture": "create_dd:block/palettes/wood_types/rubber/rubber_planks"
+  }
+}

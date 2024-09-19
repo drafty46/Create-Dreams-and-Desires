@@ -10,7 +10,7 @@ import uwu.lopyluna.create_dd.registry.DesiresFluids;
 import uwu.lopyluna.create_dd.registry.DesiresItems;
 import uwu.lopyluna.create_dd.registry.DesiresRecipeTypes;
 
-import static uwu.lopyluna.create_dd.registry.DTags.tag;
+import static uwu.lopyluna.create_dd.registry.DesiresTags.forgeItemTag;
 
 @MethodsReturnNonnullByDefault
 @SuppressWarnings({"unused"})
@@ -26,13 +26,15 @@ public class HydraulicCompactingRecipeGen extends DesireProcessingRecipeGen {
 
     GeneratedRecipe SAP_LOGS = create("sap_from_logs", b -> b
             .requiresHeat(HeatCondition.HEATED)
-            .require(tag("item", "forge", "stripped_logs"), 2)
+            .require(forgeItemTag("stripped_logs"))
+            .require(forgeItemTag("stripped_logs"))
             .output(DesiresFluids.SAP.get(), 500)
     );
 
     GeneratedRecipe SAP_WOOD = create("sap_from_wood", b -> b
             .requiresHeat(HeatCondition.HEATED)
-            .require(tag("item", "forge", "stripped_wood"), 1)
+            .require(forgeItemTag("stripped_wood"))
+            .require(forgeItemTag("stripped_wood"))
             .output(DesiresFluids.SAP.get(), 500)
     );
 
@@ -66,7 +68,7 @@ public class HydraulicCompactingRecipeGen extends DesireProcessingRecipeGen {
             .require(Fluids.LAVA, 100)
             .require(Items.BLUE_ICE)
             .require(Items.SOUL_SOIL)
-            .output(Items.STONE, 10)
+            .output(Items.BASALT, 10)
             .output(Items.BLUE_ICE, 1)
             .output(Items.SOUL_SOIL, 1)
     );

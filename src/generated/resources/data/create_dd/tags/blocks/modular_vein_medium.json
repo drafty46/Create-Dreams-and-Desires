@@ -4,6 +4,7 @@
     "create:crimsite",
     "create:ochrum",
     "create:veridium",
-    "create:asurine"
+    "create:asurine",
+    "create_dd:breccia"
   ]
 }

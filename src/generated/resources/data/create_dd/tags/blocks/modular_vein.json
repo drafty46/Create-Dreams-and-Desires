@@ -12,6 +12,7 @@
     "create_dd:dolomite",
     "create_dd:gabbro",
     "create_dd:weathered_limestone",
+    "create_dd:breccia",
     "#minecraft:base_stone_overworld",
     "#minecraft:base_stone_nether"
   ]

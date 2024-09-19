@@ -1,0 +1,34 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:sugar"
+    },
+    [
+      {
+        "item": "minecraft:dandelion"
+      },
+      {
+        "item": "minecraft:blue_orchid"
+      }
+    ],
+    [
+      {
+        "item": "minecraft:snow_block"
+      },
+      {
+        "item": "minecraft:packed_ice"
+      }
+    ],
+    {
+      "amount": 250,
+      "fluidTag": "forge:milk"
+    }
+  ],
+  "results": [
+    {
+      "amount": 250,
+      "fluid": "create_dd:vanilla_milkshake"
+    }
+  ]
+}

@@ -23,7 +23,17 @@ public class DClient extends ConfigBase {
 	// custom fluid fog
 	public final ConfigGroup fluidFogSettings = group(1, "fluidFogSettings", Comments.fluidFogSettings);
 	public final ConfigFloat sapTransparencyMultiplier =
-		f(1, .125f, 128, "sap", Comments.sapTransparencyMultiplier);
+			f(1, .125f, 128, "sap", Comments.sapTransparencyMultiplier);
+	public final ConfigFloat chocolateTransparencyMultiplier =
+			f(1, .125f, 128, "chocolateTransparencyMultiplier", Comments.chocolateTransparencyMultiplier);
+	public final ConfigFloat vanillaTransparencyMultiplier =
+			f(1, .125f, 128, "vanillaTransparencyMultiplier", Comments.vanillaTransparencyMultiplier);
+	public final ConfigFloat glowberryTransparencyMultiplier =
+			f(1, .125f, 128, "glowberryTransparencyMultiplier", Comments.glowberryTransparencyMultiplier);
+	public final ConfigFloat strawberryTransparencyMultiplier =
+			f(1, .125f, 128, "strawberryTransparencyMultiplier", Comments.strawberryTransparencyMultiplier);
+	public final ConfigFloat pumpkinTransparencyMultiplier =
+			f(1, .125f, 128, "pumpkinTransparencyMultiplier", Comments.pumpkinTransparencyMultiplier);
 
 	//ponder group
 	public final ConfigGroup ponder = group(1, "ponder",
@@ -46,7 +56,12 @@ public class DClient extends ConfigBase {
 		static String equipmentsDebug = "Debug Equipments (only works in Creative mode)";
 
 		static String fluidFogSettings = "Configure your vision range when submerged in Create Dream n' Desire's custom fluids";
-		static String sapTransparencyMultiplier = "The vision range through honey will be multiplied by this factor";
+		static String sapTransparencyMultiplier = "The vision range through Sap will be multiplied by this factor";
+		static String chocolateTransparencyMultiplier = "The vision range through Chocolate Milkshake will be multiplied by this factor";
+		static String vanillaTransparencyMultiplier = "The vision range through Vanilla Milkshake will be multiplied by this factor";
+		static String glowberryTransparencyMultiplier = "The vision range through Glowberry Milkshake will be multiplied by this factor";
+		static String strawberryTransparencyMultiplier = "The vision range through Strawberry Milkshake will be multiplied by this factor";
+		static String pumpkinTransparencyMultiplier = "The vision range through Pumpkin Milkshake will be multiplied by this factor";
 
 
 		static String ponder = "Ponder settings";

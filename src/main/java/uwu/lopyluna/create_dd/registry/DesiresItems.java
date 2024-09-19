@@ -39,10 +39,6 @@ import static uwu.lopyluna.create_dd.registry.DesiresTags.optionalTag;
 @SuppressWarnings({"unused", "deprecation", "SameParameterValue"})
 public class DesiresItems {
 
-	static {
-		REGISTRATE.creativeModeTab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB);
-	}
-
 	public static final ItemEntry<SequencedAssemblyItem>
 			INCOMPLETE_KINETIC_MECHANISM = sequencedItem("incomplete_kinetic_mechanism");
 
@@ -50,6 +46,7 @@ public class DesiresItems {
 			KINETIC_MECHANISM = item("kinetic_mechanism");
 
 	public static final ItemEntry<Item> RAW_RUBBER = REGISTRATE.item("raw_rubber", Item::new)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/generated")).texture("layer0",
 					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
@@ -72,6 +69,7 @@ public class DesiresItems {
 			.register();
 
 	public static final ItemEntry<Item> RUBBER = REGISTRATE.item("rubber", Item::new)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/generated")).texture("layer0",
 					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
@@ -97,22 +95,22 @@ public class DesiresItems {
 			.lang("Rubber")
 			.register();
 
-	public static final ItemEntry<ChromaticCompound> CHROMATIC_COMPOUND =
-			REGISTRATE.item("chromatic_compound", ChromaticCompound::new)
+	public static final ItemEntry<ChromaticCompound> CHROMATIC_COMPOUND = REGISTRATE.item("chromatic_compound", ChromaticCompound::new)
+					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 					.properties(p -> p.stacksTo(16)
 							.rarity(Rarity.UNCOMMON)
 							.fireResistant())
 					.register();
 
-	public static final ItemEntry<ShadowSteel> SHADOW_STEEL =
-			REGISTRATE.item("shadow_steel", ShadowSteel::new)
+	public static final ItemEntry<ShadowSteel> SHADOW_STEEL = REGISTRATE.item("shadow_steel", ShadowSteel::new)
+					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 					.properties(p -> p.stacksTo(16)
 							.rarity(Rarity.UNCOMMON)
 							.fireResistant())
 					.register();
 
-	public static final ItemEntry<ShadowSteel> SHADOW_STEEL_SHEET = !DreamsAddons.EXTRAS.isLoaded() ? null :
-			REGISTRATE.item("shadow_steel_sheet", ShadowSteel::new)
+	public static final ItemEntry<ShadowSteel> SHADOW_STEEL_SHEET = !DreamsAddons.EXTRAS.isLoaded() ? null : REGISTRATE.item("shadow_steel_sheet", ShadowSteel::new)
+					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 					.properties(p -> p.stacksTo(16)
 							.rarity(Rarity.UNCOMMON)
 							.fireResistant())
@@ -120,19 +118,21 @@ public class DesiresItems {
 
 	public static final ItemEntry<RefinedRadiance> REFINED_RADIANCE =
 			REGISTRATE.item("refined_radiance", RefinedRadiance::new)
+					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 					.properties(p -> p.stacksTo(16)
 							.rarity(Rarity.UNCOMMON)
 							.fireResistant())
 					.register();
 
-	public static final ItemEntry<RefinedRadiance> REFINED_RADIANCE_SHEET = !DreamsAddons.EXTRAS.isLoaded() ? null :
-			REGISTRATE.item("refined_radiance_sheet", RefinedRadiance::new)
+	public static final ItemEntry<RefinedRadiance> REFINED_RADIANCE_SHEET = !DreamsAddons.EXTRAS.isLoaded() ? null : REGISTRATE.item("refined_radiance_sheet", RefinedRadiance::new)
+					.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 					.properties(p -> p.stacksTo(16)
 							.rarity(Rarity.UNCOMMON)
 							.fireResistant())
 					.register();
 
 	public static final ItemEntry<Item> BURY_BLEND = REGISTRATE.item("bury_blend", Item::new)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/generated")).texture("layer0",
 					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
@@ -148,6 +148,7 @@ public class DesiresItems {
 			.register();
 
 	public static final ItemEntry<Item> LAPIS_LAZULI_SHARD = REGISTRATE.item("lapis_lazuli_shard", Item::new)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/generated")).texture("layer0",
 					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
@@ -168,6 +169,7 @@ public class DesiresItems {
 			.register();
 
 	public static final ItemEntry<Item> DIAMOND_SHARD = REGISTRATE.item("diamond_shard", Item::new)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/generated")).texture("layer0",
 					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
@@ -188,6 +190,7 @@ public class DesiresItems {
 			.register();
 
 	public static final ItemEntry<CombustibleItem> COAL_PIECE = REGISTRATE.item("coal_piece", CombustibleItem::new)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.onRegister(i -> i.setBurnTime(200))
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/generated")).texture("layer0",
@@ -211,6 +214,7 @@ public class DesiresItems {
 
 	public static final ItemEntry<GRSwordItem> GILDED_ROSE_SWORD = REGISTRATE.item("gilded_rose_sword",
 					p -> new GRSwordItem(DesireTiers.GILDED_ROSE, 3, -2.4F, p))
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/handheld")).texture("layer0",
 					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
@@ -221,6 +225,7 @@ public class DesiresItems {
 
 	public static final ItemEntry<GRPickaxeItem> GILDED_ROSE_PICKAXE = REGISTRATE.item("gilded_rose_pickaxe",
 					p -> new GRPickaxeItem(DesireTiers.GILDED_ROSE, 1, -2.8F, p))
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/handheld")).texture("layer0",
 					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
@@ -231,6 +236,7 @@ public class DesiresItems {
 
 	public static final ItemEntry<GRAxeItem> GILDED_ROSE_AXE = REGISTRATE.item("gilded_rose_axe",
 					p -> new GRAxeItem(DesireTiers.GILDED_ROSE, 6.0F, -3.0F, p))
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/handheld")).texture("layer0",
 					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
@@ -241,6 +247,7 @@ public class DesiresItems {
 
 	public static final ItemEntry<GRShovelItem> GILDED_ROSE_SHOVEL = REGISTRATE.item("gilded_rose_shovel",
 					p -> new GRShovelItem(DesireTiers.GILDED_ROSE, 1.5F, -3.0F, p))
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/handheld")).texture("layer0",
 					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
@@ -251,6 +258,7 @@ public class DesiresItems {
 
 	public static final ItemEntry<GRHoeItem> GILDED_ROSE_HOE = REGISTRATE.item("gilded_rose_hoe",
 					p -> new GRHoeItem(DesireTiers.GILDED_ROSE, -2, -3.0F, p))
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/handheld")).texture("layer0",
 					new ResourceLocation(DesiresCreate.MOD_ID,"item/" + c.getId().getPath())))
@@ -260,6 +268,7 @@ public class DesiresItems {
 			.register();
 
 	public static final ItemEntry<DeforesterSawItem> DEFORESTER_SAW = REGISTRATE.item("deforester_saw", DeforesterSawItem::new)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.model(AssetLookup.itemModelWithPartials())
 			.properties(p -> p.rarity(Rarity.UNCOMMON))
 			.recipe((c, p) -> {
@@ -288,12 +297,14 @@ public class DesiresItems {
 			.register();
 
 	public static final ItemEntry<ExcavationDrillItem> EXCAVATION_DRILL = REGISTRATE.item("excavation_drill", ExcavationDrillItem::new)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.model(AssetLookup.itemModelWithPartials())
 			.properties(p -> p.rarity(Rarity.UNCOMMON))
 			.tag(DesiresTags.AllItemTags.PICKAXE.tag)
 			.register();
 
 	public static final ItemEntry<ClockworkCrossbow> CLOCKWORK_CROSSBOW = REGISTRATE.item("clockwork_crossbow", ClockworkCrossbow::new)
+			.tab(() -> DesiresCreativeModeTabs.BETA_CREATIVE_TAB)
 			.model(AssetLookup.itemModelWithPartials())
 			.properties(p -> p.stacksTo(1).defaultDurability(500).durability(500).rarity(Rarity.UNCOMMON))
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
@@ -303,36 +314,42 @@ public class DesiresItems {
 			.register();
 
 	public static final ItemEntry<PortableFanItem> PORTABLE_FAN = REGISTRATE.item("portable_fan", PortableFanItem::new)
+			.tab(() -> DesiresCreativeModeTabs.BETA_CREATIVE_TAB)
 			.model((c, p) -> {})
 			//.model(AssetLookup.itemModelWithPartials())
 			.properties(p -> p.rarity(Rarity.UNCOMMON))
 			.register();
 
 	public static final ItemEntry<BlockZapperItem> BLOCK_ZAPPER = REGISTRATE.item("handheld_block_zapper", BlockZapperItem::new)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.lang("Handheld Block Zapper")
 			.model(AssetLookup.itemModelWithPartials())
 			.register();
 
 	public static final ItemEntry<ModularDrillHeadItem> DRILL_VEIN_HEAD = REGISTRATE.item("drill_vein_head",
 					p -> new ModularDrillHeadItem(p, ModularDrillHeadItem.DrillType.VEIN))
+			.tab(() -> DesiresCreativeModeTabs.BETA_CREATIVE_TAB)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/handheld")).texture("layer0",
 					new ResourceLocation(DesiresCreate.MOD_ID,"item/bury_blend")))
 			.register();
 	public static final ItemEntry<ModularDrillHeadItem> DRILL_CRUSHER_HEAD = REGISTRATE.item("drill_crusher_head",
 					p -> new ModularDrillHeadItem(p, ModularDrillHeadItem.DrillType.CRUSHER))
+			.tab(() -> DesiresCreativeModeTabs.BETA_CREATIVE_TAB)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/handheld")).texture("layer0",
 					new ResourceLocation(DesiresCreate.MOD_ID,"item/bury_blend")))
 			.register();
 	public static final ItemEntry<ModularDrillHeadItem> DRILL_ENCHANTABLE_HEAD = REGISTRATE.item("drill_enchantable_head",
 					p -> new ModularDrillHeadItem(p, ModularDrillHeadItem.DrillType.ENCHANTABLE))
+			.tab(() -> DesiresCreativeModeTabs.BETA_CREATIVE_TAB)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/handheld")).texture("layer0",
 					new ResourceLocation(DesiresCreate.MOD_ID,"item/bury_blend")))
 			.register();
 	public static final ItemEntry<ModularDrillHeadItem> DRILL_SMELTING_HEAD = REGISTRATE.item("drill_smelting_head",
 					p -> new ModularDrillHeadItem(p, ModularDrillHeadItem.DrillType.SMELTING))
+			.tab(() -> DesiresCreativeModeTabs.BETA_CREATIVE_TAB)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/handheld")).texture("layer0",
 					new ResourceLocation(DesiresCreate.MOD_ID,"item/bury_blend")))
@@ -340,6 +357,7 @@ public class DesiresItems {
 
 	public static final ItemEntry<NameableRecordItem> MUSIC_DISC_WALTZ_OF_THE_FLOWERS = REGISTRATE.item("music_disc_waltz_of_the_flowers",
 					p -> new NameableRecordItem(10, DesiresSoundEvents.MUSIC_DISC_WALTZ_OF_THE_FLOWERS, p, 16600, "Tchaikovsky - Waltz of the Flowers"))
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.properties(p -> p.rarity(Rarity.RARE)
 					.stacksTo(1))
 			.recipe((c, p) -> p.stonecutting(DataIngredient.items(AllItems.ROSE_QUARTZ), c, 1))
@@ -350,17 +368,20 @@ public class DesiresItems {
 
 	public static final ItemEntry<SpawnEggItem> INERT_BLAZELING_SPAWN_EGG = REGISTRATE.item("inert_blazeling_spawn_egg",
 					p -> new SpawnEggItem(DesiresEntityTypes.INERT_BLAZELING.get(), 5451574, 13661252, p))
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/template_spawn_egg")))
 			.register();
 
 	public static final ItemEntry<SpawnEggItem> SEETHING_ABLAZE_SPAWN_EGG = REGISTRATE.item("seething_ablaze_spawn_egg",
 					p -> new SpawnEggItem(DesiresEntityTypes.SEETHING_ABLAZE.get(), 44543, 56063, p))
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/template_spawn_egg")))
 			.register();
 
 	public static final ItemEntry<CombustibleItem> SEETHING_ABLAZE_ROD = REGISTRATE.item("seething_ablaze_rod", CombustibleItem::new)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.tag(AllTags.AllItemTags.BLAZE_BURNER_FUEL_SPECIAL.tag)
 			.onRegister(i -> i.setBurnTime(9600))
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
@@ -376,6 +397,7 @@ public class DesiresItems {
 			.register();
 
 	public static final ItemEntry<CombustibleItem> SEETHING_ABLAZE_POWDER = REGISTRATE.item("seething_ablaze_powder", CombustibleItem::new)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.onRegister(i -> i.setBurnTime(4800))
 			.model((c, p) -> p.withExistingParent(c.getId().getPath(),
 					new ResourceLocation("item/generated")).texture("layer0",
@@ -385,11 +407,13 @@ public class DesiresItems {
 
 	private static ItemEntry<Item> item(String name) {
 		return REGISTRATE.item(name, Item::new)
+				.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 				.register();
 	}
 
 	private static ItemEntry<SequencedAssemblyItem> sequencedItem(String name) {
 		return REGISTRATE.item(name, SequencedAssemblyItem::new)
+				.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 				.register();
 	}
 

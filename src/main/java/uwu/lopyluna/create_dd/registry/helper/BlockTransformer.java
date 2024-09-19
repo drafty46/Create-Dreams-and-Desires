@@ -35,6 +35,7 @@ import static com.simibubi.create.foundation.data.CreateRegistrate.connectedText
 import static com.tterrag.registrate.providers.RegistrateRecipeProvider.getItemName;
 import static com.tterrag.registrate.providers.RegistrateRecipeProvider.has;
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
+import static uwu.lopyluna.create_dd.registry.DesiresSoundEvents.RUBBER;
 import static uwu.lopyluna.create_dd.registry.DesiresTags.optionalTag;
 
 @SuppressWarnings({"unused", "deprecation"})
@@ -54,9 +55,7 @@ public class BlockTransformer {
 
 
     public static BlockEntry<Block> rubber_decor(String colorId, MaterialColor mapColor, Item dye) {
-        SoundType rubberSoundType = new ForgeSoundType(0.9f, .6f, () -> DesiresSoundEvents.RUBBER_BREAK.get(),
-                () -> SoundEvents.STEM_STEP, () -> DesiresSoundEvents.RUBBER_PLACE.get(),
-                () -> SoundEvents.STEM_HIT, () -> SoundEvents.STEM_FALL);
+        SoundType rubberSoundType = RUBBER;
         TagKey<Item> dyeRubberDecorTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", colorId + "_rubber_decor"));
         TagKey<Item> rubberDecorTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", "rubber_decors"));
         TagKey<Block> stairsBlockTag = optionalTag(ForgeRegistries.BLOCKS, new ResourceLocation("minecraft", "stairs"));

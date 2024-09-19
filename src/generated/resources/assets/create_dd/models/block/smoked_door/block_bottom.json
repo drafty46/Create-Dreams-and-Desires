@@ -1,0 +1,8 @@
+{
+  "parent": "create:block/copper_door/block_bottom",
+  "textures": {
+    "0": "create_dd:block/palettes/wood_types/smoked/smoked_door_side",
+    "2": "create_dd:block/palettes/wood_types/smoked/smoked_door_bottom",
+    "particle": "create_dd:block/palettes/wood_types/smoked/smoked_planks"
+  }
+}

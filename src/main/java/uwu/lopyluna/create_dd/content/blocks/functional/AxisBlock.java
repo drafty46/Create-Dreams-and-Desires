@@ -8,21 +8,23 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.common.ToolAction;
+import net.minecraftforge.common.ToolActions;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Objects;
 
-@SuppressWarnings("deprecation")
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class AxisBlock extends RotatedPillarBlock {
@@ -69,28 +71,28 @@ public class AxisBlock extends RotatedPillarBlock {
         return getFireSpreadSpeed;
     }
 
-
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        if (hasStrippedWood) {
-            ItemStack item = player.getItemInHand(interactionHand);
-            BlockState newState = strippedWood.setValue(AXIS, blockState.getValue(AXIS));
+    public @Nullable BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
+        if (hasStrippedWood && ToolActions.AXE_STRIP == toolAction && state.is(this)) {
+            Level level = context.getLevel();
+            Player player = context.getPlayer();
+            BlockPos blockPos = context.getClickedPos();
+            InteractionHand interactionHand = Objects.requireNonNull(context.getPlayer()).getUsedItemHand();
+            ItemStack item = Objects.requireNonNull(player).getItemInHand(interactionHand);
+            BlockState newState = strippedWood.setValue(AXIS, state.getValue(AXIS));
 
             if (item.getItem() instanceof AxeItem) {
-                level.setBlock(blockPos, newState, 11);
-                level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, newState));
-                item.hurtAndBreak(1, player, playerEntity -> playerEntity.broadcastBreakEvent(interactionHand));
-
-                level.playSound(player, blockPos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
-
                 if (player instanceof ServerPlayer) {
                     CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer)player, blockPos, item);
                 }
 
-                return InteractionResult.SUCCESS;
+                //level.setBlock(blockPos, newState, 11);
+                level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, newState));
+                item.hurtAndBreak(1, player, playerEntity -> playerEntity.broadcastBreakEvent(interactionHand));
+                level.playSound(player, blockPos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
+                return newState;
             }
         }
-
-        return InteractionResult.PASS;
+        return super.getToolModifiedState(state, context, toolAction, simulate);
     }
 }

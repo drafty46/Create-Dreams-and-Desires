@@ -30,7 +30,7 @@
   "pattern": [
     "ZBSYYY",
     " MNPPP",
-    "II    "
+    "III   "
   ],
   "result": {
     "item": "create_dd:handheld_block_zapper"

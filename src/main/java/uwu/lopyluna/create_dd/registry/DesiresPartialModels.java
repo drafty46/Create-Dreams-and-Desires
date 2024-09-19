@@ -1,7 +1,10 @@
 package uwu.lopyluna.create_dd.registry;
 
 import com.jozufozu.flywheel.core.PartialModel;
+import com.simibubi.create.foundation.utility.Couple;
 import uwu.lopyluna.create_dd.DesiresCreate;
+
+import static com.simibubi.create.AllPartialModels.FOLDING_DOORS;
 
 @SuppressWarnings({"unused"})
 public class DesiresPartialModels {
@@ -34,14 +37,19 @@ public class DesiresPartialModels {
 	
 		ENGINE_PISTON = block("furnace_engine/piston"),
 		ENGINE_LINKAGE = block("furnace_engine/linkage"),
-		ENGINE_CONNECTOR = block("furnace_engine/shaft_connector");
+		ENGINE_CONNECTOR = block("furnace_engine/shaft_connector")
+	;
 
-	//public static final Map<ResourceLocation, Couple<PartialModel>> FOLDING_DOORS = new HashMap<>()
+	static {
+		putFoldingDoor("rose");
+		putFoldingDoor("smoked");
+		putFoldingDoor("spirit");
+	}
 
-	//private static void putFoldingDoor(String path) {
-	//	FOLDING_DOORS.put(DesiresCreate.asResource(path),
-	//		Couple.create(block(path + "/fold_left"), block(path + "/fold_right")))
-	//}
+	public static void putFoldingDoor(String id) {
+		FOLDING_DOORS.put(DesiresCreate.asResource(id + "_door"),
+				Couple.create(block(id + "_door/fold_left"), block(id + "_door/fold_right")));
+	}
 
 	private static PartialModel block(String path) {
 		return new PartialModel(DesiresCreate.asResource("block/" + path));

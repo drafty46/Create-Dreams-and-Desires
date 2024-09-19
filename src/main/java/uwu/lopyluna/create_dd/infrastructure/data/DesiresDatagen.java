@@ -5,8 +5,10 @@ import net.minecraft.data.DataGenerator;
 import net.minecraftforge.data.event.GatherDataEvent;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.content.data_recipes.DesireProcessingRecipeGen;
+import uwu.lopyluna.create_dd.content.data_recipes.DesiresRecipeGen;
 import uwu.lopyluna.create_dd.content.data_recipes.MechanicalCraftingRecipeGen;
 import uwu.lopyluna.create_dd.content.data_recipes.SequencedAssemblyRecipeGen;
+import uwu.lopyluna.create_dd.content.data_tags.DesiresRegistrateTags;
 import uwu.lopyluna.create_dd.infrastructure.ponder.DesirePonderTags;
 import uwu.lopyluna.create_dd.infrastructure.ponder.DesiresPonderIndex;
 import uwu.lopyluna.create_dd.registry.DesiresLangPartial;
@@ -24,6 +26,7 @@ public class DesiresDatagen {
 		//}
 		if (event.includeServer()) {
 
+			generator.addProvider(true, new DesiresRecipeGen(generator));
 			generator.addProvider(true, new SequencedAssemblyRecipeGen(generator));
 			generator.addProvider(true, new MechanicalCraftingRecipeGen(generator));
 			DesireProcessingRecipeGen.registerAll(generator);

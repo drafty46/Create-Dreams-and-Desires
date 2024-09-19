@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left",
+  "textures": {
+    "bottom": "create_dd:block/palettes/wood_types/rubber/rubber_door_bottom",
+    "top": "create_dd:block/palettes/wood_types/rubber/rubber_door_top"
+  }
+}

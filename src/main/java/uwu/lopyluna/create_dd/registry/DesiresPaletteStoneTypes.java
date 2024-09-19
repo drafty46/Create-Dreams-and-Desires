@@ -15,6 +15,7 @@ import uwu.lopyluna.create_dd.registry.helper.palettes.DPalettesVariantEntry;
 
 import java.util.function.Function;
 
+import static uwu.lopyluna.create_dd.registry.DesiresSoundEvents.CRACKLE_STONE;
 import static uwu.lopyluna.create_dd.registry.helper.palettes.DPaletteBlockPattern.STANDARD_RANGE;
 import static uwu.lopyluna.create_dd.registry.helper.palettes.DPaletteBlockPattern.VANILLA_RANGE;
 
@@ -39,6 +40,12 @@ public enum DesiresPaletteStoneTypes {
     DOLOMITE(STANDARD_RANGE, r -> r.paletteStoneBlock("dolomite", () -> Blocks.TUFF, true, false)
             .properties(p -> p.destroyTime(1.25f)
             .color(MaterialColor.TERRACOTTA_WHITE))
+            .register()),
+
+    BRECCIA(STANDARD_RANGE, r -> r.paletteStoneBlock("breccia", () -> Blocks.TUFF, true, true)
+            .properties(p -> p.destroyTime(1.25f)
+            .sound(CRACKLE_STONE)
+            .color(MaterialColor.COLOR_ORANGE))
             .register())
     ;
 

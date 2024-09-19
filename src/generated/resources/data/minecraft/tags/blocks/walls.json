@@ -35,6 +35,10 @@
     "create_dd:cut_dolomite_wall",
     "create_dd:polished_cut_dolomite_wall",
     "create_dd:cut_dolomite_brick_wall",
-    "create_dd:small_dolomite_brick_wall"
+    "create_dd:small_dolomite_brick_wall",
+    "create_dd:cut_breccia_wall",
+    "create_dd:polished_cut_breccia_wall",
+    "create_dd:cut_breccia_brick_wall",
+    "create_dd:small_breccia_brick_wall"
   ]
 }

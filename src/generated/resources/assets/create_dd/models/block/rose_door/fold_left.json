@@ -1,0 +1,9 @@
+{
+  "parent": "create:block/copper_door/fold_left",
+  "textures": {
+    "0": "create_dd:block/palettes/wood_types/rose/rose_door_side",
+    "2": "create_dd:block/palettes/wood_types/rose/rose_door_top",
+    "3": "create_dd:block/palettes/wood_types/rose/rose_door_bottom",
+    "particle": "create_dd:block/palettes/wood_types/rose/rose_planks"
+  }
+}

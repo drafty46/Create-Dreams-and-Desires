@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": {
+      "item": "create_dd:seething_ablaze_rod"
+    },
+    "R": {
+      "item": "minecraft:netherite_scrap"
+    },
+    "S": {
+      "item": "create_dd:blasting_sail"
+    }
+  },
+  "pattern": [
+    "SCS",
+    "CRC",
+    "SCS"
+  ],
+  "result": {
+    "count": 4,
+    "item": "create_dd:seething_sail"
+  }
+}

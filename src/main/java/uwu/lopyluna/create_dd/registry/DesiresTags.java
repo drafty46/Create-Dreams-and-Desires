@@ -19,11 +19,11 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
-import uwu.lopyluna.create_dd.DesiresCreate;
 
 import java.util.Collections;
 import java.util.Objects;
 
+import static uwu.lopyluna.create_dd.DesiresCreate.MOD_ID;
 import static uwu.lopyluna.create_dd.registry.DesiresTags.NameSpace.FORGE;
 
 @SuppressWarnings({"unused"})
@@ -37,6 +37,12 @@ public class DesiresTags {
 	public static <T> TagKey<T> forgeTag(IForgeRegistry<T> registry, String path) {
 		return optionalTag(registry, new ResourceLocation("forge", path));
 	}
+	public static <T> TagKey<T> mcTag(IForgeRegistry<T> registry, String path) {
+		return optionalTag(registry, new ResourceLocation("minecraft", path));
+	}
+	public static <T> TagKey<T> modTag(IForgeRegistry<T> registry, String path) {
+		return optionalTag(registry, new ResourceLocation(MOD_ID, path));
+	}
 
 	public static TagKey<Block> forgeBlockTag(String path) {
 		return forgeTag(ForgeRegistries.BLOCKS, path);
@@ -45,6 +51,12 @@ public class DesiresTags {
 	public static TagKey<Item> forgeItemTag(String path) {
 		return forgeTag(ForgeRegistries.ITEMS, path);
 	}
+	public static TagKey<Item> modItemTag(String path) {
+		return modTag(ForgeRegistries.ITEMS, path);
+	}
+	public static TagKey<Item> mcItemTag(String path) {
+		return mcTag(ForgeRegistries.ITEMS, path);
+	}
 
 	public static TagKey<Fluid> forgeFluidTag(String path) {
 		return forgeTag(ForgeRegistries.FLUIDS, path);
@@ -52,7 +64,7 @@ public class DesiresTags {
 
 	public enum NameSpace {
 		
-		MOD(DesiresCreate.MOD_ID, false, true),
+		MOD(MOD_ID, false, true),
 		CREATE("create"),
 		FORGE("forge"),
 		TIC("tconstruct"),
@@ -92,6 +104,9 @@ public class DesiresTags {
 		MODULAR_VEIN_LARGE,
 		BLOCK_ZAPPER_REPLACEABLE,
 		BLOCK_ZAPPER_BLACKLIST,
+		FLAMMABLE_WOOD,
+		ARTIFICIAL_ORE_GENERATOR,
+		ORE_GENERATOR,
 
 		;
 
@@ -149,6 +164,7 @@ public class DesiresTags {
 		FREEZABLE,
 		ADDITIONAL_DROPS_TOOL,
 		MAGNET_IGNORE,
+		FLAMMABLE_WOOD,
 		CROSSBOW(FORGE, "tools/crossbow"),
 		SWORD(FORGE, "tools/sword"),
 		PICKAXE(FORGE, "tools/pickaxe"),
@@ -210,12 +226,18 @@ public class DesiresTags {
 
 	public enum AllFluidTags {
 
-		FAN_PROCESSING_CATALYSTS_DRAGON_BREATHING(NameSpace.MOD, "fan_processing_catalysts/dragon_breathing"),
-		FAN_PROCESSING_CATALYSTS_SANDING(NameSpace.MOD, "fan_processing_catalysts/sanding"),
-		FAN_PROCESSING_CATALYSTS_FREEZING(NameSpace.MOD, "fan_processing_catalysts/freezing"),
-		FAN_PROCESSING_CATALYSTS_SEETHING(NameSpace.MOD, "fan_processing_catalysts/seething"),
+		FAN_PROCESSING_CATALYSTS_DRAGON_BREATHING("fan_processing_catalysts/dragon_breathing"),
+		FAN_PROCESSING_CATALYSTS_SANDING("fan_processing_catalysts/sanding"),
+		FAN_PROCESSING_CATALYSTS_FREEZING("fan_processing_catalysts/freezing"),
+		FAN_PROCESSING_CATALYSTS_SEETHING("fan_processing_catalysts/seething"),
 		INDUSTRIAL_FAN_HEATER,
 
+		MILKSHAKES(FORGE),
+		CHOCOLATE(true),
+		VANILLA(true),
+		STRAWBERRY(true),
+		GLOWBERRY(true),
+		PUMPKIN(true),
 		SAP(FORGE)
 
 		;
@@ -231,6 +253,14 @@ public class DesiresTags {
 			this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
 		}
 
+		AllFluidTags(boolean milkshake) {
+            this(FORGE, milkshake ? "milkshake" : null, FORGE.optionalDefault, FORGE.alwaysDatagenDefault);
+        }
+
+		AllFluidTags(String path) {
+			this(NameSpace.MOD, path, NameSpace.MOD.optionalDefault, NameSpace.MOD.alwaysDatagenDefault);
+		}
+
 		AllFluidTags(NameSpace namespace, String path) {
 			this(namespace, path, namespace.optionalDefault, namespace.alwaysDatagenDefault);
 		}
@@ -240,7 +270,11 @@ public class DesiresTags {
 		}
 
 		AllFluidTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-			ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
+			ResourceLocation id = new ResourceLocation(namespace.id, path == null ?
+					Lang.asId(name()) : Objects.equals(path, "milkshake") ?
+					"milkshake/" + Lang.asId(name()) :
+					path
+			);
 			if (optional) {
 				tag = optionalTag(ForgeRegistries.FLUIDS, id);
 			} else {

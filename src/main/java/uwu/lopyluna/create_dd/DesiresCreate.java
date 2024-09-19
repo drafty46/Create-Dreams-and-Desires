@@ -83,7 +83,9 @@ public class DesiresCreate {
         DesiresWoodType.register();
         DesiresBlocks.register();
         DesiresItems.register();
+
         DesiresFluids.register();
+
         DesiresPaletteBlocks.register();
         ClassicBlocks.register();
         ClassicItems.register();
@@ -129,6 +131,7 @@ public class DesiresCreate {
     }
 
     public static void init(final FMLCommonSetupEvent event) {
+        DesiresFluids.registerFluidInteractions();
     }
 
     public static ResourceLocation asResource(String path) {

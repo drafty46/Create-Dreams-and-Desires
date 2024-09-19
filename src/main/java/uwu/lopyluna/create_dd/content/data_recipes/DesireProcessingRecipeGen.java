@@ -41,8 +41,10 @@ public abstract class DesireProcessingRecipeGen extends CreateRecipeProvider {
         GENERATORS.add(new FreezingRecipeGen(gen));
         GENERATORS.add(new SeethingRecipeGen(gen));
         GENERATORS.add(new ItemApplicationRecipeGen(gen));
+        GENERATORS.add(new CuttingRecipeGen(gen));
         GENERATORS.add(new MixingRecipeGen(gen));
         GENERATORS.add(new HydraulicCompactingRecipeGen(gen));
+        GENERATORS.add(new DrainRecipeGen(gen));
 
         gen.addProvider(true, new DataProvider() {
 
@@ -111,8 +113,8 @@ public abstract class DesireProcessingRecipeGen extends CreateRecipeProvider {
      * Create a new processing recipe, with recipe definitions provided by the
      * function
      */
-    protected <T extends ProcessingRecipe<?>> GeneratedRecipe create(ResourceLocation name,
-                                                                     UnaryOperator<ProcessingRecipeBuilder<T>> transform) {
+    public <T extends ProcessingRecipe<?>> GeneratedRecipe create(ResourceLocation name,
+                                                                  UnaryOperator<ProcessingRecipeBuilder<T>> transform) {
         return createWithDeferredId(() -> name, transform);
     }
 
@@ -120,7 +122,7 @@ public abstract class DesireProcessingRecipeGen extends CreateRecipeProvider {
      * Create a new processing recipe, with recipe definitions provided by the
      * function
      */
-    <T extends ProcessingRecipe<?>> GeneratedRecipe create(String name,
+    public <T extends ProcessingRecipe<?>> GeneratedRecipe create(String name,
                                                            UnaryOperator<ProcessingRecipeBuilder<T>> transform) {
         return create(DesiresCreate.asResource(name), transform);
     }

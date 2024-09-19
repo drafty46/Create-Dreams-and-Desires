@@ -39,7 +39,7 @@ public class MechanicalCraftingRecipeGen extends CreateRecipeProvider {
                     .key('M', AllItems.PRECISION_MECHANISM.get())
                     .patternLine("ZBSYYY")
                     .patternLine(" MNPPP")
-                    .patternLine("II    ")
+                    .patternLine("III   ")
             ),
 
             FURNACE_ENGINE = create(DesiresBlocks.FURNACE_ENGINE::get).returns(1)

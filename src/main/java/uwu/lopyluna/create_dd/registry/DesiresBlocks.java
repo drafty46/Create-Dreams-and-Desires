@@ -78,15 +78,15 @@ import static com.tterrag.registrate.providers.RegistrateRecipeProvider.has;
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 import static uwu.lopyluna.create_dd.registry.DesiresPaletteBlocks.rawRubberDecorTag;
 import static uwu.lopyluna.create_dd.registry.DesiresPaletteBlocks.rubberDecorTag;
+import static uwu.lopyluna.create_dd.registry.DesiresSoundEvents.CREATVEDITE;
+import static uwu.lopyluna.create_dd.registry.DesiresSoundEvents.RUBBER;
 
 @SuppressWarnings({"unused", "removal", "all"})
 public class DesiresBlocks {
 
 	public static final BlockEntry<Block> RAW_RUBBER_BLOCK = REGISTRATE.block("raw_rubber_block", Block::new)
 			.properties(p -> p.color(MaterialColor.TERRACOTTA_WHITE))
-			.properties(p -> p.sound(new ForgeSoundType(0.9f, .75f, () -> DesiresSoundEvents.RUBBER_BREAK.get(),
-					() -> SoundEvents.STEM_STEP, () -> DesiresSoundEvents.RUBBER_PLACE.get(),
-					() -> SoundEvents.STEM_HIT, () -> SoundEvents.STEM_FALL)))
+			.properties(p -> p.sound(RUBBER))
 			.properties(p -> p.strength(0.5f,1.5f))
 			.lang("Block of Raw Rubber")
 			.item()
@@ -97,9 +97,7 @@ public class DesiresBlocks {
 
 	public static final BlockEntry<Block> RUBBER_BLOCK = REGISTRATE.block("rubber_block", Block::new)
 			.properties(p -> p.color(MaterialColor.TERRACOTTA_GRAY))
-			.properties(p -> p.sound(new ForgeSoundType(0.9f, .6f, () -> DesiresSoundEvents.RUBBER_BREAK.get(),
-					() -> SoundEvents.STEM_STEP, () -> DesiresSoundEvents.RUBBER_PLACE.get(),
-					() -> SoundEvents.STEM_HIT, () -> SoundEvents.STEM_FALL)))
+			.properties(p -> p.sound(RUBBER))
 			.properties(p -> p.strength(0.5f,1.5f))
 			.lang("Block of Rubber")
 			.item()
@@ -112,9 +110,7 @@ public class DesiresBlocks {
 			.transform(BuilderTransformers.casing(() -> DesiresSpriteShifts.CREATIVE_CASING))
 			.properties(p -> p.color(MaterialColor.COLOR_BLACK)
 					.requiresCorrectToolForDrops())
-			.properties(p -> p.sound(new ForgeSoundType(0.8f, .8f, () -> DesiresSoundEvents.CREATVEDITE_BREAK.get(),
-					() -> DesiresSoundEvents.CREATVEDITE_STEP.get(), () -> DesiresSoundEvents.CREATVEDITE_PLACE.get(),
-					() -> DesiresSoundEvents.CREATVEDITE_HIT.get(), () -> DesiresSoundEvents.CREATVEDITE_FALL.get())))
+			.properties(p -> p.sound(CREATVEDITE))
 			.transform(pickaxeOnly())
 			.properties(p -> p.lightLevel($ -> 5))
 			.lang("Creative Casing")
@@ -232,6 +228,7 @@ public class DesiresBlocks {
 			.transform(BlockStressDefaults.setImpact(8.0))
 			.onRegister(movementBehaviour(new DrillMovementBehaviour()))
 			.item()
+			.tab(() -> DesiresCreativeModeTabs.BETA_CREATIVE_TAB)
 			.model((c, p) -> {})
 			.tag(AllTags.AllItemTags.CONTRAPTION_CONTROLLED.tag)
 			.transform(customItemModel())
@@ -445,7 +442,7 @@ public class DesiresBlocks {
 			.blockstate(BlockStateGen.horizontalBlockProvider(true))
 			.addLayer(() -> RenderType::cutoutMipped)
 			.item()
-			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.tab(() -> DesiresCreativeModeTabs.BETA_CREATIVE_TAB)
 			.transform(customItemModel())
 			.register();
 
@@ -456,7 +453,7 @@ public class DesiresBlocks {
 			.blockstate(BlockStateGen.axisBlockProvider(true))
 			.addLayer(() -> RenderType::cutoutMipped)
 			.item()
-			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.tab(() -> DesiresCreativeModeTabs.BETA_CREATIVE_TAB)
 			.transform(customItemModel())
 			.register();
 
@@ -467,7 +464,7 @@ public class DesiresBlocks {
 			.blockstate(BlockStateGen.axisBlockProvider(true))
 			.addLayer(() -> RenderType::cutoutMipped)
 			.item()
-			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.tab(() -> DesiresCreativeModeTabs.BETA_CREATIVE_TAB)
 			.transform(customItemModel())
 			.register();
 
@@ -611,6 +608,17 @@ public class DesiresBlocks {
 					.tag(AllTags.AllBlockTags.WINDMILL_SAILS.tag)
 					.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
 					.tag(DesiresTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_SEETHING.tag)
+					.recipe((c, p) ->
+						ShapedRecipeBuilder.shaped(c.get(), 4)
+								.pattern("SCS")
+								.pattern("CRC")
+								.pattern("SCS")
+								.define('S', BLASTING_SAIL.get())
+								.define('R', Items.NETHERITE_SCRAP)
+								.define('C', DesiresItems.SEETHING_ABLAZE_ROD.get())
+								.unlockedBy("has_" + getItemName(DesiresItems.SEETHING_ABLAZE_ROD.get()), has(DesiresItems.SEETHING_ABLAZE_ROD.get()))
+								.save(p, DesiresCreate.asResource("crafting/fan_catalyst/" + c.getName()))
+					)
 					.tag(DesiresTags.AllBlockTags.INDUSTRIAL_FAN_HEATER.tag)
 					.lang("Seething Catalyst Sail")
 					.item()
@@ -660,7 +668,7 @@ public class DesiresBlocks {
 				.pattern("CRC")
 				.pattern("SCS")
 				.define('S', AllBlocks.SAIL_FRAME.get())
-				.define('R', DesiresBlocks.RUBBER_BLOCK.get())
+				.define('R', RUBBER_BLOCK.get())
 				.define('C', cataylst)
 				.unlockedBy("has_" + getItemName(cataylst), has(cataylst))
 				.save(pFinishedRecipeConsumer, DesiresCreate.asResource("crafting/fan_catalyst/" + c.getName()));

@@ -1,5 +1,9 @@
 {
   "values": [
+    "create_dd:rose_slab",
+    "create_dd:smoked_slab",
+    "create_dd:rubber_slab",
+    "create_dd:spirit_slab",
     "create_dd:dark_metal_block_slab",
     "create_dd:dark_metal_brick_slab",
     "create_dd:padded_rubber_slab",
@@ -55,6 +59,10 @@
     "create_dd:cut_dolomite_slab",
     "create_dd:polished_cut_dolomite_slab",
     "create_dd:cut_dolomite_brick_slab",
-    "create_dd:small_dolomite_brick_slab"
+    "create_dd:small_dolomite_brick_slab",
+    "create_dd:cut_breccia_slab",
+    "create_dd:polished_cut_breccia_slab",
+    "create_dd:cut_breccia_brick_slab",
+    "create_dd:small_breccia_brick_slab"
   ]
 }
