@@ -3,8 +3,10 @@ package uwu.lopyluna.create_dd.registry;
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 import static uwu.lopyluna.create_dd.registry.helper.woodtype.WoodEntry.*;
 
+import com.google.common.collect.Maps;
 import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
+import net.minecraft.world.item.AxeItem;
 import uwu.lopyluna.create_dd.content.blocks.functional.sliding_door.WoodenSlidingDoorBlockEntity;
 import uwu.lopyluna.create_dd.registry.helper.woodtype.WoodEntry;
 import uwu.lopyluna.create_dd.registry.helper.woodtype.WoodTypes;
@@ -24,6 +26,18 @@ public class DesiresWoodType {
                     .renderer(() -> SlidingDoorRenderer::new)
                     .validBlocks(ROSE.slidingDoor, SMOKED.slidingDoor, SPIRIT.slidingDoor)
                     .register();
+
+    public static void regStrippables() {
+        regStrippables(ROSE);
+        regStrippables(SMOKED);
+        regStrippables(RUBBER);
+        regStrippables(SPIRIT);
+    }
+
+    public static void regStrippables(WoodEntry entry) {
+        AxeItem.STRIPPABLES = Maps.newHashMap(AxeItem.STRIPPABLES);
+        AxeItem.STRIPPABLES.put(entry.log.get(), entry.strippedLog.get());
+    }
 
     public static void register() {}
 }

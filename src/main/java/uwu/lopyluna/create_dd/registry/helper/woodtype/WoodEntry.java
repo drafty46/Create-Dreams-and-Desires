@@ -156,6 +156,7 @@ public class WoodEntry {
         BlockEntry<ConnectedGlassPaneBlock> window_pane;
 
         if (anyAll) {
+
             woodType = WoodType.create(id);
             plank = REGISTRATE.block(id + "_planks", flammable ? p -> CombustibleBlock.create(p, 5, 20) : CombustibleBlock::create)
                     .initialProperties(() -> Blocks.OAK_PLANKS)
@@ -233,7 +234,7 @@ public class WoodEntry {
                     .tab(tab)
                     .build()
                     .register();
-            log = REGISTRATE.block(id + "_log", flammable ? p -> AxisBlock.create(p, strippedLog.get().defaultBlockState(), 5, 5) : p -> AxisBlock.create(p, strippedLog.get().defaultBlockState()))
+            log = REGISTRATE.block(id + "_log", flammable ? p -> AxisBlock.create(p, 5, 5) : AxisBlock::create)
                     .initialProperties(() -> Blocks.OAK_LOG)
                     .lang(name + " Log")
                     .blockstate((c, p) -> p.axisBlock(c.get(), DesiresCreate.asResource(texturePathID + "_log"), DesiresCreate.asResource(texturePathID + "_log_top")))
@@ -270,7 +271,7 @@ public class WoodEntry {
                     .tab(tab)
                     .build()
                     .register();
-            wood = REGISTRATE.block(id + "_wood", flammable ? p -> AxisBlock.create(p, strippedWood.get().defaultBlockState(), 5, 5) : p -> AxisBlock.create(p, strippedWood.get().defaultBlockState()))
+            wood = REGISTRATE.block(id + "_wood", flammable ? p -> AxisBlock.create(p, 5, 5) : AxisBlock::create)
                     .initialProperties(() -> Blocks.OAK_WOOD)
                     .lang(name + " Wood")
                     .blockstate((c, p) -> p.axisBlock(c.get(), DesiresCreate.asResource(texturePathID + "_log"), DesiresCreate.asResource(texturePathID + "_log")))

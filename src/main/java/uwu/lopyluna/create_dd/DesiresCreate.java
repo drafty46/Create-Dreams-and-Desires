@@ -132,6 +132,8 @@ public class DesiresCreate {
 
     public static void init(final FMLCommonSetupEvent event) {
         DesiresFluids.registerFluidInteractions();
+
+        event.enqueueWork(() -> DesiresWoodType.regStrippables());
     }
 
     public static ResourceLocation asResource(String path) {
