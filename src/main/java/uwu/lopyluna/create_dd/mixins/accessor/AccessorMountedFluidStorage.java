@@ -1,4 +1,4 @@
-package uwu.lopyluna.create_dd.mixins;
+package uwu.lopyluna.create_dd.mixins.accessor;
 
 import com.simibubi.create.content.contraptions.MountedFluidStorage;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;

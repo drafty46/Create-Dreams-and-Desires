@@ -5,10 +5,8 @@ import com.jozufozu.flywheel.api.Material;
 import com.jozufozu.flywheel.core.materials.model.ModelData;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllSoundEvents;
-import com.simibubi.create.content.kinetics.RotationPropagator;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.IRotate;
-import com.simibubi.create.content.kinetics.crank.HandCrankBlockEntity;
 import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;
 import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.render.SuperByteBuffer;
@@ -16,7 +14,6 @@ import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,6 +21,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 import uwu.lopyluna.create_dd.registry.DesiresPartialModels;
+
+import java.util.List;
 
 public class CogCrankBlockEntity extends GeneratingKineticBlockEntity {
 
@@ -101,15 +100,16 @@ public class CogCrankBlockEntity extends GeneratingKineticBlockEntity {
     @OnlyIn(Dist.CLIENT)
     public SuperByteBuffer getRenderedHandle() {
         BlockState blockState = getBlockState();
-        Direction.Axis axis = blockState.getOptionalValue(CogCrankBlock.AXIS).orElse(Direction.Axis.X);
-        return CachedBufferer.partial(DesiresPartialModels.COG_CRANK_HANDLE, blockState);
+        Direction.Axis axis = blockState.getOptionalValue(CogCrankBlock.AXIS).orElse(Direction.Axis.Y);
+        return CachedBufferer.partialFacing(DesiresPartialModels.COG_CRANK_HANDLE, blockState, Direction.get(Direction.AxisDirection.POSITIVE, axis));
     }
+
 
     @OnlyIn(Dist.CLIENT)
     public Instancer<ModelData> getRenderedHandleInstance(Material<ModelData> material) {
         BlockState blockState = getBlockState();
-        Direction.Axis axis = blockState.getOptionalValue(CogCrankBlock.AXIS).orElse(Direction.Axis.X);
-        return material.getModel(DesiresPartialModels.COG_CRANK_HANDLE, blockState);
+        Direction.Axis axis = blockState.getOptionalValue(CogCrankBlock.AXIS).orElse(Direction.Axis.Y);
+        return material.getModel(DesiresPartialModels.COG_CRANK_HANDLE, blockState, Direction.get(Direction.AxisDirection.POSITIVE, axis).getOpposite());
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -128,7 +128,7 @@ public class CogCrankBlockEntity extends GeneratingKineticBlockEntity {
     public void tickAudio() {
         super.tickAudio();
         if (inUse > 0 && AnimationTickHolder.getTicks() % 10 == 0) {
-            if (!DesiresBlocks.COG_CRANK.has(getBlockState()))
+            if (!(getBlockState().getBlock() instanceof CogCrankBlock))
                 return;
             AllSoundEvents.CRANKING.playAt(level, worldPosition, (inUse) / 2.5f, .65f + (10 - inUse) / 10f, true);
         }
@@ -136,7 +136,19 @@ public class CogCrankBlockEntity extends GeneratingKineticBlockEntity {
     
     @Override
     protected boolean canPropagateDiagonally(IRotate block, BlockState state) {
-        return ICogWheel.isLargeCog(state);
+        return state.getBlock() instanceof ICogWheel || block instanceof ICogWheel;
     }
-    
+
+    @Override
+    public List<BlockPos> addPropagationLocations(IRotate block, BlockState state, List<BlockPos> neighbours) {
+        if (!ICogWheel.isLargeCog(state))
+            return super.addPropagationLocations(block, state, neighbours);
+
+        BlockPos.betweenClosedStream(new BlockPos(-1, -1, -1), new BlockPos(1, 1, 1))
+                .forEach(offset -> {
+                    if (offset.distSqr(BlockPos.ZERO) == 2)
+                        neighbours.add(worldPosition.offset(offset));
+                });
+        return neighbours;
+    }
 }

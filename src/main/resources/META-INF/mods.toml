@@ -36,8 +36,15 @@ Create: Dreams & Desires is an addon for the Create mod that add random QoL, ite
     side="BOTH"
 
 [[dependencies.create_dd]]
-modId="create"
-mandatory=true
-versionRange="[0.5.1.f,)"
-ordering="AFTER"
-side="BOTH"
+    modId="create"
+    mandatory=true
+    versionRange="[0.5.1.f,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.create_dd]]
+    modId="createcasing"
+    mandatory=false
+    versionRange="[1.6.1-fix3,)"
+    ordering="AFTER"
+    side="BOTH"

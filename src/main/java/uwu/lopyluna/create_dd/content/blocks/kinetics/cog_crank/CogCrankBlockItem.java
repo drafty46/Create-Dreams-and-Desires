@@ -1,10 +1,8 @@
 package uwu.lopyluna.create_dd.content.blocks.kinetics.cog_crank;
 
 import com.simibubi.create.AllShapes;
-import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
-import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.content.kinetics.base.IRotate;
-import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
+import com.simibubi.create.content.kinetics.simpleRelays.CogWheelBlock;
 import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;
 import com.simibubi.create.foundation.placement.IPlacementHelper;
 import com.simibubi.create.foundation.placement.PlacementHelpers;
@@ -13,6 +11,7 @@ import com.simibubi.create.foundation.utility.Iterate;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Direction.Axis;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -25,18 +24,23 @@ import net.minecraft.world.phys.BlockHitResult;
 import java.util.List;
 import java.util.function.Predicate;
 
+import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
+import static com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.HORIZONTAL_FACING;
+import static com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock.AXIS;
+
 public class CogCrankBlockItem extends BlockItem {
+    
+    boolean large;
+    
     private final int placementHelperId;
     private final int integratedCogHelperId;
-    boolean large;
     
     public CogCrankBlockItem(CogCrankBlock block, Properties builder) {
         super(block, builder);
         large = block.isLarge;
         
         placementHelperId = PlacementHelpers.register(large ? new LargeCogHelper() : new SmallCogHelper());
-        integratedCogHelperId =
-                PlacementHelpers.register(large ? new IntegratedLargeCogHelper() : new IntegratedSmallCogHelper());
+        integratedCogHelperId = PlacementHelpers.register(large ? new IntegratedLargeCogHelper() : new IntegratedSmallCogHelper());
     }
     
     @Override
@@ -66,7 +70,7 @@ public class CogCrankBlockItem extends BlockItem {
     }
     
     @MethodsReturnNonnullByDefault
-    private static class SmallCogHelper extends CogCrankBlockItem.DiagonalCogHelper {
+    private static class SmallCogHelper extends DiagonalCogHelper {
         
         @Override
         public Predicate<ItemStack> getItemPredicate() {
@@ -79,7 +83,7 @@ public class CogCrankBlockItem extends BlockItem {
                 return PlacementOffset.fail();
             
             if (!ICogWheel.isLargeCog(state)) {
-                Direction.Axis axis = ((IRotate) state.getBlock()).getRotationAxis(state);
+                Axis axis = ((IRotate) state.getBlock()).getRotationAxis(state);
                 List<Direction> directions = IPlacementHelper.orderedByDistanceExceptAxis(pos, ray.getLocation(), axis);
                 
                 for (Direction dir : directions) {
@@ -93,7 +97,7 @@ public class CogCrankBlockItem extends BlockItem {
                             .isReplaceable())
                         continue;
                     
-                    return PlacementOffset.success(newPos, s -> s.setValue(CogCrankBlock.AXIS, axis));
+                    return PlacementOffset.success(newPos, s -> s.setValue(AXIS, axis));
                     
                 }
                 
@@ -118,23 +122,23 @@ public class CogCrankBlockItem extends BlockItem {
                 return PlacementOffset.fail();
             
             if (ICogWheel.isLargeCog(state)) {
-                Direction.Axis axis = ((IRotate) state.getBlock()).getRotationAxis(state);
+                Axis axis = ((IRotate) state.getBlock()).getRotationAxis(state);
                 Direction side = IPlacementHelper.orderedByDistanceOnlyAxis(pos, ray.getLocation(), axis)
                         .get(0);
                 List<Direction> directions = IPlacementHelper.orderedByDistanceExceptAxis(pos, ray.getLocation(), axis);
                 for (Direction dir : directions) {
                     BlockPos newPos = pos.relative(dir)
                             .relative(side);
-                    
-                    if (!CogCrankBlock.isValidCogwheelPosition(true, world, newPos, dir.getAxis()))
+
+                    if (!CogWheelBlock.isValidCogwheelPosition(true, world, newPos, dir.getAxis()))
                         continue;
                     
                     if (!world.getBlockState(newPos)
                             .getMaterial()
                             .isReplaceable())
                         continue;
-                    
-                    return PlacementOffset.success(newPos, s -> s.setValue(CogCrankBlock.AXIS, axis));
+
+                    return PlacementOffset.success(newPos, s -> s.setValue(AXIS, dir.getAxis()));
                 }
                 
                 return PlacementOffset.fail();
@@ -143,7 +147,7 @@ public class CogCrankBlockItem extends BlockItem {
             return super.getOffset(player, world, state, pos, ray);
         }
     }
-    
+
     @MethodsReturnNonnullByDefault
     public abstract static class DiagonalCogHelper implements IPlacementHelper {
         
@@ -156,7 +160,7 @@ public class CogCrankBlockItem extends BlockItem {
         public PlacementOffset getOffset(Player player, Level world, BlockState state, BlockPos pos,
                                          BlockHitResult ray) {
             // diagonal gears of different size
-            Direction.Axis axis = ((IRotate) state.getBlock()).getRotationAxis(state);
+            Axis axis = ((IRotate) state.getBlock()).getRotationAxis(state);
             Direction closest = IPlacementHelper.orderedByDistanceExceptAxis(pos, ray.getLocation(), axis)
                     .get(0);
             List<Direction> directions = IPlacementHelper.orderedByDistanceExceptAxis(pos, ray.getLocation(), axis,
@@ -173,7 +177,7 @@ public class CogCrankBlockItem extends BlockItem {
                 if (!CogCrankBlock.isValidCogwheelPosition(ICogWheel.isLargeCog(state), world, newPos, axis))
                     continue;
                 
-                return PlacementOffset.success(newPos, s -> s.setValue(CogCrankBlock.AXIS, axis));
+                return PlacementOffset.success(newPos, s -> s.setValue(AXIS, axis));
             }
             
             return PlacementOffset.fail();
@@ -203,21 +207,14 @@ public class CogCrankBlockItem extends BlockItem {
         }
         
         @Override
-        public PlacementOffset getOffset(Player player, Level world, BlockState state, BlockPos pos,
-                                         BlockHitResult ray) {
+        public PlacementOffset getOffset(Player player, Level world, BlockState state, BlockPos pos, BlockHitResult ray) {
             Direction face = ray.getDirection();
-            Direction.Axis newAxis;
+            Axis newAxis;
             
-            if (state.hasProperty(HorizontalKineticBlock.HORIZONTAL_FACING))
-                newAxis = state.getValue(HorizontalKineticBlock.HORIZONTAL_FACING)
-                        .getAxis();
-            else if (state.hasProperty(DirectionalKineticBlock.FACING))
-                newAxis = state.getValue(DirectionalKineticBlock.FACING)
-                        .getAxis();
-            else if (state.hasProperty(RotatedPillarKineticBlock.AXIS))
-                newAxis = state.getValue(RotatedPillarKineticBlock.AXIS);
-            else
-                newAxis = Direction.Axis.Y;
+            if (state.hasProperty(HORIZONTAL_FACING)) newAxis = state.getValue(HORIZONTAL_FACING).getAxis();
+            else if (state.hasProperty(FACING)) newAxis = state.getValue(FACING).getAxis();
+            else if (state.hasProperty(AXIS)) newAxis = state.getValue(AXIS);
+            else newAxis = Axis.Y;
             
             if (face.getAxis() == newAxis)
                 return PlacementOffset.fail();
@@ -237,7 +234,7 @@ public class CogCrankBlockItem extends BlockItem {
                 if (!CogCrankBlock.isValidCogwheelPosition(false, world, newPos, newAxis))
                     return PlacementOffset.fail();
                 
-                return PlacementOffset.success(newPos, s -> s.setValue(CogCrankBlock.AXIS, newAxis));
+                return PlacementOffset.success(newPos, s -> s.setValue(AXIS, newAxis));
             }
             
             return PlacementOffset.fail();
@@ -261,17 +258,12 @@ public class CogCrankBlockItem extends BlockItem {
         @Override
         public PlacementOffset getOffset(Player player, Level world, BlockState state, BlockPos pos, BlockHitResult ray) {
             Direction face = ray.getDirection();
-            Direction.Axis newAxis;
+            Axis newAxis;
             
-            if (state.hasProperty(HorizontalKineticBlock.HORIZONTAL_FACING))
-                newAxis = state.getValue(HorizontalKineticBlock.HORIZONTAL_FACING)
-                        .getAxis();
-            else if (state.hasProperty(DirectionalKineticBlock.FACING))
-                newAxis = state.getValue(DirectionalKineticBlock.FACING).getAxis();
-            else if (state.hasProperty(RotatedPillarKineticBlock.AXIS))
-                newAxis = state.getValue(RotatedPillarKineticBlock.AXIS);
-            else
-                newAxis = Direction.Axis.Y;
+            if (state.hasProperty(HORIZONTAL_FACING)) newAxis = state.getValue(HORIZONTAL_FACING).getAxis();
+            else if (state.hasProperty(FACING)) newAxis = state.getValue(FACING).getAxis();
+            else if (state.hasProperty(AXIS)) newAxis = state.getValue(AXIS);
+            else newAxis = Axis.Y;
             
             if (face.getAxis() == newAxis)
                 return PlacementOffset.fail();
@@ -291,7 +283,7 @@ public class CogCrankBlockItem extends BlockItem {
                 
                 return PlacementOffset.success()
                         .at(newPos)
-                        .withTransform(s -> s.setValue(CogCrankBlock.AXIS, newAxis));
+                        .withTransform(s -> s.setValue(AXIS, newAxis));
             }
             
             return PlacementOffset.fail();

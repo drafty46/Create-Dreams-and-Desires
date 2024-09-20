@@ -14,6 +14,8 @@ public class DesiresLangPartial {
         consume(consumer, "item.create_dd.handheld_block_zapper.tooltip.summary", "_Creative mode_ tool for large-scale _landscaping_ from a distance.");
 
 
+        consume(consumer, "create.menu.discord", "Discord Server");
+
 
         consume(consumer, "create_dd.block_zapper.modifiers", "Modifiers:");
         consume(consumer, "create_dd.block_zapper.no_modifiers", "You have no modifiers applied.");

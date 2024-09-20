@@ -3,6 +3,7 @@ package uwu.lopyluna.create_dd.registry;
 import com.simibubi.create.content.kinetics.base.*;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftInstance;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftRenderer;
+import com.simibubi.create.content.logistics.chute.ChuteRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import uwu.lopyluna.create_dd.content.blocks.contraptions.contraption_block.HelmBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.brass_gearbox.BrassGearboxBlockEntity;
@@ -28,6 +29,7 @@ import uwu.lopyluna.create_dd.content.blocks.kinetics.kinetic_motor.KineticMotor
 import uwu.lopyluna.create_dd.content.blocks.kinetics.redstone_divider.RedstoneDividerBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.transmission.InverseBoxBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.worm_gear.WormGearBlockEntity;
+import uwu.lopyluna.create_dd.content.blocks.logistics.burden_chute.BurdenChuteBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirRenderer;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileBlockEntity;
@@ -148,6 +150,12 @@ public class DesiresBlockEntityTypes {
 			.instance(() -> ModularDrillInstance::new, false)
 			.validBlocks(DesiresBlocks.MODULAR_DRILL)
 			.renderer(() -> ModularDrillRenderer::new)
+			.register();
+
+	public static final BlockEntityEntry<BurdenChuteBlockEntity> BURDEN_CHUTE = REGISTRATE
+			.blockEntity("burden_chute", BurdenChuteBlockEntity::new)
+			.validBlocks(DesiresBlocks.BURDEN_CHUTE)
+			.renderer(() -> ChuteRenderer::new)
 			.register();
 
 	public static void register() {}

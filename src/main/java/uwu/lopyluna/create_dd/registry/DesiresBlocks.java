@@ -6,6 +6,8 @@ import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.drill.DrillMovementBehaviour;
 import com.simibubi.create.content.kinetics.gauge.GaugeGenerator;
 import com.simibubi.create.content.kinetics.motor.CreativeMotorGenerator;
+import com.simibubi.create.content.logistics.chute.ChuteGenerator;
+import com.simibubi.create.content.logistics.chute.ChuteItem;
 import com.simibubi.create.content.processing.AssemblyOperatorBlockItem;
 import com.simibubi.create.content.redstone.displayLink.source.KineticSpeedDisplaySource;
 import com.simibubi.create.content.redstone.displayLink.source.KineticStressDisplaySource;
@@ -59,6 +61,7 @@ import uwu.lopyluna.create_dd.content.blocks.kinetics.kinetic_motor.KineticMotor
 import uwu.lopyluna.create_dd.content.blocks.kinetics.redstone_divider.RedstoneDividerBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.transmission.InverseBoxBlock;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.worm_gear.WormGearBlock;
+import uwu.lopyluna.create_dd.content.blocks.logistics.burden_chute.BurdenChuteBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirCTBehaviour;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirGenerator;
@@ -122,7 +125,7 @@ public class DesiresBlocks {
 
 	public static final BlockEntry<CasingBlock> OVERBURDEN_CASING = REGISTRATE.block("overburden_casing", CasingBlock::new)
 			.transform(BuilderTransformers.casing(() -> DesiresSpriteShifts.OVERBURDEN_CASING))
-			.properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_BLUE)
+			.properties(p -> p.color(MaterialColor.COLOR_CYAN)
 					.requiresCorrectToolForDrops()
 					.sound(SoundType.NETHERITE_BLOCK))
 			.transform(pickaxeOnly())
@@ -337,7 +340,7 @@ public class DesiresBlocks {
 					.requires(AllBlocks.HAND_CRANK.get())
 					.requires(AllBlocks.COGWHEEL.get())
 					.unlockedBy("has_item", RegistrateRecipeProvider.has(ctx.get()))
-					.save(prov))
+					.save(prov, DesiresCreate.asResource("crafting/kinetics/cog_crank")))
 			.onRegister(ItemUseOverrides::addBlock)
 			.item(CogCrankBlockItem::new)
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
@@ -349,19 +352,22 @@ public class DesiresBlocks {
 			.properties(p -> p.color(MaterialColor.PODZOL))
 			.transform(axeOrPickaxe())
 		.blockstate(BlockStateGen.axisBlockProvider(true))
-			.transform(BlockStressDefaults.setCapacity(12.0))
+			.transform(BlockStressDefaults.setCapacity(8.0))
 			.transform(BlockStressDefaults.setGeneratorSpeed(CogCrankBlock::getSpeedRange))
 			.tag(AllTags.AllBlockTags.BRITTLE.tag)
-			.recipe((ctx, prov) -> ShapelessRecipeBuilder.shapeless(ctx.getEntry(), 1)
-					.requires(AllBlocks.HAND_CRANK.get())
-					.requires(AllBlocks.LARGE_COGWHEEL.get())
-					.unlockedBy("has_item", RegistrateRecipeProvider.has(ctx.get()))
-					.save(prov))
-			.recipe((ctx, prov) -> ShapelessRecipeBuilder.shapeless(ctx.getEntry(), 1)
-					.requires(COG_CRANK.get())
-					.requires(ItemTags.PLANKS)
-					.unlockedBy("has_item", RegistrateRecipeProvider.has(ctx.get()))
-					.save(prov))
+			.recipe((c, p) -> {
+				ShapelessRecipeBuilder.shapeless(c.getEntry(), 1)
+						.requires(AllBlocks.HAND_CRANK.get())
+						.requires(AllBlocks.LARGE_COGWHEEL.get())
+						.unlockedBy("has_item", RegistrateRecipeProvider.has(c.get()))
+						.save(p, DesiresCreate.asResource("crafting/kinetics/large_cog_crank"));
+
+				ShapelessRecipeBuilder.shapeless(c.getEntry(), 1)
+						.requires(COG_CRANK.get())
+						.requires(ItemTags.PLANKS)
+						.unlockedBy("has_item", RegistrateRecipeProvider.has(c.get()))
+						.save(p, DesiresCreate.asResource("crafting/kinetics/cog_crank_to_large"));
+			})
 			.onRegister(ItemUseOverrides::addBlock)
 			.item(CogCrankBlockItem::new)
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
@@ -468,6 +474,16 @@ public class DesiresBlocks {
 			.transform(customItemModel())
 			.register();
 
+	public static final BlockEntry<BurdenChuteBlock> BURDEN_CHUTE = REGISTRATE.block("burden_chute", BurdenChuteBlock::new)
+			.initialProperties(SharedProperties::softMetal)
+			.properties(p -> p.color(MaterialColor.COLOR_CYAN).sound(SoundType.NETHERITE_BLOCK))
+			.transform(pickaxeOnly())
+			.addLayer(() -> RenderType::cutoutMipped)
+			.blockstate(new ChuteGenerator()::generate)
+			.item(ChuteItem::new)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.transform(customItemModel("_", "block"))
+			.register();
 
 	public static final BlockEntry<ItemStockpileBlock> ITEM_STOCKPILE = REGISTRATE.block("item_stockpile", ItemStockpileBlock::new)
 			.initialProperties(SharedProperties::softMetal)

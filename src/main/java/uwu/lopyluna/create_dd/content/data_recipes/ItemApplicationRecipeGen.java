@@ -21,6 +21,11 @@ public class ItemApplicationRecipeGen extends DesireProcessingRecipeGen {
         super(generator);
     }
 
+    GeneratedRecipe BURDEN_CHUTE = create("burden_chute", b -> b
+            .require(AllBlocks.CHUTE.get()) //Block
+            .require(DesiresItems.BURY_BLEND.get()) //Item to Apply
+            .output(DesiresBlocks.BURDEN_CHUTE.get())); //Output
+
     GeneratedRecipe OVERBURDEN = create("overburden_casing", b -> b
             .require(AllBlocks.ANDESITE_CASING.get()) //Block
             .require(DesiresItems.BURY_BLEND.get()) //Item to Apply

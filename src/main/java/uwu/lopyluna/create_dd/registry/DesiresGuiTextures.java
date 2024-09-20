@@ -13,20 +13,21 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import static uwu.lopyluna.create_dd.DesiresCreate.MOD_ID;
 
 public enum DesiresGuiTextures implements ScreenElement {
+    LOGO("logo", 256, 256),
+
     BLOCK_ZAPPER("curiosities", 234, 103),
     BLOCK_ZAPPER_INACTIVE_PARAM("curiosities", 238, 0, 18, 18),
     ;
 
-    public static final int FONT_COLOR = 0x575F7A;
-
     public final ResourceLocation location;
-    public int width, height;
-    public int startX, startY;
+    public final int width, height;
+    public final int startX, startY;
 
     DesiresGuiTextures(String location, int width, int height) {
         this(location, 0, 0, width, height);
     }
 
+    @SuppressWarnings("unused")
     DesiresGuiTextures(int startX, int startY) {
         this("icons", startX * 16, startY * 16, 16, 16);
     }

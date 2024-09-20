@@ -230,6 +230,7 @@
     "create_dd:giant_gear_structure",
     "create_dd:incomplete_water_wheel",
     "create_dd:incomplete_large_water_wheel",
+    "create_dd:burden_chute",
     "create_dd:item_stockpile",
     "create_dd:fluid_reservoir"
   ]

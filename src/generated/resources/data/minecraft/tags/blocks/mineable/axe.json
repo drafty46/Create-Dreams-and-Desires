@@ -73,6 +73,13 @@
     "create_dd:blasting_sail",
     "create_dd:seething_sail",
     "create_dd:freezing_sail",
-    "create_dd:sanding_sail"
+    "create_dd:sanding_sail",
+    "create_dd:creative_encased_shaft",
+    "create_dd:creative_encased_cogwheel",
+    "create_dd:creative_encased_large_cogwheel",
+    "create_dd:creative_encased_fluid_pipe",
+    "create_dd:creative_depot",
+    "create_dd:creative_mixer",
+    "create_dd:creative_press"
   ]
 }

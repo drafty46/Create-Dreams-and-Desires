@@ -94,7 +94,7 @@ repositories {
     //}
     //maven {
     //    //Iglee's Repo
-    //    url = "https://iglee.fr:8081/releases"
+    //    url "https://iglee.fr:8081/releases"
     //    content {
     //        includeGroup "fr.iglee42"
     //    }

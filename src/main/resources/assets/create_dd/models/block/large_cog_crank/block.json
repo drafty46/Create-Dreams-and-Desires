@@ -1,6 +1,6 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "create:block/large_wheels",
+	"parent": "create:block/large_cogwheel",
 	"texture_size": [32, 32],
 	"textures": {
 		"4": "create:block/large_cogwheel",
