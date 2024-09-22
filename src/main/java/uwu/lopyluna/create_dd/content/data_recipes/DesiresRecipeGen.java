@@ -29,7 +29,7 @@ import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 import net.minecraftforge.common.crafting.conditions.NotCondition;
 import org.jetbrains.annotations.NotNull;
-import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.DesireUtil;
 import uwu.lopyluna.create_dd.registry.DesiresPaletteStoneTypes;
 
 import java.util.ArrayList;
@@ -74,7 +74,7 @@ public class DesiresRecipeGen extends CreateRecipeProvider {
 
     GeneratedRecipe createSpecial(Supplier<? extends SimpleRecipeSerializer<?>> serializer, String recipeType,
                                   String path) {
-        ResourceLocation location = DesiresCreate.asResource(recipeType + "/" + currentFolder + "/" + path);
+        ResourceLocation location = DesireUtil.asResource(recipeType + "/" + currentFolder + "/" + path);
         return register(consumer -> {
             SpecialRecipeBuilder b = SpecialRecipeBuilder.special(serializer.get());
             b.save(consumer, location.toString());
@@ -257,11 +257,11 @@ public class DesiresRecipeGen extends CreateRecipeProvider {
         }
 
         private ResourceLocation createSimpleLocation(String recipeType) {
-            return DesiresCreate.asResource(recipeType + "/" + getRegistryName().getPath() + suffix);
+            return DesireUtil.asResource(recipeType + "/" + getRegistryName().getPath() + suffix);
         }
 
         private ResourceLocation createLocation(String recipeType) {
-            return DesiresCreate.asResource(recipeType + "/" + path + "/" + getRegistryName().getPath() + suffix);
+            return DesireUtil.asResource(recipeType + "/" + path + "/" + getRegistryName().getPath() + suffix);
         }
 
         private ResourceLocation getRegistryName() {

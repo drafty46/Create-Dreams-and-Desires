@@ -18,6 +18,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import uwu.lopyluna.create_dd.DesireUtil;
 import uwu.lopyluna.create_dd.DesiresCreate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -124,7 +125,7 @@ public abstract class DesireProcessingRecipeGen extends CreateRecipeProvider {
      */
     public <T extends ProcessingRecipe<?>> GeneratedRecipe create(String name,
                                                            UnaryOperator<ProcessingRecipeBuilder<T>> transform) {
-        return create(DesiresCreate.asResource(name), transform);
+        return create(DesireUtil.asResource(name), transform);
     }
 
     protected abstract IRecipeTypeInfo getRecipeType();
@@ -174,7 +175,7 @@ public abstract class DesireProcessingRecipeGen extends CreateRecipeProvider {
     }
 
     public GeneratedRecipe convertChanceRecipe(ItemLike item, ItemLike result, float chance) {
-        return create(DesiresCreate.asResource(getItemName(result) + "_from_" + getItemName(item)), b -> b.withItemIngredients(Ingredient.of(item)).output(chance, result, 1));
+        return create(DesireUtil.asResource(getItemName(result) + "_from_" + getItemName(item)), b -> b.withItemIngredients(Ingredient.of(item)).output(chance, result, 1));
     }
 
     public GeneratedRecipe crushedOre(Supplier<ItemLike> crushed, ItemLike ingot, ItemLike secondary,

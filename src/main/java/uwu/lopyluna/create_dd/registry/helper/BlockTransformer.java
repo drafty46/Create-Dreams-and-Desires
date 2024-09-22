@@ -23,10 +23,9 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.registries.ForgeRegistries;
-import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.DesireUtil;
 import uwu.lopyluna.create_dd.content.blocks.functional.VelvetBlock;
 import uwu.lopyluna.create_dd.registry.DesiresPaletteBlocks;
-import uwu.lopyluna.create_dd.registry.DesiresSoundEvents;
 
 import java.util.function.Supplier;
 
@@ -80,7 +79,7 @@ public class BlockTransformer {
                         .define('C', rubberDecorTag)
                         .define('D', dye)
                         .unlockedBy("has_" + c.getName(), has(c.get()))
-                        .save(p, DesiresCreate.asResource("crafting/decor/" + c.getName() + "_from_" + c.getName())))
+                        .save(p, DesireUtil.asResource("crafting/decor/" + c.getName() + "_from_" + c.getName())))
                 .item()
                 .tag(dyeRubberDecorTag, rubberDecorTag)
                 .build()
@@ -90,7 +89,7 @@ public class BlockTransformer {
                 .properties(p -> p.color(mapColor)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
                 .tag(stairsBlockTag)
                 .recipe((c, p) -> p.stonecutting(DataIngredient.tag(dyeRubberDecorTag), c, 1))
-                .blockstate((c, p) -> p.stairsBlock(c.get(), DesiresCreate.asResource("block/" + colorId + "_padded_tiled_rubber")))
+                .blockstate((c, p) -> p.stairsBlock(c.get(), DesireUtil.asResource("block/" + colorId + "_padded_tiled_rubber")))
                 .item()
                 .tag(dyeRubberDecorTag, stairsItemTag)
                 .build()
@@ -99,10 +98,10 @@ public class BlockTransformer {
                 .properties(p -> p.color(mapColor)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
                 .tag(slabsBlockTag)
                 .recipe((c, p) -> p.stonecutting(DataIngredient.tag(dyeRubberDecorTag), c, 2))
-                .blockstate((c, p) -> p.slabBlock(c.get(), DesiresCreate.asResource("block/" + colorId + "_padded_rubber"),
-                        DesiresCreate.asResource("block/" + colorId + "_padded_rubber_slab"),
-                        DesiresCreate.asResource("block/" + colorId + "_padded_rubber"),
-                        DesiresCreate.asResource("block/" + colorId + "_padded_rubber")))
+                .blockstate((c, p) -> p.slabBlock(c.get(), DesireUtil.asResource("block/" + colorId + "_padded_rubber"),
+                        DesireUtil.asResource("block/" + colorId + "_padded_rubber_slab"),
+                        DesireUtil.asResource("block/" + colorId + "_padded_rubber"),
+                        DesireUtil.asResource("block/" + colorId + "_padded_rubber")))
                 .item()
                 .tag(slabsItemTag)
                 .build()
@@ -131,7 +130,7 @@ public class BlockTransformer {
                             .define('C', blueprintDecorTag)
                             .define('D', dye)
                             .unlockedBy("has_dyed_item", has(dye))
-                            .save(p, DesiresCreate.asResource("crafting/decor/" + c.getName() + "_from_" + getItemName(dye)));
+                            .save(p, DesireUtil.asResource("crafting/decor/" + c.getName() + "_from_" + getItemName(dye)));
                     ShapedRecipeBuilder.shaped(c.get(), 4)
                             .pattern("DPD")
                             .pattern("PWP")
@@ -140,7 +139,7 @@ public class BlockTransformer {
                             .define('W', ItemTags.WOOL)
                             .define('P', Items.PAPER)
                             .unlockedBy("has_dyed_item", has(dye))
-                            .save(p, DesiresCreate.asResource("crafting/decor/" + c.getName()));
+                            .save(p, DesireUtil.asResource("crafting/decor/" + c.getName()));
                 })
                 .properties(p -> p.color(mapColor))
                 .properties(p -> p.sound(new ForgeSoundType(1, 0.85f, () -> SoundEvents.PAINTING_BREAK,
@@ -169,7 +168,7 @@ public class BlockTransformer {
                             .define('C', blueprintDecorTag)
                             .define('D', dye)
                             .unlockedBy("has_dyed_item", has(dye))
-                            .save(p, DesiresCreate.asResource("crafting/decor/" + c.getName() + "_from_" + getItemName(dye)));
+                            .save(p, DesireUtil.asResource("crafting/decor/" + c.getName() + "_from_" + getItemName(dye)));
                     ShapedRecipeBuilder.shaped(c.get(), 4)
                             .pattern("DPD")
                             .pattern("PWP")
@@ -178,7 +177,7 @@ public class BlockTransformer {
                             .define('W', ItemTags.WOOL)
                             .define('P', Items.PAPER)
                             .unlockedBy("has_dyed_item", has(dye))
-                            .save(p, DesiresCreate.asResource("crafting/decor/" + c.getName()));
+                            .save(p, DesireUtil.asResource("crafting/decor/" + c.getName()));
                 })
                 .properties(p -> p.color(mapColor))
                 .properties(p -> p.sound(new ForgeSoundType(1, 0.85f, () -> SoundEvents.PAINTING_BREAK,

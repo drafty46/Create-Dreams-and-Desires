@@ -5,7 +5,7 @@ import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
 import com.simibubi.create.foundation.block.connected.CTSpriteShifter;
 import com.simibubi.create.foundation.block.connected.CTType;
 import com.simibubi.create.foundation.utility.Couple;
-import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.DesireUtil;
 
 
 @SuppressWarnings({"unused"})
@@ -99,15 +99,15 @@ public class DesiresSpriteShifts {
 	private static Couple<CTSpriteShiftEntry> stockpile(String name) {
 		final String prefixed = "block/stockpile/stockpile_" + name;
 		return Couple.createWithContext(
-				medium -> CTSpriteShifter.getCT(AllCTTypes.RECTANGLE, DesiresCreate.asResource(prefixed + "_small"),
-						DesiresCreate.asResource(medium ? prefixed + "_medium" : prefixed + "_large")));
+				medium -> CTSpriteShifter.getCT(AllCTTypes.RECTANGLE, DesireUtil.asResource(prefixed + "_small"),
+						DesireUtil.asResource(medium ? prefixed + "_medium" : prefixed + "_large")));
 	}
 
 	private static Couple<CTSpriteShiftEntry> reservoir(String name) {
 		final String prefixed = "block/reservoir/reservoir_" + name;
 		return Couple.createWithContext(
-				medium -> CTSpriteShifter.getCT(AllCTTypes.RECTANGLE, DesiresCreate.asResource(prefixed + "_small"),
-						DesiresCreate.asResource(medium ? prefixed + "_medium" : prefixed + "_large")));
+				medium -> CTSpriteShifter.getCT(AllCTTypes.RECTANGLE, DesireUtil.asResource(prefixed + "_small"),
+						DesireUtil.asResource(medium ? prefixed + "_medium" : prefixed + "_large")));
 	}
 
 	private static CTSpriteShiftEntry omniBlueprint(String name) {
@@ -127,7 +127,7 @@ public class DesiresSpriteShifts {
 	}
 
 	private static CTSpriteShiftEntry getCT(CTType type, String blockTextureName, String connectedTextureName) {
-		return CTSpriteShifter.getCT(type, DesiresCreate.asResource("block/" + blockTextureName), DesiresCreate.asResource("block/" + connectedTextureName + "_connected"));
+		return CTSpriteShifter.getCT(type, DesireUtil.asResource("block/" + blockTextureName), DesireUtil.asResource("block/" + connectedTextureName + "_connected"));
 	}
 
 	private static CTSpriteShiftEntry getCT(CTType type, String blockTextureName) {

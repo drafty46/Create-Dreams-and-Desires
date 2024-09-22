@@ -9,6 +9,7 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Items;
 import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.DesireUtil;
 import uwu.lopyluna.create_dd.registry.DesiresItems;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -46,7 +47,7 @@ public class SequencedAssemblyRecipeGen extends CreateRecipeProvider {
 
     protected GeneratedRecipe create(String name, UnaryOperator<SequencedAssemblyRecipeBuilder> transform) {
         GeneratedRecipe generatedRecipe =
-                c -> transform.apply(new SequencedAssemblyRecipeBuilder(DesiresCreate.asResource(name)))
+                c -> transform.apply(new SequencedAssemblyRecipeBuilder(DesireUtil.asResource(name)))
                         .build(c);
         all.add(generatedRecipe);
         return generatedRecipe;

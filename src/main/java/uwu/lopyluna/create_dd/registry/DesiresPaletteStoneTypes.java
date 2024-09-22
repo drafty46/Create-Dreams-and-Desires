@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.ForgeRegistries;
-import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.DesireUtil;
 import uwu.lopyluna.create_dd.registry.helper.palettes.DPaletteBlockPattern;
 import uwu.lopyluna.create_dd.registry.helper.palettes.DPalettesVariantEntry;
 
@@ -75,7 +75,7 @@ public enum DesiresPaletteStoneTypes {
             paletteStoneVariants.baseBlock = paletteStoneVariants.factory.apply(registrate);
             String id = Lang.asId(paletteStoneVariants.name());
             paletteStoneVariants.materialTag =
-                    DesiresTags.optionalTag(ForgeRegistries.ITEMS, DesiresCreate.asResource("stone_types/" + id));
+                    DesiresTags.optionalTag(ForgeRegistries.ITEMS, DesireUtil.asResource("stone_types/" + id));
             paletteStoneVariants.variants = new DPalettesVariantEntry(id, paletteStoneVariants);
         }
     }

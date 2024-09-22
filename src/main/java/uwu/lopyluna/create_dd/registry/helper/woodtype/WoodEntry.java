@@ -43,7 +43,7 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
-import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.DesireUtil;
 import uwu.lopyluna.create_dd.content.blocks.functional.AxisBlock;
 import uwu.lopyluna.create_dd.content.blocks.functional.Combustible.*;
 import uwu.lopyluna.create_dd.content.blocks.functional.sliding_door.WoodenSlidingDoorBlock;
@@ -176,11 +176,11 @@ public class WoodEntry {
                     .tab(tab)
                     .build()
                     .register();
-            ResourceLocation plankTextures = DesiresCreate.asResource(texturePathID + "_planks");
+            ResourceLocation plankTextures = DesireUtil.asResource(texturePathID + "_planks");
             slab = REGISTRATE.block(id + "_slab", flammable ? p -> CombustibleSlabBlock.create(p, 5, 20) : CombustibleSlabBlock::create)
                     .initialProperties(() -> Blocks.OAK_SLAB)
                     .lang(name + " Slab")
-                    .blockstate((c, p) -> p.slabBlock(c.get(), DesiresCreate.asResource("block/" + id + "_planks"), plankTextures))
+                    .blockstate((c, p) -> p.slabBlock(c.get(), DesireUtil.asResource("block/" + id + "_planks"), plankTextures))
                     .transform(axeOnly())
                     .tag(!flammable ? BlockTags.NON_FLAMMABLE_WOOD : DesiresTags.AllBlockTags.FLAMMABLE_WOOD.tag)
                     .tag(BlockTags.SLABS)
@@ -221,7 +221,7 @@ public class WoodEntry {
             strippedLog = REGISTRATE.block("stripped_" + id + "_log", flammable ? p -> AxisBlock.create(p, 5, 5) : AxisBlock::create)
                     .initialProperties(() -> Blocks.STRIPPED_OAK_LOG)
                     .lang("Stripped " + name + " Log")
-                    .blockstate((c, p) -> p.axisBlock(c.get(), DesiresCreate.asResource(strippedSuffix + "_log"), DesiresCreate.asResource(texturePathID + "_log_top")))
+                    .blockstate((c, p) -> p.axisBlock(c.get(), DesireUtil.asResource(strippedSuffix + "_log"), DesireUtil.asResource(texturePathID + "_log_top")))
                     .transform(axeOnly())
                     .tag(flammable ? BlockTags.LOGS_THAT_BURN : BlockTags.NON_FLAMMABLE_WOOD)
                     .tag(BlockTags.LOGS)
@@ -237,7 +237,7 @@ public class WoodEntry {
             log = REGISTRATE.block(id + "_log", flammable ? p -> AxisBlock.create(p, 5, 5) : AxisBlock::create)
                     .initialProperties(() -> Blocks.OAK_LOG)
                     .lang(name + " Log")
-                    .blockstate((c, p) -> p.axisBlock(c.get(), DesiresCreate.asResource(texturePathID + "_log"), DesiresCreate.asResource(texturePathID + "_log_top")))
+                    .blockstate((c, p) -> p.axisBlock(c.get(), DesireUtil.asResource(texturePathID + "_log"), DesireUtil.asResource(texturePathID + "_log_top")))
                     .transform(axeOnly())
                     .tag(flammable ? BlockTags.LOGS_THAT_BURN : BlockTags.NON_FLAMMABLE_WOOD)
                     .tag(BlockTags.LOGS)
@@ -252,7 +252,7 @@ public class WoodEntry {
             strippedWood = REGISTRATE.block("stripped_" + id + "_wood", flammable ? p -> AxisBlock.create(p, 5, 5) : AxisBlock::create)
                     .initialProperties(() -> Blocks.STRIPPED_OAK_WOOD)
                     .lang("Stripped " + name + " Wood")
-                    .blockstate((c, p) -> p.axisBlock(c.get(), DesiresCreate.asResource(strippedSuffix + "_log"), DesiresCreate.asResource(strippedSuffix + "_log")))
+                    .blockstate((c, p) -> p.axisBlock(c.get(), DesireUtil.asResource(strippedSuffix + "_log"), DesireUtil.asResource(strippedSuffix + "_log")))
                     .transform(axeOnly())
                     .tag(flammable ? BlockTags.LOGS_THAT_BURN : BlockTags.NON_FLAMMABLE_WOOD)
                     .tag(BlockTags.LOGS)
@@ -274,7 +274,7 @@ public class WoodEntry {
             wood = REGISTRATE.block(id + "_wood", flammable ? p -> AxisBlock.create(p, 5, 5) : AxisBlock::create)
                     .initialProperties(() -> Blocks.OAK_WOOD)
                     .lang(name + " Wood")
-                    .blockstate((c, p) -> p.axisBlock(c.get(), DesiresCreate.asResource(texturePathID + "_log"), DesiresCreate.asResource(texturePathID + "_log")))
+                    .blockstate((c, p) -> p.axisBlock(c.get(), DesireUtil.asResource(texturePathID + "_log"), DesireUtil.asResource(texturePathID + "_log")))
                     .transform(axeOnly())
                     .tag(flammable ? BlockTags.LOGS_THAT_BURN : BlockTags.NON_FLAMMABLE_WOOD)
                     .tag(BlockTags.LOGS)
@@ -382,7 +382,7 @@ public class WoodEntry {
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .addLayer(() -> RenderType::cutoutMipped)
                     .lang(name + " Trapdoor")
-                    .blockstate((c, p) -> p.trapdoorBlock(c.get(), DesiresCreate.asResource("block/palettes/wood_types/" + id + "/" + id + "_trapdoor"), orientable))
+                    .blockstate((c, p) -> p.trapdoorBlock(c.get(), DesireUtil.asResource("block/palettes/wood_types/" + id + "/" + id + "_trapdoor"), orientable))
                     .transform(axeOnly())
                     .tag(!flammable ? BlockTags.NON_FLAMMABLE_WOOD : DesiresTags.AllBlockTags.FLAMMABLE_WOOD.tag)
                     .tag(BlockTags.TRAPDOORS)
@@ -395,7 +395,7 @@ public class WoodEntry {
                             .group("wooden_trapdoor")
                             .unlockedBy("has_planks", has(plank.get())).save(p))
                     .model((c, p) -> {
-                        ResourceLocation loc = DesiresCreate.asResource("block/palettes/wood_types/" + id + "/" + id + "_trapdoor");
+                        ResourceLocation loc = DesireUtil.asResource("block/palettes/wood_types/" + id + "/" + id + "_trapdoor");
                         if (orientable) {
                             p.trapdoorOrientableBottom(c.getName(), loc);
                         } else {
@@ -413,10 +413,10 @@ public class WoodEntry {
                         .initialProperties(() -> Blocks.OAK_DOOR)
                         .properties(BlockBehaviour.Properties::noOcclusion)
                         .blockstate((c, p) -> {
-                            ResourceLocation particle = DesiresCreate.asResource("block/palettes/wood_types/" + id + "/" + id + "_planks");
-                            ResourceLocation bottom = DesiresCreate.asResource("block/palettes/wood_types/" + id + "/" + id + "_door_bottom");
-                            ResourceLocation top = DesiresCreate.asResource("block/palettes/wood_types/" + id + "/" + id + "_door_top");
-                            ResourceLocation side = DesiresCreate.asResource("block/palettes/wood_types/" + id + "/" + id + "_door_side");
+                            ResourceLocation particle = DesireUtil.asResource("block/palettes/wood_types/" + id + "/" + id + "_planks");
+                            ResourceLocation bottom = DesireUtil.asResource("block/palettes/wood_types/" + id + "/" + id + "_door_bottom");
+                            ResourceLocation top = DesireUtil.asResource("block/palettes/wood_types/" + id + "/" + id + "_door_top");
+                            ResourceLocation side = DesireUtil.asResource("block/palettes/wood_types/" + id + "/" + id + "_door_side");
 
                             ResourceLocation refModelFoldBottom = Create.asResource("block/copper_door/block_bottom");
                             ResourceLocation refModelFoldTop = Create.asResource("block/copper_door/block_top");
@@ -483,11 +483,11 @@ public class WoodEntry {
                         .lang(name + " Door")
                         .loot((lr, block) -> lr.add(block, BlockLoot.createDoorTable(block)))
                         .blockstate((c, p) -> {
-                            //ResourceLocation particle = DesiresCreate.asResource("block/palettes/wood_types/" + id + "/" + id + "_planks");*
-                            //ResourceLocation side = DesiresCreate.asResource("block/palettes/wood_types/" + id + "/" + id + "_door_side");*
+                            //ResourceLocation particle = DesireUtil.asResource("block/palettes/wood_types/" + id + "/" + id + "_planks");*
+                            //ResourceLocation side = DesireUtil.asResource("block/palettes/wood_types/" + id + "/" + id + "_door_side");*
 
-                            ResourceLocation bottom = DesiresCreate.asResource("block/palettes/wood_types/" + id + "/" + id + "_door_bottom");
-                            ResourceLocation top = DesiresCreate.asResource("block/palettes/wood_types/" + id + "/" + id + "_door_top");
+                            ResourceLocation bottom = DesireUtil.asResource("block/palettes/wood_types/" + id + "/" + id + "_door_bottom");
+                            ResourceLocation top = DesireUtil.asResource("block/palettes/wood_types/" + id + "/" + id + "_door_top");
 
                             p.doorBlock(c.get(), bottom, top);
                         })

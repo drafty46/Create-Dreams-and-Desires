@@ -11,15 +11,17 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.PacketDistributor.TargetPoint;
 import net.minecraftforge.network.simple.SimpleChannel;
-import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.DesireUtil;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.multimeter.GaugeObservedPacket;
 import uwu.lopyluna.create_dd.content.items.equipment.InvertFunctionPacket;
 import uwu.lopyluna.create_dd.content.items.equipment.block_zapper.ConfigureBlockZapperPacket;
+import uwu.lopyluna.create_dd.content.packet.SConfigureConfigPacket;
 
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static net.minecraftforge.network.NetworkDirection.PLAY_TO_CLIENT;
 import static net.minecraftforge.network.NetworkDirection.PLAY_TO_SERVER;
 
 @SuppressWarnings({"unused"})
@@ -34,13 +36,14 @@ public enum DesiresPackets {
 	//TOOLBOX_DISPOSE_ALL(ToolboxDisposeDesiresPacket.class, ToolboxDisposeDesiresPacket::new, PLAY_TO_SERVER),
 
 	// Server to Client
+	S_CONFIGURE_CONFIG(SConfigureConfigPacket.class, SConfigureConfigPacket::new, PLAY_TO_CLIENT),
 	//BEAM_EFFECT(ZapperBeamPacket.class, ZapperBeamPacket::new, PLAY_TO_CLIENT),
 	//POTATO_CANNON(PotatoCannonPacket.class, PotatoCannonPacket::new, PLAY_TO_CLIENT),
 	//SYNC_POTATO_PROJECTILE_TYPES(PotatoProjectileTypeManager.SyncPacket.class,
 	//	PotatoProjectileTypeManager.SyncPacket::new, PLAY_TO_CLIENT),
 	;
 
-	public static final ResourceLocation CHANNEL_NAME = DesiresCreate.asResource("main");
+	public static final ResourceLocation CHANNEL_NAME = DesireUtil.asResource("main");
 	public static final int NETWORK_VERSION = 3;
 	public static final String NETWORK_VERSION_STR = String.valueOf(NETWORK_VERSION);
 	private static SimpleChannel channel;

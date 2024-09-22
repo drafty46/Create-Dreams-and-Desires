@@ -25,6 +25,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
 import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.DesireUtil;
 import uwu.lopyluna.create_dd.content.recipes.FreezingRecipe;
 import uwu.lopyluna.create_dd.content.recipes.SandingRecipe;
 import uwu.lopyluna.create_dd.content.recipes.SeethingRecipe;
@@ -317,7 +318,7 @@ public class DesiresJEI implements IModPlugin {
 			}
 
 			CreateRecipeCategory.Info<T> info = new CreateRecipeCategory.Info<>(
-					new mezz.jei.api.recipe.RecipeType<>(DesiresCreate.asResource(name), recipeClass),
+					new mezz.jei.api.recipe.RecipeType<>(DesireUtil.asResource(name), recipeClass),
 					Lang.translateDirect("recipe." + name), background, icon, recipesSupplier, catalysts);
 			CreateRecipeCategory<T> category = factory.create(info);
 			allCategories.add(category);

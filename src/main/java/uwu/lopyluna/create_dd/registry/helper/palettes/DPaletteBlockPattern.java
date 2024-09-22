@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
-import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.DesireUtil;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -212,7 +212,7 @@ public class DPaletteBlockPattern {
 	}
 
 	protected static ResourceLocation toLocation(String variant, String texture) {
-		return DesiresCreate.asResource(
+		return DesireUtil.asResource(
 			String.format(TEXTURE_LOCATION, texture, variant + (texture.equals("cut") ? "_" : "_cut_") + texture));
 	}
 

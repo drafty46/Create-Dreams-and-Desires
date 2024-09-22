@@ -11,12 +11,12 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
-import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.DesireUtil;
 
 public class DeforesterSawRenderer extends CustomRenderedItemModelRenderer {
-    protected static final PartialModel ITEM = new PartialModel(DesiresCreate.asResource("item/deforester_saw/item"));
-    protected static final PartialModel SHAFT = new PartialModel(DesiresCreate.asResource("item/deforester_saw/shaft"));
-    protected static final PartialModel GEAR = new PartialModel(DesiresCreate.asResource("item/deforester_saw/gear"));
+    protected static final PartialModel ITEM = new PartialModel(DesireUtil.asResource("item/deforester_saw/item"));
+    protected static final PartialModel SHAFT = new PartialModel(DesireUtil.asResource("item/deforester_saw/shaft"));
+    protected static final PartialModel GEAR = new PartialModel(DesireUtil.asResource("item/deforester_saw/gear"));
 
     private static final Vec3 SHAFT_ROTATION_OFFSET = new Vec3(0, 5.5 / 16f, 0);
     private static final Vec3 GEAR_ROTATION_OFFSET = new Vec3(-3.25 / 16f, -1.5 / 16f, 0);

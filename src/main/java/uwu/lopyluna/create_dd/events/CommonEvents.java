@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forgespi.language.IModFileInfo;
 import net.minecraftforge.forgespi.locating.IModFile;
 import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.DesireUtil;
 
 @Mod.EventBusSubscriber
 public class CommonEvents {
@@ -28,7 +29,7 @@ public class CommonEvents {
                 }
                 IModFile modFile = modFileInfo.getFile();
                 event.addRepositorySource((consumer, constructor) -> {
-                    consumer.accept(Pack.create(DesiresCreate.asResource("create_invert_boxes").toString(), true, () -> new ModFilePackResources("Create Invert Boxes", modFile, "resourcepacks/create_invert_boxes"), constructor, Pack.Position.TOP, PackSource.DEFAULT));
+                    consumer.accept(Pack.create(DesireUtil.asResource("create_invert_boxes").toString(), true, () -> new ModFilePackResources("Create Invert Boxes", modFile, "resourcepacks/create_invert_boxes"), constructor, Pack.Position.TOP, PackSource.DEFAULT));
                 });
             }
         }

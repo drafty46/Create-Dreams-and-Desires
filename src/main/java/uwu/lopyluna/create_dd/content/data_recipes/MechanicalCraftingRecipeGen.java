@@ -14,6 +14,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
 import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.DesireUtil;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 import uwu.lopyluna.create_dd.registry.DesiresItems;
 
@@ -182,7 +183,7 @@ public class MechanicalCraftingRecipeGen extends CreateRecipeProvider {
             return register(consumer -> {
                 MechanicalCraftingRecipeBuilder b =
                         builder.apply(MechanicalCraftingRecipeBuilder.shapedRecipe(result.get(), amount));
-                ResourceLocation location = DesiresCreate.asResource("mechanical_crafting/" + RegisteredObjects.getKeyOrThrow(result.get()
+                ResourceLocation location = DesireUtil.asResource("mechanical_crafting/" + RegisteredObjects.getKeyOrThrow(result.get()
                                 .asItem())
                         .getPath() + suffix);
                 b.build(consumer, location);

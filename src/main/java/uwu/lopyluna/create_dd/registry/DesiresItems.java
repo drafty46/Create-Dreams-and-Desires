@@ -18,6 +18,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.DesireUtil;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.modular_drill.ModularDrillHeadItem;
 import uwu.lopyluna.create_dd.content.items.equipment.NameableRecordItem;
 import uwu.lopyluna.create_dd.content.items.equipment.block_zapper.BlockZapperItem;
@@ -59,11 +60,11 @@ public class DesiresItems {
 						.pattern("CCC")
 						.define('C', c.get())
 						.unlockedBy("has_" + getItemName(output), has(output))
-						.save(p, DesiresCreate.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
+						.save(p, DesireUtil.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
 				ShapelessRecipeBuilder.shapeless(c.get(), 9)
 						.requires(output)
 						.unlockedBy("has_" + c.getName(), has(c.get()))
-						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
+						.save(p, DesireUtil.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
 			})
 			.lang("Raw Rubber")
 			.register();
@@ -82,15 +83,15 @@ public class DesiresItems {
 						.pattern("CCC")
 						.define('C', c.get())
 						.unlockedBy("has_" + getItemName(output), has(output))
-						.save(p, DesiresCreate.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
+						.save(p, DesireUtil.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
 				ShapelessRecipeBuilder.shapeless(c.get(), 9)
 						.requires(output)
 						.unlockedBy("has_" + c.getName(), has(c.get()))
-						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
+						.save(p, DesireUtil.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
 
 				SimpleCookingRecipeBuilder.cooking(Ingredient.of(RAW_RUBBER.get()), c.get(), 2, 600, RecipeSerializer.SMOKING_RECIPE)
 						.unlockedBy("has_" + getItemName(RAW_RUBBER.get()), has(RAW_RUBBER.get()))
-						.save(p, DesiresCreate.asResource("smoking/" + c.getId().getPath()));
+						.save(p, DesireUtil.asResource("smoking/" + c.getId().getPath()));
 			})
 			.lang("Rubber")
 			.register();
@@ -143,7 +144,7 @@ public class DesiresItems {
 					.requires(AllItems.CRUSHED_IRON.get())
 					.requires(Items.LAPIS_LAZULI)
 					.unlockedBy("has_" + getItemName(Items.LAPIS_LAZULI), has(Items.LAPIS_LAZULI))
-					.save(p, DesiresCreate.asResource("crafting/bury_blend")))
+					.save(p, DesireUtil.asResource("crafting/bury_blend")))
 			.lang("Bury Blend")
 			.register();
 
@@ -160,11 +161,11 @@ public class DesiresItems {
 						.pattern("CC")
 						.define('C', c.get())
 						.unlockedBy("has_" + getItemName(output), has(output))
-						.save(p, DesiresCreate.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
+						.save(p, DesireUtil.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
 				ShapelessRecipeBuilder.shapeless(c.get(), 4)
 						.requires(output)
 						.unlockedBy("has_" + c.getName(), has(c.get()))
-						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
+						.save(p, DesireUtil.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
 			})
 			.register();
 
@@ -181,11 +182,11 @@ public class DesiresItems {
 					.pattern("CC")
 						.define('C', c.get())
 						.unlockedBy("has_" + getItemName(output), has(output))
-						.save(p, DesiresCreate.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
+						.save(p, DesireUtil.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
 				ShapelessRecipeBuilder.shapeless(c.get(), 4)
 						.requires(output)
 						.unlockedBy("has_" + c.getName(), has(c.get()))
-						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
+						.save(p, DesireUtil.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
 			})
 			.register();
 
@@ -204,11 +205,11 @@ public class DesiresItems {
 						.requires(c.get()).requires(c.get())
 						.requires(c.get()).requires(c.get())
 						.unlockedBy("has_" + getItemName(output), has(output))
-						.save(p, DesiresCreate.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
+						.save(p, DesireUtil.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
 				ShapelessRecipeBuilder.shapeless(c.get(), 8)
 						.requires(output)
 						.unlockedBy("has_" + c.getName(), has(c.get()))
-						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
+						.save(p, DesireUtil.asResource("crafting/" + c.getName() + "_from_" + getItemName(output)));
 			})
 			.register();
 
@@ -281,7 +282,7 @@ public class DesiresItems {
 						.define('I', AllTags.forgeItemTag("plates/iron"))
 						.define('S', Items.STICK)
 						.unlockedBy("has_" + getItemName(KINETIC_MECHANISM.get().asItem()), has(KINETIC_MECHANISM.get()))
-						.save(p, DesiresCreate.asResource("crafting/equipment/flipped_" + c.getName()));
+						.save(p, DesireUtil.asResource("crafting/equipment/flipped_" + c.getName()));
 				ShapedRecipeBuilder.shaped(c.get(), 1)
 						.pattern("II ")
 						.pattern("IKA")
@@ -291,7 +292,7 @@ public class DesiresItems {
 						.define('I', AllTags.forgeItemTag("plates/iron"))
 						.define('S', Items.STICK)
 						.unlockedBy("has_" + getItemName(KINETIC_MECHANISM.get().asItem()), has(KINETIC_MECHANISM.get()))
-						.save(p, DesiresCreate.asResource("crafting/equipment/" + c.getName()));
+						.save(p, DesireUtil.asResource("crafting/equipment/" + c.getName()));
 			})
 			.tag(DesiresTags.AllItemTags.AXE.tag)
 			.register();
@@ -392,7 +393,7 @@ public class DesiresItems {
 				ShapelessRecipeBuilder.shapeless(output, 2)
 						.requires(c.get())
 						.unlockedBy("has_" + c.getName(), has(c.get()))
-						.save(p, DesiresCreate.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
+						.save(p, DesireUtil.asResource("crafting/" + getItemName(output) + "_from_" + c.getName()));
 			})
 			.register();
 

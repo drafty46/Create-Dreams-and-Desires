@@ -10,7 +10,6 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -21,10 +20,10 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.content.blocks.functional.VelvetBlock;
+import uwu.lopyluna.create_dd.DesireUtil;
 
 import static com.simibubi.create.foundation.data.CreateRegistrate.casingConnectivity;
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
@@ -83,7 +82,7 @@ public class DesiresPaletteBlocks {
 						.pattern("CC")
 						.define('C', AllBlocks.INDUSTRIAL_IRON_BLOCK.get())
 						.unlockedBy("has_" + c.getName(), has(c.get()))
-						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
+						.save(p, DesireUtil.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
 			})
 			.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
 			.item()
@@ -110,7 +109,7 @@ public class DesiresPaletteBlocks {
 						.pattern("CCC")
 						.define('C', DARK_METAL_BLOCK.get())
 						.unlockedBy("has_" + c.getName(), has(c.get()))
-						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
+						.save(p, DesireUtil.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
 			})
 			.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
 			.item()
@@ -122,10 +121,10 @@ public class DesiresPaletteBlocks {
 			.properties(p -> p.color(MaterialColor.COLOR_BLACK)
 					.sound(SoundType.NETHERITE_BLOCK)
 					.strength(0.5f,1.5f))
-			.blockstate((c, p) -> p.slabBlock(c.get(), DesiresCreate.asResource("block/dark_metal_block"),
-					DesiresCreate.asResource("block/dark_metal_block_slab"),
-					DesiresCreate.asResource("block/dark_metal_block"),
-					DesiresCreate.asResource("block/dark_metal_block")))
+			.blockstate((c, p) -> p.slabBlock(c.get(), DesireUtil.asResource("block/dark_metal_block"),
+					DesireUtil.asResource("block/dark_metal_block_slab"),
+					DesireUtil.asResource("block/dark_metal_block"),
+					DesireUtil.asResource("block/dark_metal_block")))
 			.transform(pickaxeOnly())
 			.tag(stairsBlockTag)
 			.recipe((c, p) -> {
@@ -135,7 +134,7 @@ public class DesiresPaletteBlocks {
 						.pattern("CCC")
 						.define('C', DARK_METAL_BLOCK.get())
 						.unlockedBy("has_" + c.getName(), has(c.get()))
-						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
+						.save(p, DesireUtil.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
 			})
 			.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
 			.item()
@@ -147,7 +146,7 @@ public class DesiresPaletteBlocks {
 			.properties(p -> p.color(MaterialColor.COLOR_BLACK)
 					.sound(SoundType.NETHERITE_BLOCK)
 					.strength(0.5f,1.5f))
-			.blockstate((c, p) -> p.stairsBlock(c.get(), DesiresCreate.asResource("block/dark_metal_block")))
+			.blockstate((c, p) -> p.stairsBlock(c.get(), DesireUtil.asResource("block/dark_metal_block")))
 			.transform(pickaxeOnly())
 			.tag(stairsBlockTag)
 			.recipe((c, p) -> {
@@ -157,7 +156,7 @@ public class DesiresPaletteBlocks {
 						.pattern("X  ").pattern("XX ").pattern("XXX")
 						.define('X', DARK_METAL_BLOCK.get())
 						.unlockedBy("has_" + c.getName(), has(c.get()))
-						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
+						.save(p, DesireUtil.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
 			})
 			.item()
 			.tag(darkMetalDecorTag, stairsItemTag)
@@ -178,7 +177,7 @@ public class DesiresPaletteBlocks {
 						.pattern("CC")
 						.define('C', DARK_METAL_BLOCK.get())
 						.unlockedBy("has_" + c.getName(), has(c.get()))
-						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
+						.save(p, DesireUtil.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
 			})
 			.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
 			.item()
@@ -190,10 +189,10 @@ public class DesiresPaletteBlocks {
 			.properties(p -> p.color(MaterialColor.COLOR_BLACK)
 					.sound(SoundType.NETHERITE_BLOCK)
 					.strength(0.5f,1.5f))
-			.blockstate((c, p) -> p.slabBlock(c.get(), DesiresCreate.asResource("block/dark_metal_bricks"),
-					DesiresCreate.asResource("block/dark_metal_bricks"),
-					DesiresCreate.asResource("block/dark_metal_bricks"),
-					DesiresCreate.asResource("block/dark_metal_bricks")))
+			.blockstate((c, p) -> p.slabBlock(c.get(), DesireUtil.asResource("block/dark_metal_bricks"),
+					DesireUtil.asResource("block/dark_metal_bricks"),
+					DesireUtil.asResource("block/dark_metal_bricks"),
+					DesireUtil.asResource("block/dark_metal_bricks")))
 			.transform(pickaxeOnly())
 			.tag(stairsBlockTag)
 			.recipe((c, p) -> {
@@ -203,7 +202,7 @@ public class DesiresPaletteBlocks {
 						.pattern("CCC")
 						.define('C', DARK_METAL_BRICKS.get())
 						.unlockedBy("has_" + c.getName(), has(c.get()))
-						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
+						.save(p, DesireUtil.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
 			})
 			.tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
 			.item()
@@ -215,7 +214,7 @@ public class DesiresPaletteBlocks {
 			.properties(p -> p.color(MaterialColor.COLOR_BLACK)
 					.sound(SoundType.NETHERITE_BLOCK)
 					.strength(0.5f,1.5f))
-			.blockstate((c, p) -> p.stairsBlock(c.get(), DesiresCreate.asResource("block/dark_metal_bricks")))
+			.blockstate((c, p) -> p.stairsBlock(c.get(), DesireUtil.asResource("block/dark_metal_bricks")))
 			.transform(pickaxeOnly())
 			.tag(stairsBlockTag)
 			.recipe((c, p) -> {
@@ -225,7 +224,7 @@ public class DesiresPaletteBlocks {
 						.pattern("X  ").pattern("XX ").pattern("XXX")
 						.define('X', DARK_METAL_BRICKS.get())
 						.unlockedBy("has_" + c.getName(), has(c.get()))
-						.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
+						.save(p, DesireUtil.asResource("crafting/" + c.getName() + "_from_" + c.getName()));
 			})
 			.item()
 			.tag(darkMetalDecorTag, stairsItemTag)
@@ -242,7 +241,7 @@ public class DesiresPaletteBlocks {
 					.pattern("CC")
 					.define('C', DesiresBlocks.RUBBER_BLOCK.get())
 					.unlockedBy("has_" + c.getName(), has(c.get()))
-					.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + c.getName())))
+					.save(p, DesireUtil.asResource("crafting/" + c.getName() + "_from_" + c.getName())))
 			.item()
 			.tag(rubberDecorTag, optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", "rubber_decors")))
 			.build()
@@ -271,10 +270,10 @@ public class DesiresPaletteBlocks {
 					.properties(p -> p.color(MaterialColor.TERRACOTTA_GRAY)).properties(p -> p.sound(RUBBER)).properties(p -> p.strength(0.5f,1.5f))
 					.tag(slabsBlockTag)
 					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rubberDecorTag), c, 2))
-					.blockstate((c, p) -> p.slabBlock(c.get(), DesiresCreate.asResource("block/padded_rubber"),
-							DesiresCreate.asResource("block/padded_rubber_slab"),
-							DesiresCreate.asResource("block/padded_rubber"),
-							DesiresCreate.asResource("block/padded_rubber")))
+					.blockstate((c, p) -> p.slabBlock(c.get(), DesireUtil.asResource("block/padded_rubber"),
+							DesireUtil.asResource("block/padded_rubber_slab"),
+							DesireUtil.asResource("block/padded_rubber"),
+							DesireUtil.asResource("block/padded_rubber")))
 					.item()
 					.tag(slabsItemTag)
 					.build()
@@ -285,7 +284,7 @@ public class DesiresPaletteBlocks {
 					.properties(p -> p.color(MaterialColor.TERRACOTTA_GRAY)).properties(p -> p.sound(RUBBER)).properties(p -> p.strength(0.5f,1.5f))
 					.tag(stairsBlockTag)
 					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rubberDecorTag), c, 1))
-					.blockstate((c, p) -> p.stairsBlock(c.get(), DesiresCreate.asResource("block/padded_tiled_rubber")))
+					.blockstate((c, p) -> p.stairsBlock(c.get(), DesireUtil.asResource("block/padded_tiled_rubber")))
 					.item()
 					.tag(rubberDecorTag, stairsItemTag)
 					.build()
@@ -300,7 +299,7 @@ public class DesiresPaletteBlocks {
 					.pattern("CC")
 					.define('C', DesiresBlocks.RAW_RUBBER_BLOCK.get())
 					.unlockedBy("has_" + c.getName(), has(c.get()))
-					.save(p, DesiresCreate.asResource("crafting/" + c.getName() + "_from_" + c.getName())))
+					.save(p, DesireUtil.asResource("crafting/" + c.getName() + "_from_" + c.getName())))
 			.item()
 			.tag(rawRubberDecorTag)
 			.build()
@@ -329,10 +328,10 @@ public class DesiresPaletteBlocks {
 					.properties(p -> p.color(MaterialColor.TERRACOTTA_WHITE)).properties(p -> p.sound(RUBBER)).properties(p -> p.strength(0.5f,1.5f))
 					.tag(slabsBlockTag)
 					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rawRubberDecorTag), c, 2))
-					.blockstate((c, p) -> p.slabBlock(c.get(), DesiresCreate.asResource("block/" + "raw_padded_rubber"),
-							DesiresCreate.asResource("block/" + "raw_padded_rubber_slab"),
-							DesiresCreate.asResource("block/" + "raw_padded_rubber"),
-							DesiresCreate.asResource("block/" + "raw_padded_rubber")))
+					.blockstate((c, p) -> p.slabBlock(c.get(), DesireUtil.asResource("block/" + "raw_padded_rubber"),
+							DesireUtil.asResource("block/" + "raw_padded_rubber_slab"),
+							DesireUtil.asResource("block/" + "raw_padded_rubber"),
+							DesireUtil.asResource("block/" + "raw_padded_rubber")))
 					.item()
 					.tag(slabsItemTag)
 					.build()
@@ -343,7 +342,7 @@ public class DesiresPaletteBlocks {
 					.properties(p -> p.color(MaterialColor.TERRACOTTA_WHITE)).properties(p -> p.sound(RUBBER)).properties(p -> p.strength(0.5f,1.5f))
 					.tag(stairsBlockTag)
 					.recipe((c, p) -> p.stonecutting(DataIngredient.tag(rawRubberDecorTag), c, 1))
-					.blockstate((c, p) -> p.stairsBlock(c.get(), DesiresCreate.asResource("block/" + "raw_padded_tiled_rubber")))
+					.blockstate((c, p) -> p.stairsBlock(c.get(), DesireUtil.asResource("block/" + "raw_padded_tiled_rubber")))
 					.item()
 					.tag(rawRubberDecorTag, stairsItemTag)
 					.build()
@@ -462,7 +461,7 @@ public class DesiresPaletteBlocks {
                             .pattern("SDS")
                             .pattern("BSB")
                             .unlockedBy("has_dyed_item", has(Tags.Items.DYES))
-                            .save(p, DesiresCreate.asResource("crafting/decor/" + c.getName())))
+                            .save(p, DesireUtil.asResource("crafting/decor/" + c.getName())))
 					.build()
 					.lang(upColor + " Asphalt Block")
 					.register();

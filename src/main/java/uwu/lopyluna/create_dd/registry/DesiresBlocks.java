@@ -39,6 +39,7 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.util.ForgeSoundType;
 import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.DesireUtil;
 import uwu.lopyluna.create_dd.content.blocks.contraptions.bore_block.BoreBlock;
 import uwu.lopyluna.create_dd.content.blocks.contraptions.bore_block.BoreBlockMovementBehaviour;
 import uwu.lopyluna.create_dd.content.blocks.contraptions.contraption_block.HelmBlock;
@@ -177,7 +178,7 @@ public class DesiresBlocks {
 						.define('C', AllBlocks.COGWHEEL.get())
 						.define('I', INDUSTRIAL_CASING.get())
 						.unlockedBy("has_casing", has(INDUSTRIAL_CASING.get()))
-						.save(p, DesiresCreate.asResource("crafting/" + c.getName()));
+						.save(p, DesireUtil.asResource("crafting/" + c.getName()));
 			})
 			.lang("Industrial Fan")
 			.item()
@@ -215,7 +216,7 @@ public class DesiresBlocks {
 						.define('C', AllBlocks.ANDESITE_ALLOY_BLOCK.get())
 						.define('I', Items.IRON_INGOT)
 						.unlockedBy("has_" + c.getName(), has(c.get()))
-						.save(p, DesiresCreate.asResource("crafting/" + c.getName()));
+						.save(p, DesireUtil.asResource("crafting/" + c.getName()));
 			})
 			.item()
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
@@ -249,7 +250,7 @@ public class DesiresBlocks {
 					.requires(AllBlocks.STRESSOMETER.get())
 					.requires(AllBlocks.SPEEDOMETER.get())
 					.unlockedBy("has_" + getItemName(Items.COMPASS), has(Items.COMPASS))
-					.save(p, DesiresCreate.asResource("crafting/multimeter")))
+					.save(p, DesireUtil.asResource("crafting/multimeter")))
 			.item()
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.transform(ModelGen.customItemModel("gauge", "_", "item"))
@@ -286,7 +287,7 @@ public class DesiresBlocks {
 					.requires(AllBlocks.LARGE_COGWHEEL.get())
 					.requires(Items.REDSTONE)
 					.unlockedBy("has_" + getItemName(AllBlocks.COGWHEEL.get()), has(AllBlocks.COGWHEEL.get()))
-					.save(p, DesiresCreate.asResource("crafting/kinetics/redstone_divider")))
+					.save(p, DesireUtil.asResource("crafting/kinetics/redstone_divider")))
 			.item()
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.transform(customItemModel())
@@ -303,7 +304,7 @@ public class DesiresBlocks {
 					.requires(AllBlocks.ANDESITE_CASING.get())
 					.requires(AllBlocks.COGWHEEL.get())
 					.unlockedBy("has_" + getItemName(AllBlocks.COGWHEEL.get()), has(AllBlocks.COGWHEEL.get()))
-					.save(p, DesiresCreate.asResource("crafting/kinetics/inverse_box")))
+					.save(p, DesireUtil.asResource("crafting/kinetics/inverse_box")))
 			.item()
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.transform(customItemModel())
@@ -319,7 +320,7 @@ public class DesiresBlocks {
 					.requires(AllBlocks.ANDESITE_CASING.get())
 					.requires(DesiresItems.KINETIC_MECHANISM.get())
 					.unlockedBy("has_" + getItemName(DesiresItems.KINETIC_MECHANISM.get()), has(DesiresItems.KINETIC_MECHANISM.get()))
-					.save(p, DesiresCreate.asResource("crafting/kinetics/kinetic_motor")))
+					.save(p, DesireUtil.asResource("crafting/kinetics/kinetic_motor")))
 			.blockstate(new CreativeMotorGenerator()::generate)
 			.transform(BlockStressDefaults.setCapacity(48))
 			.transform(BlockStressDefaults.setGeneratorSpeed(() -> Couple.create(0, 32)))
@@ -340,7 +341,7 @@ public class DesiresBlocks {
 					.requires(AllBlocks.HAND_CRANK.get())
 					.requires(AllBlocks.COGWHEEL.get())
 					.unlockedBy("has_item", RegistrateRecipeProvider.has(ctx.get()))
-					.save(prov, DesiresCreate.asResource("crafting/kinetics/cog_crank")))
+					.save(prov, DesireUtil.asResource("crafting/kinetics/cog_crank")))
 			.onRegister(ItemUseOverrides::addBlock)
 			.item(CogCrankBlockItem::new)
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
@@ -360,13 +361,13 @@ public class DesiresBlocks {
 						.requires(AllBlocks.HAND_CRANK.get())
 						.requires(AllBlocks.LARGE_COGWHEEL.get())
 						.unlockedBy("has_item", RegistrateRecipeProvider.has(c.get()))
-						.save(p, DesiresCreate.asResource("crafting/kinetics/large_cog_crank"));
+						.save(p, DesireUtil.asResource("crafting/kinetics/large_cog_crank"));
 
 				ShapelessRecipeBuilder.shapeless(c.getEntry(), 1)
 						.requires(COG_CRANK.get())
 						.requires(ItemTags.PLANKS)
 						.unlockedBy("has_item", RegistrateRecipeProvider.has(c.get()))
-						.save(p, DesiresCreate.asResource("crafting/kinetics/cog_crank_to_large"));
+						.save(p, DesireUtil.asResource("crafting/kinetics/cog_crank_to_large"));
 			})
 			.onRegister(ItemUseOverrides::addBlock)
 			.item(CogCrankBlockItem::new)
@@ -506,7 +507,7 @@ public class DesiresBlocks {
 						.define('C', Tags.Items.BARRELS_WOODEN)
 						.pattern("BCB")
 						.unlockedBy("has_" + getItemName(Items.BARREL.asItem()), has(Tags.Items.BARRELS_WOODEN))
-						.save(p, DesiresCreate.asResource("crafting/kinetics/" + c.getName()));
+						.save(p, DesireUtil.asResource("crafting/kinetics/" + c.getName()));
 			})
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.build()
@@ -530,7 +531,7 @@ public class DesiresBlocks {
 						.define('C', Tags.Items.BARRELS_WOODEN)
 						.pattern("BCB")
 						.unlockedBy("has_" + getItemName(Items.BARREL.asItem()), has(Tags.Items.BARRELS_WOODEN))
-						.save(p, DesiresCreate.asResource("crafting/kinetics/" + c.getName()));
+						.save(p, DesireUtil.asResource("crafting/kinetics/" + c.getName()));
 			})
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.build()
@@ -633,7 +634,7 @@ public class DesiresBlocks {
 								.define('R', Items.NETHERITE_SCRAP)
 								.define('C', DesiresItems.SEETHING_ABLAZE_ROD.get())
 								.unlockedBy("has_" + getItemName(DesiresItems.SEETHING_ABLAZE_ROD.get()), has(DesiresItems.SEETHING_ABLAZE_ROD.get()))
-								.save(p, DesiresCreate.asResource("crafting/fan_catalyst/" + c.getName()))
+								.save(p, DesireUtil.asResource("crafting/fan_catalyst/" + c.getName()))
 					)
 					.tag(DesiresTags.AllBlockTags.INDUSTRIAL_FAN_HEATER.tag)
 					.lang("Seething Catalyst Sail")
@@ -687,7 +688,7 @@ public class DesiresBlocks {
 				.define('R', RUBBER_BLOCK.get())
 				.define('C', cataylst)
 				.unlockedBy("has_" + getItemName(cataylst), has(cataylst))
-				.save(pFinishedRecipeConsumer, DesiresCreate.asResource("crafting/fan_catalyst/" + c.getName()));
+				.save(pFinishedRecipeConsumer, DesireUtil.asResource("crafting/fan_catalyst/" + c.getName()));
 	}
 
 	protected static String getItemName(ItemLike pItemLike) {

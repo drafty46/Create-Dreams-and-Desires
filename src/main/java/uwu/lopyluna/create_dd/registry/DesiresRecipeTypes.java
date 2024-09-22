@@ -16,6 +16,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.content.recipes.*;
+import uwu.lopyluna.create_dd.DesireUtil;
 
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -36,7 +37,7 @@ public enum DesiresRecipeTypes implements IRecipeTypeInfo {
 
 	DesiresRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier) {
 		String name = Lang.asId(name());
-		id = DesiresCreate.asResource(name);
+		id = DesireUtil.asResource(name);
 		serializerObject = Registers.SERIALIZER_REGISTER.register(name, serializerSupplier);
 		@Nullable RegistryObject<RecipeType<?>> typeObject = Registers.TYPE_REGISTER.register(name, () -> RecipeType.simple(id));
 		type = typeObject;

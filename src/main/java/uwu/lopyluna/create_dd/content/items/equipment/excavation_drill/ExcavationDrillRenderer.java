@@ -12,13 +12,13 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
-import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.DesireUtil;
 import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
 
 public class ExcavationDrillRenderer extends CustomRenderedItemModelRenderer {
-    protected static final PartialModel ITEM = new PartialModel(DesiresCreate.asResource("item/excavation_drill/item"));
-    protected static final PartialModel HEAD = new PartialModel(DesiresCreate.asResource("item/excavation_drill/head"));
-    protected static final PartialModel GEAR = new PartialModel(DesiresCreate.asResource("item/excavation_drill/gear"));
+    protected static final PartialModel ITEM = new PartialModel(DesireUtil.asResource("item/excavation_drill/item"));
+    protected static final PartialModel HEAD = new PartialModel(DesireUtil.asResource("item/excavation_drill/head"));
+    protected static final PartialModel GEAR = new PartialModel(DesireUtil.asResource("item/excavation_drill/gear"));
 
     private static final Vec3 HEAD_ROTATION_OFFSET = new Vec3(0, -4 / 16f, -7 / 16f);
     private static final Vec3 GEAR_ROTATION_OFFSET = new Vec3(0, -3 / 16f, 1 / 16f);

@@ -3,7 +3,7 @@ package uwu.lopyluna.create_dd.infrastructure.ponder;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.foundation.ponder.PonderRegistry;
 import com.simibubi.create.foundation.ponder.PonderTag;
-import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.DesireUtil;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 
 @SuppressWarnings({"unused", "SameParameterValue"})
@@ -15,7 +15,7 @@ public class DesirePonderTags {
 			.addToIndex();
 
 	private static PonderTag create(String id) {
-		return new PonderTag(DesiresCreate.asResource(id));
+		return new PonderTag(DesireUtil.asResource(id));
 	}
 
 	public static void register() {

@@ -30,11 +30,13 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import org.jetbrains.annotations.NotNull;
+import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import static uwu.lopyluna.create_dd.DesireUtil.randomChance;
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 import static uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs.client;
 
@@ -135,7 +137,7 @@ public class DesiresFluids {
 		));
 		FluidInteractionRegistry.addInteraction(ForgeMod.LAVA_TYPE.get(), new FluidInteractionRegistry.InteractionInformation(
 				(level, currentPos, relativePos, fluidState) ->
-						level.getRandom().nextIntBetweenInclusive(1, 4) == 1 &&
+						 randomChance(DesiresConfigs.server().chanceForOreStone.get(), level) &&
 								level.getBlockState(currentPos.below()).is(DesiresTags.AllBlockTags.ORE_GENERATOR.tag) &&
 								level.getFluidState(relativePos).is(fluid) &&
 								!fluidState.isSource(),
@@ -144,7 +146,7 @@ public class DesiresFluids {
 		));
 		FluidInteractionRegistry.addInteraction(ForgeMod.LAVA_TYPE.get(), new FluidInteractionRegistry.InteractionInformation(
 				(level, currentPos, relativePos, fluidState) ->
-						level.getRandom().nextIntBetweenInclusive(1, 8) == 1 &&
+						randomChance(DesiresConfigs.server().chanceForArtificialOreStone.get(), level) &&
 								level.getBlockState(currentPos.below()).is(DesiresTags.AllBlockTags.ARTIFICIAL_ORE_GENERATOR.tag) &&
 								level.getFluidState(relativePos).is(fluid) &&
 								!fluidState.isSource(),
@@ -171,9 +173,9 @@ public class DesiresFluids {
 	}
 
 	public static BlockState addMilkshakeStones(Block stoneBedrock, Block stoneDefault, Level level, BlockPos pos) {
-		if (level.getBlockState(pos.below()).is(DesiresTags.AllBlockTags.ORE_GENERATOR.tag) && level.getRandom().nextIntBetweenInclusive(1, 4) == 1) {
+		if (level.getBlockState(pos.below()).is(DesiresTags.AllBlockTags.ORE_GENERATOR.tag) && randomChance(DesiresConfigs.server().chanceForOreStone.get(), level)) {
 			return stoneBedrock.defaultBlockState();
-		} else if (level.getBlockState(pos.below()).is(DesiresTags.AllBlockTags.ARTIFICIAL_ORE_GENERATOR.tag) && level.getRandom().nextIntBetweenInclusive(1, 8) == 1) {
+		} else if (level.getBlockState(pos.below()).is(DesiresTags.AllBlockTags.ARTIFICIAL_ORE_GENERATOR.tag) && randomChance(DesiresConfigs.server().chanceForArtificialOreStone.get(), level)) {
 			return stoneBedrock.defaultBlockState();
 		} else {
 			return stoneDefault.defaultBlockState();

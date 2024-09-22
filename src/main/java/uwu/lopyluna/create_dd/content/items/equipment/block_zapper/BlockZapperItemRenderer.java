@@ -18,7 +18,7 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.ItemStack;
 
 import static java.lang.Math.max;
-import static uwu.lopyluna.create_dd.DesiresCreate.asResource;
+import static uwu.lopyluna.create_dd.DesireUtil.asResource;
 
 public class BlockZapperItemRenderer extends ZapperItemRenderer {
 

@@ -29,6 +29,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
 import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.DesireUtil;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 import uwu.lopyluna.create_dd.registry.DesiresGuiTextures;
 import uwu.lopyluna.create_dd.registry.DesiresPartialModels;
@@ -36,7 +37,7 @@ import uwu.lopyluna.create_dd.registry.DesiresPartialModels;
 public class DesiresMainMenuScreen extends AbstractSimiScreen {
 
     public static final CubeMap PANORAMA_RESOURCES =
-            new CubeMap(DesiresCreate.asResource("textures/gui/title/background/panorama"));
+            new CubeMap(DesireUtil.asResource("textures/gui/title/background/panorama"));
     public static final ResourceLocation PANORAMA_OVERLAY_TEXTURES =
             new ResourceLocation("textures/gui/title/background/panorama_overlay.png");
     public static final PanoramaRenderer PANORAMA = new PanoramaRenderer(PANORAMA_RESOURCES);

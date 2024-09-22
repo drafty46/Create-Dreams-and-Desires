@@ -36,7 +36,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
-import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.DesireUtil;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.industrial_fan_block.IndustrialFanBlock;
 import uwu.lopyluna.create_dd.content.entities.inert_blazeling.InertBlaze;
 import uwu.lopyluna.create_dd.content.entities.seething_ablaze.SeethingBlaze;
@@ -68,7 +68,7 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
     }
 
     private static <T extends FanProcessingType> T register(String id, T type) {
-        FanProcessingTypeRegistry.register(DesiresCreate.asResource(id), type);
+        FanProcessingTypeRegistry.register(DesireUtil.asResource(id), type);
         return type;
     }
 

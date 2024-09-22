@@ -2,7 +2,7 @@ package uwu.lopyluna.create_dd.registry;
 
 import com.jozufozu.flywheel.core.PartialModel;
 import com.simibubi.create.foundation.utility.Couple;
-import uwu.lopyluna.create_dd.DesiresCreate;
+import uwu.lopyluna.create_dd.DesireUtil;
 
 import static com.simibubi.create.AllPartialModels.FOLDING_DOORS;
 
@@ -47,16 +47,16 @@ public class DesiresPartialModels {
 	}
 
 	public static void putFoldingDoor(String id) {
-		FOLDING_DOORS.put(DesiresCreate.asResource(id + "_door"),
+		FOLDING_DOORS.put(DesireUtil.asResource(id + "_door"),
 				Couple.create(block(id + "_door/fold_left"), block(id + "_door/fold_right")));
 	}
 
 	private static PartialModel block(String path) {
-		return new PartialModel(DesiresCreate.asResource("block/" + path));
+		return new PartialModel(DesireUtil.asResource("block/" + path));
 	}
 
 	//private static PartialModel entity(String path) {
-	//	return new PartialModel(DesiresCreate.asResource("entity/" + path))
+	//	return new PartialModel(DesireUtil.asResource("entity/" + path))
 	//}
 
 	public static void init() {
