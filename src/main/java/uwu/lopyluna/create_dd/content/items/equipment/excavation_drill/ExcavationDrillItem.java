@@ -24,6 +24,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -66,11 +67,18 @@ public class ExcavationDrillItem extends BackTankPickaxeItem {
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
     }
 
+    @SuppressWarnings("all")
     public static void destroyVein(Level pLevel, BlockState state, BlockPos pos, Player player) {
-        DesiresPackets.getChannel().sendToServer(new InvertFunctionPacket());
+        boolean flagFakePlayer = player != null && !(player instanceof FakePlayer);
+        boolean playerHeldShift;
 
-        boolean inverted = DesiresConfigs.client().invertDeforesterSawFunction.get();
-        boolean playerHeldShift = inverted != player.isShiftKeyDown();
+        if (flagFakePlayer) {
+            DesiresPackets.getChannel().sendToServer(new InvertFunctionPacket());
+            boolean inverted = DesiresConfigs.client().invertExcavationDrillFunction.get();
+            playerHeldShift = inverted != player.isShiftKeyDown();
+        } else {
+            playerHeldShift = true;
+        }
 
         if (veinExcavating || !(state.is(EXCAVATION_DRILL_VEIN_VALID.tag)) || !playerHeldShift)
             return;
@@ -90,13 +98,20 @@ public class ExcavationDrillItem extends BackTankPickaxeItem {
         world.addFreshEntity(entity);
     }
 
+    @SuppressWarnings("all")
     @SubscribeEvent
     public static void onBlockDestroyed(BlockEvent.BreakEvent event) {
         Player player = event.getPlayer();
-        DesiresPackets.getChannel().sendToServer(new InvertFunctionPacket());
+        boolean flagFakePlayer = player != null && !(player instanceof FakePlayer);
+        boolean playerHeldShift;
 
-        boolean inverted = DesiresConfigs.client().invertDeforesterSawFunction.get();
-        boolean playerHeldShift = inverted != player.isShiftKeyDown();
+        if (flagFakePlayer) {
+            DesiresPackets.getChannel().sendToServer(new InvertFunctionPacket());
+            boolean inverted = DesiresConfigs.client().invertExcavationDrillFunction.get();
+            playerHeldShift = inverted != player.isShiftKeyDown();
+        } else {
+            playerHeldShift = true;
+        }
 
         Level level = (Level) event.getLevel();
         ItemStack heldItemMainhand = event.getPlayer().getItemInHand(InteractionHand.MAIN_HAND);

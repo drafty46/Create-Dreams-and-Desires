@@ -21,22 +21,22 @@ public class DesireUtil {
 
 
     public static boolean randomChance(int chance) {
-        int newChance = 100 - Mth.clamp(chance, 1, 100);
-        return (newChance + 1 == 1) ? true : RANDOM.nextInt(1, newChance + 2) == 1;
+        int newChance = Mth.clamp(chance, 0, 100);
+        return RANDOM.nextInt(1,  100) <= newChance;
     }
 
     public static boolean randomChance(int chance, Level level) {
-        int newChance = 100 - Mth.clamp(chance, 1, 100);
-        return (newChance + 1 == 1) ? true : level.getRandom().nextInt(1, newChance + 1) == 1;
+        int newChance = Mth.clamp(chance, 0, 100);
+        return level.getRandom().nextInt(1,  100) <= newChance;
     }
 
     public static boolean randomChance(double chance) {
-        int newChance = 100 - Mth.clamp(((int) chance * 100), 1, 100);
-        return (newChance + 1 == 1) ? true : RANDOM.nextInt(1, newChance + 2) == 1;
+        int newChance = Mth.clamp(((int) chance * 100), 0, 100);
+        return RANDOM.nextInt(1,  100) <= newChance;
     }
     public static boolean randomChance(double chance, Level level) {
-        int newChance = 100 - Mth.clamp(((int) chance * 100), 1, 100);
-        return (newChance + 1 == 1) ? true : level.getRandom().nextInt(1, newChance + 2) == 1;
+        int newChance = Mth.clamp(((int) chance * 100), 0, 100);
+        return level.getRandom().nextInt(1,  100) <= newChance;
     }
 
 

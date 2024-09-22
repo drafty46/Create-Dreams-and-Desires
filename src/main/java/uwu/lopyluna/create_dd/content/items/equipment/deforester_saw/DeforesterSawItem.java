@@ -22,6 +22,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -50,25 +51,32 @@ public class DeforesterSawItem extends BackTankAxeItem {
         super(Deforester, 6.0F, -3.2F, pProperties);
     }
 
+    @SuppressWarnings("all")
 public static void destroyTree(Level pLevel, BlockState state, BlockPos pos, Player player) {
+    boolean flagFakePlayer = player != null && !(player instanceof FakePlayer);
+    boolean playerHeldShift;
+
+    if (flagFakePlayer) {
         DesiresPackets.getChannel().sendToServer(new InvertFunctionPacket());
-
         boolean inverted = DesiresConfigs.client().invertDeforesterSawFunction.get();
-        boolean playerHeldShift = inverted != player.isShiftKeyDown();
+        playerHeldShift = inverted != player.isShiftKeyDown();
+    } else {
+        playerHeldShift = true;
+    }
 
-        if (deforesting || !(state.is(BlockTags.LOGS) || AllTags.AllBlockTags.SLIMY_LOGS.matches(state)) || !playerHeldShift)
-            return;
-        Vec3 vec = player.getLookAngle();
+    if (deforesting || !(state.is(BlockTags.LOGS) || AllTags.AllBlockTags.SLIMY_LOGS.matches(state)) || !playerHeldShift)
+        return;
+    Vec3 vec = player.getLookAngle();
 
-        deforesting = true;
-        Optional<AbstractBlockBreakQueue> dynamicTree = findDynamicTree(state.getBlock(), pos);
-        if (dynamicTree.isPresent()) {
-            dynamicTree.get().destroyBlocks(pLevel, player, (dropPos, item) -> dropItemFromCutTree(pLevel, pos, vec, dropPos, item));
-            deforesting = false;
-            return;
-        }
-        findTree(pLevel, pos).destroyBlocks(pLevel, player, (dropPos, item) -> dropItemFromCutTree(pLevel, pos, vec, dropPos, item));
+    deforesting = true;
+    Optional<AbstractBlockBreakQueue> dynamicTree = findDynamicTree(state.getBlock(), pos);
+    if (dynamicTree.isPresent()) {
+        dynamicTree.get().destroyBlocks(pLevel, player, (dropPos, item) -> dropItemFromCutTree(pLevel, pos, vec, dropPos, item));
         deforesting = false;
+        return;
+    }
+    findTree(pLevel, pos).destroyBlocks(pLevel, player, (dropPos, item) -> dropItemFromCutTree(pLevel, pos, vec, dropPos, item));
+    deforesting = false;
     }
 
     @SubscribeEvent

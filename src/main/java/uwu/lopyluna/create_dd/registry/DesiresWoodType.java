@@ -37,6 +37,7 @@ public class DesiresWoodType {
     public static void regStrippables(WoodEntry entry) {
         AxeItem.STRIPPABLES = Maps.newHashMap(AxeItem.STRIPPABLES);
         AxeItem.STRIPPABLES.put(entry.log.get(), entry.strippedLog.get());
+        AxeItem.STRIPPABLES.put(entry.wood.get(), entry.strippedWood.get());
     }
 
     public static void register() {}
