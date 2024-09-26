@@ -10,8 +10,6 @@ import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
 import com.simibubi.create.foundation.render.RenderTypes;
 import com.simibubi.create.foundation.utility.Couple;
 import com.simibubi.create.foundation.utility.DyeHelper;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -44,12 +42,9 @@ public class HandheldNozzleRenderer extends CustomRenderedItemModelRenderer {
 
         TransformStack stacker = TransformStack.cast(ms);
         float worldTime = AnimationTickHolder.getRenderTime();
-        LocalPlayer player = Minecraft.getInstance().player;
-        assert player != null;
-        boolean mainHand = player.getMainHandItem() == stack;
-        boolean offHand = player.getOffhandItem() == stack;
-        boolean flag1 = (mainHand || offHand) && item.getIsActive(nbt);
-        boolean flag2 = (mainHand || offHand) && item.getIsBlowing(nbt);
+
+        boolean flag1 = item.getIsActive(nbt);
+        boolean flag2 = item.getIsBlowing(nbt);
 
         renderer.render(ITEM.get(), light);
 
@@ -57,7 +52,7 @@ public class HandheldNozzleRenderer extends CustomRenderedItemModelRenderer {
         Couple<Integer> couple = DyeHelper.DYE_TABLE.get(flag1 ? DyeColor.LIME : DyeColor.RED);
         int brightColor = couple.getFirst();
         int darkColor = couple.getSecond();
-        int color = randomChance(10) ? darkColor : brightColor;
+        int color = randomChance(25) ? darkColor : brightColor;
 
         float multiplier = -Mth.sin(worldTime * .25f % 360);
         int lightIntensity = (int) (15 * Mth.clamp(multiplier, 0.5, 1));

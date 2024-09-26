@@ -1,0 +1,38 @@
+{
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": true,
+  "key": {
+    "A": {
+      "item": "create:andesite_alloy"
+    },
+    "B": {
+      "tag": "forge:storage_blocks/copper"
+    },
+    "C": {
+      "tag": "forge:ingots/copper"
+    },
+    "E": {
+      "item": "create:electron_tube"
+    },
+    "F": {
+      "item": "create:fluid_pipe"
+    },
+    "M": {
+      "item": "create:precision_mechanism"
+    },
+    "P": {
+      "item": "create:propeller"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "WBACE  ",
+    "WBPCMCC",
+    " AFFACC"
+  ],
+  "result": {
+    "item": "create_dd:handheld_nozzle"
+  }
+}

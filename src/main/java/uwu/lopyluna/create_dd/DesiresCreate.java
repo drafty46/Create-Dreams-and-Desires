@@ -27,6 +27,9 @@ import uwu.lopyluna.create_dd.compat.registry.EncasedCompat;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngineBlock;
 import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
 import uwu.lopyluna.create_dd.infrastructure.data.DesiresDatagen;
+import uwu.lopyluna.create_dd.infrastructure.world.DesireBuiltinRegistration;
+import uwu.lopyluna.create_dd.infrastructure.world.DesiresFeatures;
+import uwu.lopyluna.create_dd.infrastructure.world.DesiresPlacementModifiers;
 import uwu.lopyluna.create_dd.registry.*;
 import uwu.lopyluna.create_dd.registry.addons.DreamsAddons;
 import uwu.lopyluna.create_dd.registry.darkness.MagicItems;
@@ -98,6 +101,9 @@ public class DesiresCreate {
         DesiresEntityDataSerializers.register(modEventBus);
         DesiresPackets.registerPackets();
         DesiresOreFeaturesEntries.init();
+        DesiresPlacementModifiers.register(modEventBus);
+        DesiresFeatures.register(modEventBus);
+        DesireBuiltinRegistration.register(modEventBus);
         DesiresBlockMovementChecks.register();
 
         //ADDONS

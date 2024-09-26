@@ -1,5 +1,6 @@
 package uwu.lopyluna.create_dd.content.items.equipment.handheld_nozzle;
 
+import com.simibubi.create.AllItems;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.content.kinetics.fan.AirCurrent;
@@ -9,9 +10,11 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -19,6 +22,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -47,7 +51,7 @@ public class HandheldNozzleItem extends Item {
     private final List<Entity> pushingEntities = new ArrayList<>();
 
     public HandheldNozzleItem(Properties properties) {
-        super(properties);
+        super(properties.durability(4096));
     }
 
     public boolean getIsBlowing(CompoundTag nbt) {
@@ -64,25 +68,54 @@ public class HandheldNozzleItem extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ItemStack itemStack = player.getItemInHand(hand);
-        CompoundTag nbt = itemStack.getOrCreateTag();
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+        ItemStack tool = pPlayer.getItemInHand(InteractionHand.MAIN_HAND == pUsedHand ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND);
+        ItemStack repairStack = pPlayer.getItemInHand(InteractionHand.MAIN_HAND == pUsedHand ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
 
-        if (player.isShiftKeyDown()) {
-            if (!level.isClientSide) {
-                setIsBlowing(nbt, !getIsBlowing(nbt));
-                player.displayClientMessage(Component.literal("Mode switched to: " + (getIsBlowing(nbt) ? "Blowing" : "Vacuuming")), true);
-                level.playSound(null, player.blockPosition(), AllSoundEvents.CONFIRM.getMainEvent(), SoundSource.PLAYERS, 1.0F, 1.0F);
+        if ((repairStack.is(AllItems.PROPELLER.get()) || repairStack.is(Items.COPPER_INGOT))) {
+            boolean flag = (tool.isDamaged() && tool.isBarVisible());
+            int value = repairStack.is(AllItems.PROPELLER.get()) ? 100 : 10;
+            if (tool.getItem() == this && tool.getMaxDamage() != tool.getDamageValue() && flag) {
+                repairTool(tool, ((tool.getMaxDamage() - value) >= tool.getDamageValue()) ? value : tool.getMaxDamage() - tool.getDamageValue());
+
+                if (!pPlayer.isCreative()) {
+                    repairStack.shrink(1);
+                }
+            }
+            if (pLevel.isClientSide() && flag) {
+                float r = (pPlayer.random.nextFloat() - pPlayer.random.nextFloat()) * 0.2F;
+                pPlayer.playSound(SoundEvents.AXE_SCRAPE, .25f, 0.85f + r);
+                pPlayer.playSound(SoundEvents.NETHERITE_BLOCK_HIT, .15f, .75f + r);
+                pPlayer.playSound(SoundEvents.COPPER_BREAK, .9f, 1.45f + r);
+                pPlayer.playSound(SoundEvents.COPPER_BREAK, .9f, 0.65f + r);
+                return new InteractionResultHolder<>(InteractionResult.SUCCESS, pPlayer.getItemInHand(pUsedHand));
+            } else {
+                return new InteractionResultHolder<>(InteractionResult.FAIL, pPlayer.getItemInHand(pUsedHand));
             }
         } else {
-            if (!level.isClientSide) {
-                setIsActive(nbt, !getIsActive(nbt));
-                player.displayClientMessage(Component.literal(getName(itemStack).getString() + ": " + (getIsActive(nbt) ? "Activated" : "De-Activated") ), true);
-                level.playSound(null, player.blockPosition(), getIsActive(nbt) ? AllSoundEvents.CONFIRM.getMainEvent() : AllSoundEvents.DENY.getMainEvent(), SoundSource.PLAYERS, 1.0F, 1.0F);
+            ItemStack itemStack = pPlayer.getItemInHand(pUsedHand);
+            CompoundTag nbt = itemStack.getOrCreateTag();
 
+            if (pPlayer.isShiftKeyDown()) {
+                if (!pLevel.isClientSide) {
+                    setIsBlowing(nbt, !getIsBlowing(nbt));
+                    pPlayer.displayClientMessage(Component.literal("Mode switched to: " + (getIsBlowing(nbt) ? "Blowing" : "Vacuuming")), true);
+                    pLevel.playSound(null, pPlayer.blockPosition(), AllSoundEvents.CONFIRM.getMainEvent(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                }
+            } else {
+                if (!pLevel.isClientSide) {
+                    setIsActive(nbt, !getIsActive(nbt));
+                    pPlayer.displayClientMessage(Component.literal(getName(itemStack).getString() + ": " + (getIsActive(nbt) ? "Activated" : "De-Activated")), true);
+                    pLevel.playSound(null, pPlayer.blockPosition(), getIsActive(nbt) ? AllSoundEvents.CONFIRM.getMainEvent() : AllSoundEvents.DENY.getMainEvent(), SoundSource.PLAYERS, 1.0F, 1.0F);
+
+                }
             }
+            return InteractionResultHolder.sidedSuccess(itemStack, pLevel.isClientSide());
         }
-        return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
+    }
+
+    public void repairTool(ItemStack tool, int value) {
+        tool.setDamageValue(tool.getDamageValue() - value);
     }
 
     @Override
@@ -135,6 +168,11 @@ public class HandheldNozzleItem extends Item {
                 Vec3 center = getCenterPos(pPlayer);
 
                 if (!pLevel.isClientSide) {
+
+                    if (!BacktankUtil.canAbsorbDamage(pPlayer, getMaxDamage(pStack))) {
+                        pStack.hurtAndBreak(randomChance(75) ? 1 : 0, pPlayer, p -> p.broadcastBreakEvent((pPlayer.getOffhandItem() == pStack && pSlotId == 0 && !(pIsSelected && pSlotId == 0 && pPlayer.getMainHandItem() == pStack)) ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND));
+                    }
+
                     handleEntityInteractions(pLevel, pPlayer, center, range, nbt, speedLimit);
                     handlePlayerInteractions(pPlayer, rangeP, nbt, speedLimit);
                 }
@@ -149,6 +187,11 @@ public class HandheldNozzleItem extends Item {
                 }
             }
         }
+    }
+
+    @Override
+    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+        return slotChanged;
     }
 
     private void handleEntityInteractions(Level pLevel, Player pPlayer, Vec3 center, float range, CompoundTag nbt, float speedLimit) {

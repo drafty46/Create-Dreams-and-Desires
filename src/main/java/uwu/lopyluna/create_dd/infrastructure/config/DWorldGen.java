@@ -4,6 +4,8 @@ import com.simibubi.create.foundation.config.ConfigBase;
 import net.minecraftforge.common.ForgeConfigSpec;
 import uwu.lopyluna.create_dd.registry.DesiresOreFeaturesEntries;
 
+import static uwu.lopyluna.create_dd.DesiresCreate.NAME;
+
 @SuppressWarnings("unused")
 public class DWorldGen extends ConfigBase {
 
@@ -23,6 +25,6 @@ public class DWorldGen extends ConfigBase {
     }
 
     private static class Comments {
-        static String disable = "Prevents all worldgen added by Create from taking effect";
+        static String disable = "Prevents all worldgen added by " + NAME + " from taking effect";
     }
 }

@@ -20,6 +20,11 @@ public class DesiresSoundEvents {
 	public static RegistryObject<SoundEvent> CREATVEDITE_PLACE = registerSoundEvent("creatvedite_place");
 	public static RegistryObject<SoundEvent> CREATVEDITE_HIT = registerSoundEvent("creatvedite_hit");
 	public static RegistryObject<SoundEvent> CREATVEDITE_FALL = registerSoundEvent("creatvedite_fall");
+	public static RegistryObject<SoundEvent> CRACKLE_BREAK = registerSoundEvent("crackle_break");
+	public static RegistryObject<SoundEvent> CRACKLE_STEP = registerSoundEvent("crackle_step");
+	public static RegistryObject<SoundEvent> CRACKLE_PLACE = registerSoundEvent("crackle_place");
+	public static RegistryObject<SoundEvent> CRACKLE_HIT = registerSoundEvent("crackle_hit");
+	public static RegistryObject<SoundEvent> CRACKLE_FALL = registerSoundEvent("crackle_fall");
 	public static RegistryObject<SoundEvent> RUBBER_BREAK = registerSoundEvent("rubber_break");
 	public static RegistryObject<SoundEvent> RUBBER_PLACE = registerSoundEvent("rubber_place");
 	public static RegistryObject<SoundEvent> BLOCK_ZAPPER_UPGRADE = registerSoundEvent("block_zapper_upgrade");
@@ -33,9 +38,9 @@ public class DesiresSoundEvents {
 			() -> SoundEvents.STEM_STEP, () -> DesiresSoundEvents.RUBBER_PLACE.get(),
 			() -> SoundEvents.STEM_HIT, () -> SoundEvents.STEM_FALL);
 
-	public static SoundType CRACKLE_STONE = new ForgeSoundType(0.9f, 1f, () -> SoundEvents.STONE_BREAK
-			, () -> SoundEvents.STONE_STEP, () -> SoundEvents.STONE_PLACE
-			, () -> SoundEvents.STONE_HIT, () -> SoundEvents.STONE_FALL);
+	public static SoundType CRACKLE_STONE = new ForgeSoundType(0.9f, 0.7f, () -> DesiresSoundEvents.CRACKLE_BREAK.get(),
+			() -> DesiresSoundEvents.CRACKLE_STEP.get(), () -> DesiresSoundEvents.CRACKLE_PLACE.get(),
+			() -> DesiresSoundEvents.CRACKLE_HIT.get(), () -> DesiresSoundEvents.CRACKLE_FALL.get());
 
 	private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
 		return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(DesiresCreate.MOD_ID, name)));

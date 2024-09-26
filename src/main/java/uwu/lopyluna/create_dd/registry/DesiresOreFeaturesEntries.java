@@ -6,6 +6,7 @@ import com.simibubi.create.infrastructure.worldgen.OreFeatureConfigEntry;
 import net.minecraft.tags.BiomeTags;
 import net.minecraftforge.common.ForgeConfigSpec;
 import uwu.lopyluna.create_dd.DesireUtil;
+import uwu.lopyluna.create_dd.content.world.DesiresLayerPatterns;
 
 import java.util.Objects;
 
@@ -26,12 +27,27 @@ public class DesiresOreFeaturesEntries {
                     .biomeTag(BiomeTags.IS_OVERWORLD)
                     .parent();
 
+    public static final OreFeatureConfigEntry STRIATED_ERODED_OVERWORLD =
+            Objects.requireNonNull(create("striated_eroded_overworld", 24, 1 / 36f, -64, 0).layeredDatagenExt())
+                    .withLayerPattern(DesiresLayerPatterns.SPACE_ROCK)
+                    .biomeTag(BiomeTags.IS_OVERWORLD)
+                    .parent();
+
+    public static final OreFeatureConfigEntry STRIATED_ERODED_NETHER =
+            Objects.requireNonNull(create("striated_eroded_nether", 24, 1 / 36f, 0, 100).layeredDatagenExt())
+                    .withLayerPattern(DesiresLayerPatterns.SPACE_ROCK)
+                    .biomeTag(BiomeTags.IS_NETHER)
+                    .parent();
+
+    public static final OreFeatureConfigEntry STRIATED_ORES_OCEANS =
+            Objects.requireNonNull(create("striated_ores_oceans", 32, 1 / 18f, -30, 70).layeredDatagenExt())
+                    .withLayerPattern(DesiresLayerPatterns.WEATHERED_LIMESTONE)
+                    .biomeTag(BiomeTags.IS_OCEAN)
+                    .parent();
+
     private static OreFeatureConfigEntry create(String name, int clusterSize, float frequency, int minHeight, int maxHeight) {
         return new OreFeatureConfigEntry(DesireUtil.asResource(name), clusterSize, frequency, minHeight, maxHeight);
     }
-
-    public static void init() {}
-
 
     public static void fillConfig(ForgeConfigSpec.Builder builder) {
         OreFeatureConfigEntry.ALL
@@ -43,4 +59,6 @@ public class DesiresOreFeaturesEntries {
                     }
                 });
     }
+
+    public static void init() {}
 }

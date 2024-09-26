@@ -10,6 +10,7 @@ import com.simibubi.create.foundation.utility.RegisteredObjects;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
@@ -27,6 +28,21 @@ import java.util.function.UnaryOperator;
 public class MechanicalCraftingRecipeGen extends CreateRecipeProvider {
 
     GeneratedRecipe
+
+            HANDHELD_NOZZLE = create(DesiresItems.HANDHELD_NOZZLE::get).returns(1)
+            .recipe(b -> b
+                    .key('B', AllTags.forgeItemTag("storage_blocks/copper"))
+                    .key('C', AllTags.forgeItemTag("ingots/copper"))
+                    .key('W', ItemTags.WOOL)
+                    .key('M', AllItems.PRECISION_MECHANISM.get())
+                    .key('P', AllItems.PROPELLER.get())
+                    .key('E', AllItems.ELECTRON_TUBE.get())
+                    .key('F', AllBlocks.FLUID_PIPE.get())
+                    .key('A', AllItems.ANDESITE_ALLOY.get())
+                    .patternLine("WBACE  ")
+                    .patternLine("WBPCMCC")
+                    .patternLine(" AFFACC")
+            ),
 
             BLOCK_ZAPPER = create(DesiresItems.BLOCK_ZAPPER::get).returns(1)
             .recipe(b -> b

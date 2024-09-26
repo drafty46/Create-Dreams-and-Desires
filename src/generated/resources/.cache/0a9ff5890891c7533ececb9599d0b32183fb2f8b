@@ -1,4 +1,4 @@
-// 1.19.2	2024-09-15T20:07:49.4805557	Create: Dreams n' Desires Mechanical Crafting Recipes
+// 1.19.2	2024-09-26T12:35:37.5732135	Create: Dreams n' Desires Mechanical Crafting Recipes
 24c1b24debb02415c1e9e71d16948381134e3183 data/create_dd/recipes/mechanical_crafting/excavation_drill.json
 bd9e26573c5589f68a52be4289dffc0611521673 data/create_dd/recipes/mechanical_crafting/furnace_engine.json
 f202d7ab2f317e76047a70e4a729f48c659b1337 data/create_dd/recipes/mechanical_crafting/gilded_rose_axe.json
@@ -7,4 +7,5 @@ d22fd812f21dfa704f43d06601f1b47992d8aa37 data/create_dd/recipes/mechanical_craft
 f27360c7cebfc2597d334ef7254e350138d28ec8 data/create_dd/recipes/mechanical_crafting/gilded_rose_shovel.json
 0888979c7de1185744b2a0cd441c7778b3dc1d04 data/create_dd/recipes/mechanical_crafting/gilded_rose_sword.json
 ca8a0d0f9377cd5c466611a69bec1ec4f6a2e8fe data/create_dd/recipes/mechanical_crafting/handheld_block_zapper.json
+b1b0e58e5421b8fe09974bdf54c8a486b1043fb2 data/create_dd/recipes/mechanical_crafting/handheld_nozzle.json
 4b8fe1a4dd07347d87a964e328e584b04c095237 data/create_dd/recipes/mechanical_crafting/hydraulic_press.json
