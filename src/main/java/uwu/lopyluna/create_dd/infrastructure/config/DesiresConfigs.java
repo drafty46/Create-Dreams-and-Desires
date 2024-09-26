@@ -21,16 +21,15 @@ public class DesiresConfigs {
 
 	private static final Map<ModConfig.Type, ConfigBase> CONFIGS = new EnumMap<>(ModConfig.Type.class);
 
+	private static DCommon common;
 	private static DClient client;
 	private static DServer server;
 
-	public static DClient client() {
-		return client;
-	}
+	public static DClient client() { return client; }
 
-	public static DServer server() {
-		return server;
-	}
+	public static DCommon common() { return common; }
+
+	public static DServer server() { return server; }
 
 	public static ConfigBase byType(ModConfig.Type type) {
 		return CONFIGS.get(type);
@@ -51,6 +50,7 @@ public class DesiresConfigs {
 
 	public static void register(ModLoadingContext context) {
 		client = register(DClient::new, ModConfig.Type.CLIENT);
+		common = register(DCommon::new, ModConfig.Type.COMMON);
 		server = register(DServer::new, ModConfig.Type.SERVER);
 
 		for (Entry<ModConfig.Type, ConfigBase> pair : CONFIGS.entrySet())

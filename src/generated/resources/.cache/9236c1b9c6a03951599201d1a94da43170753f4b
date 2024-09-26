@@ -1,4 +1,4 @@
-// 1.19.2	2024-09-20T00:40:01.7352221	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2024-09-25T22:38:45.6336296	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 9452bed2fb7ba829ea35644054add91456d3f5d9 assets/create_dd/blockstates/amethyst_block_pillar.json
 64dc32722d3ad05720fa9a200df1de7179cfd890 assets/create_dd/blockstates/basalt_pillar.json
 5fd6e80fe77786dd8fd0c5cfd6d866b44365aa96 assets/create_dd/blockstates/blackstone_pillar.json
@@ -421,8 +421,8 @@ af62e1b2187e70334a3e36986b368feac281d63d assets/create_dd/blockstates/yellow_pad
 2736c91b94b9dd34ed0a702b4b538e6d63bc5c73 assets/create_dd/blockstates/yellow_padded_rubber_stairs.json
 7ac56fd4064658532ee94e7c8def9f604e9528aa assets/create_dd/blockstates/yellow_padded_tiled_rubber.json
 9952df2744c1791ecccc84a34a105cffe18b76d9 assets/create_dd/blockstates/yellow_velvet_block.json
-57fc28b9068d0e6252d949c1bf8efdd99eec9be5 assets/create_dd/lang/en_ud.json
-f2e7bb6d1d7ef9d9377ba45ef2c5d187250f13d8 assets/create_dd/lang/en_us.json
+a9a33c97acd05119ee88ca95c4459b0721455e4f assets/create_dd/lang/en_ud.json
+9c37824fe7eb9a659797112be1b5fa4de7163aeb assets/create_dd/lang/en_us.json
 186464982087eb2dd6aa9a5bf09cdb29e6326c49 assets/create_dd/models/block/amethyst_block_pillar.json
 37f5da0e49555aed59846ec90f8286e737feb179 assets/create_dd/models/block/amethyst_block_pillar_horizontal.json
 c9845fd31f14aa8e1a83ffc67249b5486a8ff5cc assets/create_dd/models/block/basalt_pillar.json
@@ -1356,6 +1356,7 @@ a3ee268f5a05d4aed2b7908d15725fe9cd7c02a3 assets/create_dd/models/item/green_padd
 8aeff01cfb946289d0fefa1f0352196a399cba13 assets/create_dd/models/item/green_padded_tiled_rubber.json
 646125c8505149b02bb25fd7bcd511f85b53c617 assets/create_dd/models/item/green_velvet_block.json
 82e9049994856d02a4e9b1dd22e5034ceadbb05a assets/create_dd/models/item/handheld_block_zapper.json
+756a7b1519e73d3a2134711481d2c7dbca57c7b7 assets/create_dd/models/item/handheld_nozzle.json
 9bf067add92f1dacfa85e22d064b7bb61e223bbf assets/create_dd/models/item/haunting_sail.json
 994076ecbe15fa52cca5b0f205547c76dc513475 assets/create_dd/models/item/hazard_block.json
 a17807cc3f3109b35d6c5d9b3677a4d926221d33 assets/create_dd/models/item/helm.json

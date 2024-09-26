@@ -38,7 +38,8 @@ public class RemapHelperDesires {
         reMap.put("incomplete_inductive_mechanism", INCOMPLETE_KINETIC_MECHANISM.getId());
         reMap.put("lapis_alloy", BURY_BLEND.getId());
 
-        reMap.put("magnet", PORTABLE_FAN.getId());
+        reMap.put("magnet", HANDHELD_NOZZLE.getId());
+        reMap.put("portable_fan", HANDHELD_NOZZLE.getId());
         reMap.put("block_zapper", BLOCK_ZAPPER.getId());
     }
 

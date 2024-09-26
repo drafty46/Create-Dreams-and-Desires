@@ -7,13 +7,13 @@ public class DServer extends ConfigBase {
 
 	public final ConfigGroup World = group(0, "World", "World");
 	public final ConfigInt chanceForOreStone = i(25, 1, 100, "chanceForOreStone", Comments.chanceForOreStone);
-	public final ConfigInt chanceForArtificialOreStone = i(5, 1, 100, "chanceForArtificialOreStone", Comments.chanceForArtificialOreStone);
+	public final ConfigInt chanceForArtificialOreStone = i(5, 0, 100, "chanceForArtificialOreStone", Comments.chanceForArtificialOreStone);
 
 	public final ConfigGroup infrastructure = group(0, "infrastructure", Comments.infrastructure);
 	public final DRecipes recipes = nested(0, DRecipes::new, Comments.recipes);
 	public final DKinetics kinetics = nested(0, DKinetics::new, Comments.kinetics);
 	public final DLogistics logistics = nested(0, DLogistics::new, Comments.logistics);
-	//public final DEquipment equipment = nested(0, DEquipment::new, Comments.equipment);*
+	public final DEquipment equipment = nested(0, DEquipment::new, Comments.equipment);
 
 	@Override
 	public String getName() {

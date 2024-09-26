@@ -37,8 +37,8 @@ public class DesiresBaseConfigScreen extends DesiresConfigScreen {
 
     static {
         DEFAULTS.put(MOD_ID, (base) -> base
-                .withTitles("Client Settings", "Gameplay Settings")
-                .withSpecs(DesiresConfigs.client().specification, DesiresConfigs.server().specification)
+                .withTitles("Client Settings", "World Generation Settings", "Gameplay Settings")
+                .withSpecs(DesiresConfigs.client().specification, DesiresConfigs.common().specification, DesiresConfigs.server().specification)
         );
     }
 
@@ -102,15 +102,19 @@ public class DesiresBaseConfigScreen extends DesiresConfigScreen {
 
     }
 
-    public DesiresBaseConfigScreen withSpecs(@Nullable ForgeConfigSpec client, @Nullable ForgeConfigSpec server) {
+    public DesiresBaseConfigScreen withSpecs(@Nullable ForgeConfigSpec client, ForgeConfigSpec common, @Nullable ForgeConfigSpec server) {
         clientSpec = client;
+        commonSpec = common;
         serverSpec = server;
         return this;
     }
 
-    public DesiresBaseConfigScreen withTitles(@Nullable String client, @Nullable String server) {
+    public DesiresBaseConfigScreen withTitles(@Nullable String client, String common, @Nullable String server) {
         if (client != null)
             clientTitle = client;
+
+        if (common != null)
+            commonTitle = common;
 
         if (server != null)
             serverTitle = server;

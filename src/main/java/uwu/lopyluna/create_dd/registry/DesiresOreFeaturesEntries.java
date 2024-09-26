@@ -4,9 +4,12 @@ import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.foundation.utility.Couple;
 import com.simibubi.create.infrastructure.worldgen.OreFeatureConfigEntry;
 import net.minecraft.tags.BiomeTags;
+import net.minecraftforge.common.ForgeConfigSpec;
 import uwu.lopyluna.create_dd.DesireUtil;
 
 import java.util.Objects;
+
+import static uwu.lopyluna.create_dd.DesiresCreate.MOD_ID;
 
 @SuppressWarnings({"unused", "SameParameterValue"})
 public class DesiresOreFeaturesEntries {
@@ -28,4 +31,16 @@ public class DesiresOreFeaturesEntries {
     }
 
     public static void init() {}
+
+
+    public static void fillConfig(ForgeConfigSpec.Builder builder) {
+        OreFeatureConfigEntry.ALL
+                .forEach((id, entry) -> {
+                    if (id.getNamespace().equals(MOD_ID)) {
+                        builder.push(entry.getName());
+                        entry.addToConfig(builder);
+                        builder.pop();
+                    }
+                });
+    }
 }

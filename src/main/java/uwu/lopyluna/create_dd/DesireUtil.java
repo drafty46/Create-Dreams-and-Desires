@@ -22,21 +22,25 @@ public class DesireUtil {
 
     public static boolean randomChance(int chance) {
         int newChance = Mth.clamp(chance, 0, 100);
-        return RANDOM.nextInt(1,  100) <= newChance;
+        return newChance != 0 && RANDOM.nextInt(1,  100) <= newChance;
     }
 
     public static boolean randomChance(int chance, Level level) {
         int newChance = Mth.clamp(chance, 0, 100);
-        return level.getRandom().nextInt(1,  100) <= newChance;
+        return newChance != 0 && level.getRandom().nextInt(1,  100) <= newChance;
     }
 
     public static boolean randomChance(double chance) {
         int newChance = Mth.clamp(((int) chance * 100), 0, 100);
-        return RANDOM.nextInt(1,  100) <= newChance;
+        return newChance != 0 && RANDOM.nextInt(1,  100) <= newChance;
     }
     public static boolean randomChance(double chance, Level level) {
         int newChance = Mth.clamp(((int) chance * 100), 0, 100);
-        return level.getRandom().nextInt(1,  100) <= newChance;
+        return newChance != 0 && level.getRandom().nextInt(1,  100) <= newChance;
+    }
+
+    public static boolean tickDelay(int percentage, Level level ) {
+        return level.getGameTime() % percentage != 0;
     }
 
 

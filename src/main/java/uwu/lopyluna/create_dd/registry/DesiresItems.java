@@ -26,7 +26,7 @@ import uwu.lopyluna.create_dd.content.items.equipment.clockwork_crossbow.Clockwo
 import uwu.lopyluna.create_dd.content.items.equipment.deforester_saw.DeforesterSawItem;
 import uwu.lopyluna.create_dd.content.items.equipment.excavation_drill.ExcavationDrillItem;
 import uwu.lopyluna.create_dd.content.items.equipment.gilded_rose_tools.*;
-import uwu.lopyluna.create_dd.content.items.equipment.portable_fan.PortableFanItem;
+import uwu.lopyluna.create_dd.content.items.equipment.handheld_nozzle.HandheldNozzleItem;
 import uwu.lopyluna.create_dd.content.items.materials.ChromaticCompound;
 import uwu.lopyluna.create_dd.content.items.materials.RefinedRadiance;
 import uwu.lopyluna.create_dd.content.items.materials.ShadowSteel;
@@ -314,10 +314,9 @@ public class DesiresItems {
 			.tag(DesiresTags.AllItemTags.CROSSBOW.tag)
 			.register();
 
-	public static final ItemEntry<PortableFanItem> PORTABLE_FAN = REGISTRATE.item("portable_fan", PortableFanItem::new)
-			.tab(() -> DesiresCreativeModeTabs.BETA_CREATIVE_TAB)
-			.model((c, p) -> {})
-			//.model(AssetLookup.itemModelWithPartials())
+	public static final ItemEntry<HandheldNozzleItem> HANDHELD_NOZZLE = REGISTRATE.item("handheld_nozzle", HandheldNozzleItem::new)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.model(AssetLookup.itemModelWithPartials())
 			.properties(p -> p.rarity(Rarity.UNCOMMON))
 			.register();
 
