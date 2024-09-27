@@ -2,9 +2,9 @@
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "features": {
     "ghcr.io/devcontainers/features/java:1": {
-      "version": "21",
-      "additionalVersions": "17,8",
-      "jdkDistro": "them",
+      "version": "17",
+      "additionalVersions": "21,8",
+      "jdkDistro": "tem",
       "installGradle": true
     }
   }
