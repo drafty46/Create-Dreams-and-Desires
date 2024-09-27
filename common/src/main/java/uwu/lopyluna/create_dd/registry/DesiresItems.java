@@ -16,7 +16,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.Desires;
 import uwu.lopyluna.create_dd.DesireUtil;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.modular_drill.ModularDrillHeadItem;

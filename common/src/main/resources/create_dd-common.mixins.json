@@ -11,6 +11,7 @@
     "MixinBlockFluidResBlock",
     "MixinClutchBlock",
     "MixinClutchBlockEntity",
+    "MixinDyeColor",
     "MixinFluidPipeBlock",
     "MixinFluidPropagator",
     "MixinForgeHooks",

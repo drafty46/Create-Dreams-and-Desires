@@ -29,6 +29,8 @@ dependencies {
 
     compileOnly("io.github.llamalad7:mixinextras-common:${"mixin_extras_version"()}")
     annotationProcessor(implementation(include("io.github.llamalad7:mixinextras-forge:${"mixin_extras_version"()}")!!)!!)
+
+    modApi("dev.architectury:architectury-forge:${"architectury_version"()}") { isTransitive = false }
 }
 
 operator fun String.invoke(): String {

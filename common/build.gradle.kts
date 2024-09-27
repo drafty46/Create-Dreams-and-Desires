@@ -26,6 +26,8 @@ dependencies {
     modCompileOnly("net.fabricmc.fabric-api:fabric-api:${"fabric_api_version"()}")
 
     annotationProcessor(implementation("io.github.llamalad7:mixinextras-common:${"mixin_extras_version"()}")!!)
+
+    modApi("dev.architectury:architectury:${"architectury_version"()}")
 }
 
 tasks.processResources {

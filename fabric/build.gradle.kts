@@ -37,6 +37,8 @@ dependencies {
     modLocalRuntime("maven.modrinth:lazydfu:${"lazydfu_version"()}")
     modLocalRuntime("com.terraformersmc:modmenu:${"modmenu_version"()}")
     modLocalRuntime("dev.emi:emi-fabric:${"emi_version"()}")
+
+    modApi("dev.architectury:architectury-fabric:${"architectury_version"()}")
 }
 
 operator fun String.invoke(): String {

@@ -218,6 +218,7 @@ fun Project.setupRepositories() {
         maven("https://maven.terraformersmc.com/releases/")
         maven("https://raw.githubusercontent.com/Fuzss/modresources/main/maven/")
         maven("https://maven.jamieswhiteshirt.com/libs-release")
+        maven("https://maven.shedaniel.me/")
     }
 }
 
