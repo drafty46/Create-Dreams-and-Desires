@@ -22,10 +22,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
 import uwu.lopyluna.create_dd.registry.DesiresRecipeTypes;
@@ -61,14 +57,14 @@ public class HydraulicPressBlockEntity extends MechanicalPressBlockEntity {
                             .add(mb)
                             .style(ChatFormatting.GOLD))
                     .text(ChatFormatting.GRAY, " / ")
-                    .add(Lang.number(tank.getPrimaryHandler().getTankCapacity(0))
+                    .add(Lang.number(tank.getPrimaryHandler().getCapacity())
                             .add(mb)
                             .style(ChatFormatting.DARK_GRAY))
                     .forGoggles(tooltip, 1);
 
         } else if (fluidStack.isEmpty()) {
             Lang.translate("gui.goggles.fluid_container.capacity")
-                    .add(Lang.number(tank.getPrimaryHandler().getTankCapacity(0))
+                    .add(Lang.number(tank.getPrimaryHandler().getCapacity())
                             .add(mb)
                             .style(ChatFormatting.GOLD))
                     .style(ChatFormatting.GRAY)

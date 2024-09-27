@@ -19,10 +19,9 @@ import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.material.MaterialColor;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.Desires;
 import uwu.lopyluna.create_dd.content.blocks.functional.VelvetBlock;
+import uwu.lopyluna.create_dd.infrastructure.utility.ForgeTags;
 import uwu.lopyluna.create_dd.DesireUtil;
 
 import static com.simibubi.create.foundation.data.CreateRegistrate.casingConnectivity;
@@ -41,16 +40,16 @@ public class DesiresPaletteBlocks {
 		REGISTRATE.creativeModeTab(() -> DesiresCreativeModeTabs.PALETTES_CREATIVE_TAB);
 	}
 
-	public static TagKey<Item> rubberDecorTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", "rubber_decor"));
-	public static TagKey<Item> rawRubberDecorTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", "raw_rubber_decor"));
-	public static TagKey<Item> industrialIronDecorTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", "industrial_iron_decor"));
-	public static TagKey<Item> darkMetalDecorTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", "dark_metal_decor"));
-	public static TagKey<Item> asphaltBlocks = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", "asphalt_blocks"));
+	public static TagKey<Item> rubberDecorTag = optionalTag(Registry.ITEM_REGISTRY, new ResourceLocation("create_dd", "rubber_decor"));
+	public static TagKey<Item> rawRubberDecorTag = optionalTag(Registry.ITEM_REGISTRY, new ResourceLocation("create_dd", "raw_rubber_decor"));
+	public static TagKey<Item> industrialIronDecorTag = optionalTag(Registry.ITEM_REGISTRY, new ResourceLocation("create_dd", "industrial_iron_decor"));
+	public static TagKey<Item> darkMetalDecorTag = optionalTag(Registry.ITEM_REGISTRY, new ResourceLocation("create_dd", "dark_metal_decor"));
+	public static TagKey<Item> asphaltBlocks = optionalTag(Registry.ITEM_REGISTRY, new ResourceLocation("create_dd", "asphalt_blocks"));
 
-	public static TagKey<Block> stairsBlockTag = optionalTag(ForgeRegistries.BLOCKS, new ResourceLocation("minecraft", "stairs"));
-	public static TagKey<Item> stairsItemTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("minecraft", "stairs"));
-	public static TagKey<Block> slabsBlockTag = optionalTag(ForgeRegistries.BLOCKS, new ResourceLocation("minecraft", "slabs"));
-	public static TagKey<Item> slabsItemTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("minecraft", "slabs"));
+	public static TagKey<Block> stairsBlockTag = optionalTag(Registry.BLOCK_REGISTRY, new ResourceLocation("minecraft", "stairs"));
+	public static TagKey<Item> stairsItemTag = optionalTag(Registry.ITEM_REGISTRY, new ResourceLocation("minecraft", "stairs"));
+	public static TagKey<Block> slabsBlockTag = optionalTag(Registry.BLOCK_REGISTRY, new ResourceLocation("minecraft", "slabs"));
+	public static TagKey<Item> slabsItemTag = optionalTag(Registry.ITEM_REGISTRY, new ResourceLocation("minecraft", "slabs"));
 
 	public static final BlockEntry<Block> HAZARD_BLOCK = REGISTRATE.block("hazard_block", Block::new)
 			.properties(p -> p.destroyTime(1.25f)
@@ -243,7 +242,7 @@ public class DesiresPaletteBlocks {
 					.unlockedBy("has_" + c.getName(), has(c.get()))
 					.save(p, DesireUtil.asResource("crafting/" + c.getName() + "_from_" + c.getName())))
 			.item()
-			.tag(rubberDecorTag, optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", "rubber_decors")))
+			.tag(rubberDecorTag, optionalTag(Registry.ITEM_REGISTRY, new ResourceLocation("create_dd", "rubber_decors")))
 			.build()
 			.register();
 
@@ -439,28 +438,28 @@ public class DesiresPaletteBlocks {
 					.tag(asphaltBlocks)
 					.recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 4)
                             .define('D',
-                                color.equals("black") ? Tags.Items.DYES_BLACK :
-                                color.equals("white") ? Tags.Items.DYES_WHITE :
-                                color.equals("blue") ? Tags.Items.DYES_BLUE :
-                                color.equals("light_blue") ? Tags.Items.DYES_LIGHT_BLUE :
-                                color.equals("red") ? Tags.Items.DYES_RED :
-                                color.equals("green") ? Tags.Items.DYES_GREEN :
-                                color.equals("lime") ? Tags.Items.DYES_LIME :
-                                color.equals("pink") ? Tags.Items.DYES_PINK :
-                                color.equals("magenta") ? Tags.Items.DYES_MAGENTA :
-                                color.equals("yellow") ? Tags.Items.DYES_YELLOW :
-                                color.equals("gray") ? Tags.Items.DYES_GRAY :
-                                color.equals("light_gray") ? Tags.Items.DYES_LIGHT_GRAY :
-                                color.equals("brown") ? Tags.Items.DYES_BROWN :
-                                color.equals("cyan") ? Tags.Items.DYES_CYAN :
-                                color.equals("purple") ? Tags.Items.DYES_PURPLE :
-                                color.equals("orange") ? Tags.Items.DYES_ORANGE : Tags.Items.DYES)
+                                color.equals("black") ? ForgeTags.Items.DYES_BLACK :
+                                color.equals("white") ? ForgeTags.Items.DYES_WHITE :
+                                color.equals("blue") ? ForgeTags.Items.DYES_BLUE :
+                                color.equals("light_blue") ? ForgeTags.Items.DYES_LIGHT_BLUE :
+                                color.equals("red") ? ForgeTags.Items.DYES_RED :
+                                color.equals("green") ? ForgeTags.Items.DYES_GREEN :
+                                color.equals("lime") ? ForgeTags.Items.DYES_LIME :
+                                color.equals("pink") ? ForgeTags.Items.DYES_PINK :
+                                color.equals("magenta") ? ForgeTags.Items.DYES_MAGENTA :
+                                color.equals("yellow") ? ForgeTags.Items.DYES_YELLOW :
+                                color.equals("gray") ? ForgeTags.Items.DYES_GRAY :
+                                color.equals("light_gray") ? ForgeTags.Items.DYES_LIGHT_GRAY :
+                                color.equals("brown") ? ForgeTags.Items.DYES_BROWN :
+                                color.equals("cyan") ? ForgeTags.Items.DYES_CYAN :
+                                color.equals("purple") ? ForgeTags.Items.DYES_PURPLE :
+                                color.equals("orange") ? ForgeTags.Items.DYES_ORANGE : ForgeTags.Items.DYES)
                             .define('B', Items.SLIME_BALL)
                             .define('S', AllPaletteStoneTypes.SCORCHIA.baseBlock.get())
                             .pattern("BSB")
                             .pattern("SDS")
                             .pattern("BSB")
-                            .unlockedBy("has_dyed_item", has(Tags.Items.DYES))
+                            .unlockedBy("has_dyed_item", has(ForgeTags.Items.DYES))
                             .save(p, DesireUtil.asResource("crafting/decor/" + c.getName())))
 					.build()
 					.lang(upColor + " Asphalt Block")

@@ -17,6 +17,9 @@ import uwu.lopyluna.create_dd.DesireClient;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 import uwu.lopyluna.create_dd.registry.helper.Lang;
 import com.simibubi.create.foundation.utility.Pair;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -26,9 +29,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.DistExecutor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -45,17 +45,16 @@ public class GiantGearBlockItem extends BlockItem {
     }
     
     @Override
-    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
-
-        InteractionResult smallCogPlacementHelper = usePlacementHelper(smallPlacementHelperId, stack, context);
+    public InteractionResult useOn(UseOnContext context) {
+        InteractionResult smallCogPlacementHelper = usePlacementHelper(smallPlacementHelperId, context.getItemInHand(), context);
         if (smallCogPlacementHelper != null)
             return smallCogPlacementHelper;
         
-        InteractionResult bigCogPlacementHelper = usePlacementHelper(bigPlacementHelperId, stack, context);
+        InteractionResult bigCogPlacementHelper = usePlacementHelper(bigPlacementHelperId, context.getItemInHand(), context);
         if (bigCogPlacementHelper != null)
             return bigCogPlacementHelper;
         
-        return super.onItemUseFirst(stack, context);
+        return super.useOn(context);
     }
     
     private InteractionResult usePlacementHelper(int placementHelperId, ItemStack stack, UseOnContext context) {
@@ -73,10 +72,7 @@ public class GiantGearBlockItem extends BlockItem {
             PlacementOffset offset = helper.getOffset(player, world, state, pos, ray);
             
             if (!GiantGearBlock.isClearForStructure(axis, offset.getBlockPos(), context.getLevel())) {
-                if (context.getLevel().isClientSide())
-                    DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> showBounds(
-                        context.getPlayer(), offset.getBlockPos(), axis
-                    ));
+                if (context.getLevel().isClientSide())showBounds(context.getPlayer(), offset.getBlockPos(), axis);
                 return InteractionResult.FAIL;
             }
             
@@ -103,14 +99,12 @@ public class GiantGearBlockItem extends BlockItem {
         //Still failed, so show bounds
         if (result == InteractionResult.FAIL && ctx.getLevel()
                 .isClientSide())
-            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () ->
-                showBounds(ctx.getPlayer(), ctx.getClickedPos(), ((GiantGearBlock) getBlock()).getAxisForPlacement(ctx))
-            );
+            showBounds(ctx.getPlayer(), ctx.getClickedPos(), ((GiantGearBlock) getBlock()).getAxisForPlacement(ctx));
         
         return result;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     public void showBounds(Player player, BlockPos pos, Direction.Axis axis) {
         if (!(player instanceof LocalPlayer localPlayer))
             return;

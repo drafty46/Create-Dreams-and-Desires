@@ -156,6 +156,7 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
                 particleAccess.spawnExtraParticle(ParticleTypes.WITCH, .125f);
         }
 
+
         @Override
         public void affectEntity(Entity entity, Level level) {
 

@@ -3,12 +3,13 @@ package uwu.lopyluna.create_dd.registry;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import uwu.lopyluna.create_dd.registry.helper.Lang;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
+
+import net.minecraft.core.Registry;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.MaterialColor;
-import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.DesireUtil;
 import uwu.lopyluna.create_dd.registry.helper.palettes.DPaletteBlockPattern;
 import uwu.lopyluna.create_dd.registry.helper.palettes.DPalettesVariantEntry;
@@ -75,7 +76,7 @@ public enum DesiresPaletteStoneTypes {
             paletteStoneVariants.baseBlock = paletteStoneVariants.factory.apply(registrate);
             String id = Lang.asId(paletteStoneVariants.name());
             paletteStoneVariants.materialTag =
-                    DesiresTags.optionalTag(ForgeRegistries.ITEMS, DesireUtil.asResource("stone_types/" + id));
+                    DesiresTags.optionalTag(Registry.ITEM_REGISTRY, DesireUtil.asResource("stone_types/" + id));
             paletteStoneVariants.variants = new DPalettesVariantEntry(id, paletteStoneVariants);
         }
     }

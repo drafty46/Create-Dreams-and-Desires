@@ -5,13 +5,14 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.simibubi.create.foundation.particle.ICustomParticleDataWithSprite;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import uwu.lopyluna.create_dd.registry.DesiresParticleTypes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -76,7 +77,7 @@ public class SmokeJetParticleData implements ParticleOptions, ICustomParticleDat
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     public ParticleEngine.SpriteParticleRegistration<SmokeJetParticleData> getMetaFactory() {
         return SmokeJetParticle.Factory::new;
     }

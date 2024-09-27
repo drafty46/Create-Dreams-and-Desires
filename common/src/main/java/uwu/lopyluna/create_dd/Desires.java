@@ -31,7 +31,6 @@ import java.util.Random;
 
 
 @SuppressWarnings({"deprecation", "unused"})
-@Mod(Desires.MOD_ID)
 public class Desires {
     public static final String NAME = "Create: Dreams n' Desires";
     public static final String MOD_ID = "create_dd";
@@ -77,7 +76,7 @@ public class Desires {
         DesireFanProcessingTypes.register();
         DesiresRecipeTypes.register();
         DesiresParticleTypes.register();
-        DesiresEntityDataSerializers.register();
+        // DesiresEntityDataSerializers.register(); // TODO - Is this even used?
         DesiresPackets.registerPackets();
         DesiresOreFeaturesEntries.init();
         DesiresPlacementModifiers.register();

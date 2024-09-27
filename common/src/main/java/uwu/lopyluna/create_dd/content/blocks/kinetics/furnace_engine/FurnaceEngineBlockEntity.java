@@ -13,6 +13,9 @@ import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollOp
 import com.simibubi.create.foundation.utility.AngleHelper;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.VecHelper;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -23,9 +26,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.DistExecutor;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 
 import javax.annotation.Nullable;
@@ -113,7 +113,7 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
                 flywheel.update(this.worldPosition, conveyedSpeedLevel, delayedEfficiency);
                 assert this.level != null;
                 if (this.level.isClientSide) {
-                    DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> this::spawnParticles);
+                    this.spawnParticles();
                 }
             }
         } else {
@@ -135,7 +135,7 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
 
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     private void spawnParticles() {
         Float targetAngle = this.getTargetAngle();
         PoweredFlywheelBlockEntity ste = this.target.get();
@@ -221,7 +221,7 @@ public class FurnaceEngineBlockEntity extends SmartBlockEntity {
     }
 
     @Nullable
-    @OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     public Float getTargetAngle() {
         float angle;
         BlockState blockState = this.getBlockState();

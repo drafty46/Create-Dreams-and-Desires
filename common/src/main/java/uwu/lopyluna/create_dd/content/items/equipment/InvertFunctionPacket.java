@@ -1,12 +1,12 @@
 package uwu.lopyluna.create_dd.content.items.equipment;
 
-import com.simibubi.create.foundation.networking.SimplePacketBase;
+import dev.architectury.networking.NetworkManager.PacketContext;
+import net.fabricmc.api.EnvType;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkEvent;
 import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
+import uwu.lopyluna.create_dd.infrastructure.ponder.PacketBase;
 
-public class InvertFunctionPacket extends SimplePacketBase {
+public class InvertFunctionPacket extends PacketBase {
 
     public InvertFunctionPacket() {}
     public InvertFunctionPacket(FriendlyByteBuf buffer) {}
@@ -15,13 +15,15 @@ public class InvertFunctionPacket extends SimplePacketBase {
     public void write(FriendlyByteBuf buffer) {}
 
     @Override
-    public boolean handle(NetworkEvent.Context context) {
-        if (context.getDirection() != NetworkDirection.PLAY_TO_SERVER)
+    public boolean handle(PacketContext context) {
+        if (context.getEnv() != EnvType.SERVER)
             return false;
-        context.enqueueWork(() -> {
+
+        context.queue(() -> {
             DesiresConfigs.client().invertDeforesterSawFunction.get();
             DesiresConfigs.client().invertExcavationDrillFunction.get();
         });
+
         return true;
     }
 }

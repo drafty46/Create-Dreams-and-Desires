@@ -1,7 +1,10 @@
 accessWidener v2 named
 
+mutable field net/minecraft/world/item/AxeItem STRIPPABLES Ljava/util/Map;
+accessible field net/minecraft/client/gui/screens/TitleScreen panorama Lnet/minecraft/client/renderer/PanoramaRenderer;
+accessible field net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity cookingProgress I
+accessible field net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity cookingTotalTime I
+
 #public net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity f_58318_
 #public net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity f_58319_
 #public net.minecraft.world.entity.Entity f_19796_ # random
-#public-f net.minecraft.world.item.AxeItem f_150683_ # STRIPPABLES
-#public net.minecraft.client.gui.screens.TitleScreen f_96729_ # panorama

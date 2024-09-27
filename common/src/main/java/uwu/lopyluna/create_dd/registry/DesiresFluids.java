@@ -36,6 +36,7 @@ import static uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs.client
 
 
 public class DesiresFluids {
+	// TODO: There are so many forge extensions in this class I'm going to cry
 
 	public static final FluidEntry<ForgeFlowingFluid.Flowing> CHOCOLATE_MILKSHAKE = newFluid("Chocolate Milkshake",
 			0xB2614D, "c", DesiresTags.AllFluidTags.CHOCOLATE.tag)

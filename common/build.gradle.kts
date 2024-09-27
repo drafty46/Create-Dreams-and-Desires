@@ -24,6 +24,7 @@ dependencies {
     // Flywheel and Registrate must also be used carefully due to differences.
     modCompileOnly("com.simibubi.create:create-fabric-${"minecraft_version"()}:${"create_fabric_version"()}")
     modCompileOnly("net.fabricmc.fabric-api:fabric-api:${"fabric_api_version"()}")
+    modCompileOnly("mezz.jei:jei-${"minecraft_version"()}-common-api:${"jei_version"()}")
 
     annotationProcessor(implementation("io.github.llamalad7:mixinextras-common:${"mixin_extras_version"()}")!!)
 

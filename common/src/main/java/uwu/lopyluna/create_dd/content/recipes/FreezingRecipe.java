@@ -2,9 +2,8 @@ package uwu.lopyluna.create_dd.content.recipes;
 
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder.ProcessingRecipeParams;
+
 import net.minecraft.world.level.Level;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.wrapper.RecipeWrapper;
 import uwu.lopyluna.create_dd.registry.DesiresRecipeTypes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -34,6 +33,8 @@ public class FreezingRecipe extends ProcessingRecipe<FreezingRecipe.FreezingWrap
 		return 12;
 	}
 
+	// TODO: Remap to forge's RecipeWrapper
+	// TODO: Remap to forge's ItemStackHandler
 	public static class FreezingWrapper extends RecipeWrapper {
 		public FreezingWrapper() {
 			super(new ItemStackHandler(1));

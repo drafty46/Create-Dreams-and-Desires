@@ -5,10 +5,11 @@ import com.simibubi.create.content.contraptions.ContraptionType;
 import com.simibubi.create.content.contraptions.TranslatingContraption;
 import com.simibubi.create.content.contraptions.render.ContraptionLighter;
 import com.simibubi.create.content.contraptions.render.NonStationaryLighter;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import uwu.lopyluna.create_dd.registry.DesiresContraptionType;
 
 public class BoatContraption extends TranslatingContraption {
@@ -27,7 +28,7 @@ public class BoatContraption extends TranslatingContraption {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     public ContraptionLighter<?> makeLighter() {
         return new NonStationaryLighter<>(this);
     }

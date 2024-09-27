@@ -1,13 +1,14 @@
 package uwu.lopyluna.create_dd.registry.addons;
 
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.registry.helper.Lang;
 
 import java.util.Optional;
 import java.util.function.Supplier;
+
+import dev.architectury.platform.Platform;
 
 public enum DreamsAddons {
     EXTRAS,
@@ -29,11 +30,11 @@ public enum DreamsAddons {
     }
 
     public Block getBlock(String id) {
-        return ForgeRegistries.BLOCKS.getValue(rl(id));
+        return Registry.BLOCK.get(rl(id));
     }
 
     public boolean isLoaded() {
-        return ModList.get().isLoaded(id);
+        return Platform.isModLoaded(id);
     }
 
     public <T> Optional<T> runIfInstalled(Supplier<Supplier<T>> toRun) {

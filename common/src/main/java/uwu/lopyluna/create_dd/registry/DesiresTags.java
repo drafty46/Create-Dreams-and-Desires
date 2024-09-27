@@ -2,6 +2,7 @@ package uwu.lopyluna.create_dd.registry;
 
 import com.simibubi.create.foundation.utility.Lang;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
@@ -17,8 +18,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.Collections;
 import java.util.Objects;
@@ -28,38 +27,37 @@ import static uwu.lopyluna.create_dd.registry.DesiresTags.NameSpace.FORGE;
 
 @SuppressWarnings({"unused"})
 public class DesiresTags {
-	public static <T> TagKey<T> optionalTag(IForgeRegistry<T> registry,
+	public static <T> TagKey<T> optionalTag(ResourceKey<Registry<T>> registry,
 		ResourceLocation id) {
-		return Objects.requireNonNull(registry.tags())
-			.createOptionalTagKey(id, Collections.emptySet());
+		return TagKey.create(registry, id);
 	}
 
-	public static <T> TagKey<T> forgeTag(IForgeRegistry<T> registry, String path) {
+	public static <T> TagKey<T> forgeTag(ResourceKey<Registry<T>> registry, String path) {
 		return optionalTag(registry, new ResourceLocation("forge", path));
 	}
-	public static <T> TagKey<T> mcTag(IForgeRegistry<T> registry, String path) {
+	public static <T> TagKey<T> mcTag(ResourceKey<Registry<T>> registry, String path) {
 		return optionalTag(registry, new ResourceLocation("minecraft", path));
 	}
-	public static <T> TagKey<T> modTag(IForgeRegistry<T> registry, String path) {
+	public static <T> TagKey<T> modTag(ResourceKey<Registry<T>> registry, String path) {
 		return optionalTag(registry, new ResourceLocation(MOD_ID, path));
 	}
 
 	public static TagKey<Block> forgeBlockTag(String path) {
-		return forgeTag(ForgeRegistries.BLOCKS, path);
+		return forgeTag(Registry.BLOCK_REGISTRY, path);
 	}
 
 	public static TagKey<Item> forgeItemTag(String path) {
-		return forgeTag(ForgeRegistries.ITEMS, path);
+		return forgeTag(Registry.ITEM_REGISTRY, path);
 	}
 	public static TagKey<Item> modItemTag(String path) {
-		return modTag(ForgeRegistries.ITEMS, path);
+		return modTag(Registry.ITEM_REGISTRY, path);
 	}
 	public static TagKey<Item> mcItemTag(String path) {
-		return mcTag(ForgeRegistries.ITEMS, path);
+		return mcTag(Registry.ITEM_REGISTRY, path);
 	}
 
 	public static TagKey<Fluid> forgeFluidTag(String path) {
-		return forgeTag(ForgeRegistries.FLUIDS, path);
+		return forgeTag(Registry.FLUID_REGISTRY, path);
 	}
 
 	public enum NameSpace {
@@ -132,9 +130,9 @@ public class DesiresTags {
 		AllBlockTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
 			ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
 			if (optional) {
-				tag = optionalTag(ForgeRegistries.BLOCKS, id);
+				tag = optionalTag(Registry.BLOCK_REGISTRY, id);
 			} else {
-				tag = BlockTags.create(id);
+				tag = TagKey.create(Registry.BLOCK_REGISTRY, id);
 			}
 			this.alwaysDatagen = alwaysDatagen;
 		}
@@ -203,9 +201,9 @@ public class DesiresTags {
 		AllItemTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
 			ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
 			if (optional) {
-				tag = optionalTag(ForgeRegistries.ITEMS, id);
+				tag = optionalTag(Registry.ITEM_REGISTRY, id);
 			} else {
-				tag = ItemTags.create(id);
+				tag = TagKey.create(Registry.ITEM_REGISTRY, id);
 			}
 			this.alwaysDatagen = alwaysDatagen;
 		}
@@ -276,9 +274,9 @@ public class DesiresTags {
 					path
 			);
 			if (optional) {
-				tag = optionalTag(ForgeRegistries.FLUIDS, id);
+				tag = optionalTag(Registry.FLUID_REGISTRY, id);
 			} else {
-				tag = FluidTags.create(id);
+				tag = TagKey.create(Registry.FLUID_REGISTRY, id);
 			}
 			this.alwaysDatagen = alwaysDatagen;
 		}
@@ -324,7 +322,7 @@ public class DesiresTags {
 		AllEntityTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
 			ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
 			if (optional) {
-				tag = optionalTag(ForgeRegistries.ENTITY_TYPES, id);
+				tag = optionalTag(Registry.ENTITY_TYPE_REGISTRY, id);
 			} else {
 				tag = TagKey.create(Registry.ENTITY_TYPE_REGISTRY, id);
 			}
@@ -369,7 +367,7 @@ public class DesiresTags {
 		DesiresRecipeSerializerTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
 			ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
 			if (optional) {
-				tag = optionalTag(ForgeRegistries.RECIPE_SERIALIZERS, id);
+				tag = optionalTag(Registry.RECIPE_SERIALIZER_REGISTRY, id);
 			} else {
 				tag = TagKey.create(Registry.RECIPE_SERIALIZER_REGISTRY, id);
 			}
@@ -377,7 +375,7 @@ public class DesiresTags {
 		}
 
 		public boolean matches(RecipeSerializer<?> recipeSerializer) {
-			return ForgeRegistries.RECIPE_SERIALIZERS.getHolder(recipeSerializer).orElseThrow().is(tag);
+			return Registry.RECIPE_SERIALIZER.getHolder(Registry.RECIPE_SERIALIZER.getId(recipeSerializer)).orElseThrow().is(tag);
 		}
 
 		private static void init() {}

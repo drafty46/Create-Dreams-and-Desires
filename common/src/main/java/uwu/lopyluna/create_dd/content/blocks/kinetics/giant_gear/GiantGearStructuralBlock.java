@@ -3,6 +3,9 @@ package uwu.lopyluna.create_dd.content.blocks.kinetics.giant_gear;
 import com.simibubi.create.content.equipment.goggles.IProxyHoveringInformation;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.render.MultiPosDestructionHandler;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleEngine;
@@ -31,9 +34,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.extensions.common.IClientBlockExtensions;
 import org.jetbrains.annotations.Nullable;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 
@@ -150,23 +150,24 @@ public class GiantGearStructuralBlock extends DirectionalBlock implements IWrenc
                 && targetedState.getValue(GiantGearBlock.AXIS) != direction.getAxis();
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     public void initializeClient(Consumer<IClientBlockExtensions> consumer) {
         consumer.accept(new GiantGearStructuralBlock.RenderProperties());
     }
     
     private static final SoundType silentSoundType = new SoundType(0F, 1.0F, SoundEvents.STONE_BREAK, SoundEvents.STONE_STEP, SoundEvents.STONE_PLACE, SoundEvents.STONE_HIT, SoundEvents.STONE_FALL);
-    
+   
     @Override
-    public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
+    public SoundType getSoundType(BlockState state) {
         return silentSoundType;
     }
     
-    @Override
-    public boolean addLandingEffects(BlockState state1, ServerLevel level, BlockPos pos, BlockState state2,
-                                     LivingEntity entity, int numberOfParticles) {
-        return true;
-    }
+    // TODO
+    // @Override
+    // public boolean addLandingEffects(BlockState state1, ServerLevel level, BlockPos pos, BlockState state2,
+    //                                  LivingEntity entity, int numberOfParticles) {
+    //     return true;
+    // }
     
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {

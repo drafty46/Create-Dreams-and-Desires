@@ -8,6 +8,7 @@ import com.simibubi.create.foundation.utility.RegisteredObjects;
 
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
@@ -18,7 +19,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class PoweredFlywheelBlockEntity extends GeneratingKineticBlockEntity {
 
@@ -112,7 +112,7 @@ public class PoweredFlywheelBlockEntity extends GeneratingKineticBlockEntity {
 		if (compound.contains("EnginePos")) {
 			enginePos = NbtUtils.readBlockPos(compound.getCompound("EnginePos"));
 			engineEfficiency = compound.getFloat("EnginePower");
-			capacityKey = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(compound.getString("EngineType")));
+			capacityKey = Registry.BLOCK.get(new ResourceLocation(compound.getString("EngineType")));
 		}
 		if (clientPacket) {
 			this.visualSpeed.chase(this.getGeneratedSpeed(), 0.015625, LerpedFloat.Chaser.EXP);

@@ -1,10 +1,8 @@
 package uwu.lopyluna.create_dd.infrastructure.client;
 
-import com.simibubi.create.foundation.blockEntity.behaviour.ValueBox;
 import com.simibubi.create.foundation.outliner.Outline;
 import com.simibubi.create.foundation.outliner.Outliner;
 import com.simibubi.create.foundation.utility.Color;
-import com.simibubi.create.foundation.utility.Iterate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.AABB;
 

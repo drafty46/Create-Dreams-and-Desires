@@ -360,8 +360,8 @@ public class DesiresItems {
 			.properties(p -> p.rarity(Rarity.RARE)
 					.stacksTo(1))
 			.recipe((c, p) -> p.stonecutting(DataIngredient.items(AllItems.ROSE_QUARTZ), c, 1))
-			.tag(optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("minecraft", "music_discs")))
-			.tag(optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("minecraft", "creeper_drop_music_discs")))
+			.tag(optionalTag(Registry.ITEM_REGISTRY, new ResourceLocation("minecraft", "music_discs")))
+			.tag(optionalTag(Registry.ITEM_REGISTRY, new ResourceLocation("minecraft", "creeper_drop_music_discs")))
 			.lang("Music Disc")
 			.register();
 

@@ -1,13 +1,12 @@
 package uwu.lopyluna.create_dd.content.items.equipment.block_zapper;
 
-import com.simibubi.create.content.equipment.zapper.ConfigureZapperPacket;
 import com.simibubi.create.content.equipment.zapper.PlacementPatterns;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import uwu.lopyluna.create_dd.content.items.equipment.block_zapper.additional.*;
 
-public class ConfigureBlockZapperPacket extends ConfigureZapperPacket {
+public class ConfigureBlockZapperPacket extends CustomConfigureZapperPacket {
 
 	protected TerrainBrushes brush;
 	protected int brushParamX;

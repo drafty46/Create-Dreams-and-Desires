@@ -3,16 +3,15 @@ package uwu.lopyluna.create_dd.registry;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder.ProcessingRecipeFactory;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
+
+import dev.architectury.registry.registries.DeferredRegister;
+import dev.architectury.registry.registries.RegistrySupplier;
 import uwu.lopyluna.create_dd.registry.helper.Lang;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 import uwu.lopyluna.create_dd.Desires;
 import uwu.lopyluna.create_dd.content.recipes.*;
@@ -32,14 +31,14 @@ public enum DesiresRecipeTypes implements IRecipeTypeInfo {
 
 
 	private final ResourceLocation id;
-	private final RegistryObject<RecipeSerializer<?>> serializerObject;
+	private final RegistrySupplier<RecipeSerializer<?>> serializerObject;
 	private final Supplier<RecipeType<?>> type;
 
 	DesiresRecipeTypes(Supplier<RecipeSerializer<?>> serializerSupplier) {
 		String name = Lang.asId(name());
 		id = DesireUtil.asResource(name);
 		serializerObject = Registers.SERIALIZER_REGISTER.register(name, serializerSupplier);
-		@Nullable RegistryObject<RecipeType<?>> typeObject = Registers.TYPE_REGISTER.register(name, () -> RecipeType.simple(id));
+		@Nullable RegistrySupplier<RecipeType<?>> typeObject = Registers.TYPE_REGISTER.register(name, () -> RecipeType.simple(id));
 		type = typeObject;
 	}
 
@@ -47,10 +46,10 @@ public enum DesiresRecipeTypes implements IRecipeTypeInfo {
 		this(() -> new ProcessingRecipeSerializer<>(processingFactory));
 	}
 
-	public static void register(IEventBus modEventBus) {
+	public static void register() {
 		ShapedRecipe.setCraftingSize(9, 9);
-		Registers.SERIALIZER_REGISTER.register(modEventBus);
-		Registers.TYPE_REGISTER.register(modEventBus);
+		Registers.SERIALIZER_REGISTER.register();
+		Registers.TYPE_REGISTER.register();
 	}
 
 	@Override
@@ -76,8 +75,8 @@ public enum DesiresRecipeTypes implements IRecipeTypeInfo {
 	}
 
 	private static class Registers {
-		private static final DeferredRegister<RecipeSerializer<?>> SERIALIZER_REGISTER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Desires.MOD_ID);
-		private static final DeferredRegister<RecipeType<?>> TYPE_REGISTER = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, Desires.MOD_ID);
+		private static final DeferredRegister<RecipeSerializer<?>> SERIALIZER_REGISTER = DeferredRegister.create(Desires.MOD_ID, Registry.RECIPE_SERIALIZER_REGISTRY);
+		private static final DeferredRegister<RecipeType<?>> TYPE_REGISTER = DeferredRegister.create(Desires.MOD_ID, Registry.RECIPE_TYPE_REGISTRY);
 	}
 
 }

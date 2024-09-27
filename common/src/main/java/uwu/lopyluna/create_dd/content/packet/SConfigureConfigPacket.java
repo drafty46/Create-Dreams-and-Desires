@@ -5,23 +5,23 @@ import com.simibubi.create.Create;
 import com.simibubi.create.foundation.config.ui.ConfigHelper;
 import com.simibubi.create.foundation.config.ui.SubMenuConfigScreen;
 import com.simibubi.create.foundation.gui.ScreenOpener;
-import com.simibubi.create.foundation.networking.SimplePacketBase;
 import com.simibubi.create.foundation.utility.Components;
+
+import dev.architectury.networking.NetworkManager.PacketContext;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.network.NetworkEvent;
 import org.slf4j.Logger;
 import uwu.lopyluna.create_dd.infrastructure.gui.DesiresBaseConfigScreen;
+import uwu.lopyluna.create_dd.infrastructure.ponder.PacketBase;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class SConfigureConfigPacket extends SimplePacketBase {
+public class SConfigureConfigPacket extends PacketBase {
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
@@ -40,8 +40,9 @@ public class SConfigureConfigPacket extends SimplePacketBase {
     }
 
     @Override
-    public boolean handle(NetworkEvent.Context context) {
-        context.enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+    @Environment(EnvType.CLIENT)
+    public boolean handle(PacketContext context) {
+        context.queue(() -> {
             if (option.startsWith("SET")) {
                 trySetConfig(option.substring(3), value);
                 return;
@@ -53,7 +54,8 @@ public class SConfigureConfigPacket extends SimplePacketBase {
             } catch (IllegalArgumentException e) {
                 LOGGER.warn("Received ConfigureConfigPacket with invalid Option: " + option);
             }
-        }));
+        });
+
         return true;
     }
 
@@ -88,9 +90,7 @@ public class SConfigureConfigPacket extends SimplePacketBase {
     }
 
     public enum Actions {
-        configScreen(() -> Actions::configScreen),
-
-        ;
+        configScreen(() -> Actions::configScreen);
 
         private final Supplier<Consumer<String>> consumer;
 
@@ -103,7 +103,7 @@ public class SConfigureConfigPacket extends SimplePacketBase {
                     .accept(value);
         }
 
-        @OnlyIn(Dist.CLIENT)
+        @Environment(EnvType.CLIENT)
         private static void configScreen(String value) {
             if (value.isEmpty()) {
                 ScreenOpener.open(DesiresBaseConfigScreen.forDesires(null));

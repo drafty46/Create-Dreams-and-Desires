@@ -26,9 +26,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.wrapper.RecipeWrapper;
-import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.registry.DesiresTags;
 
 import java.util.*;
@@ -76,7 +73,7 @@ public class ModularDrillBlockEntity extends BlockBreakingKineticBlockEntity {
         ListTag enchantmentList = new ListTag();
         for (Map.Entry<Enchantment, Integer> entry : drillHeadEnchantments.entrySet()) {
             CompoundTag enchantmentTag = new CompoundTag();
-            ResourceLocation enchantmentKey = ForgeRegistries.ENCHANTMENTS.getKey(entry.getKey());
+            ResourceLocation enchantmentKey = Registry.ENCHANTMENT.getKey(entry.getKey());
             if (enchantmentKey != null) {
                 enchantmentTag.putString("id", enchantmentKey.toString());
                 enchantmentTag.putInt("lvl", entry.getValue());
@@ -97,7 +94,7 @@ public class ModularDrillBlockEntity extends BlockBreakingKineticBlockEntity {
             drillHeadEnchantments.clear();
             for (int i = 0; i < enchantmentList.size(); i++) {
                 CompoundTag enchantmentTag = enchantmentList.getCompound(i);
-                Enchantment enchantment = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(enchantmentTag.getString("id")));
+                Enchantment enchantment = Registry.ENCHANTMENT.get(new ResourceLocation(enchantmentTag.getString("id")));
                 int level = enchantmentTag.getInt("lvl");
                 if (enchantment != null) {
                     drillHeadEnchantments.put(enchantment, level);

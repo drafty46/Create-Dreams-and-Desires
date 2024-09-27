@@ -61,8 +61,9 @@ public class ModularDrillHeadItem extends DiggerItem {
     public @NotNull Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot pEquipmentSlot) {
         return super.getDefaultAttributeModifiers(pEquipmentSlot);
     }
+    
     @Override
-    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state) {
+    public boolean isCorrectToolForDrops(BlockState state) {
         return false;
     }
 

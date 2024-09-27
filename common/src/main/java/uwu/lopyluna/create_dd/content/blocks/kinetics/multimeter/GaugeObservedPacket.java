@@ -1,10 +1,9 @@
 package uwu.lopyluna.create_dd.content.blocks.kinetics.multimeter;
 
-import com.simibubi.create.foundation.networking.BlockEntityConfigurationPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 
-public class GaugeObservedPacket extends BlockEntityConfigurationPacket<MultiMeterBlockEntity> {
+public class GaugeObservedPacket extends CustomBlockEntityConfigurationPacket<MultiMeterBlockEntity> {
 
 	public GaugeObservedPacket(BlockPos pos) {
 		super(pos);

@@ -111,7 +111,7 @@ public abstract class DPaletteBlockPartial<B extends Block> {
 
 		@Override
 		protected StairBlock createBlock(Supplier<? extends Block> block) {
-			return new StairBlock(() -> block.get()
+			return new StairBlock(block.get()
 				.defaultBlockState(), Properties.copy(block.get()));
 		}
 

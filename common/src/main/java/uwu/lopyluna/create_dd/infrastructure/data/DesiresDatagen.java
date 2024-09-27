@@ -2,7 +2,6 @@ package uwu.lopyluna.create_dd.infrastructure.data;
 
 import com.tterrag.registrate.providers.ProviderType;
 import net.minecraft.data.DataGenerator;
-import net.minecraftforge.data.event.GatherDataEvent;
 import uwu.lopyluna.create_dd.Desires;
 import uwu.lopyluna.create_dd.content.data_recipes.DesireProcessingRecipeGen;
 import uwu.lopyluna.create_dd.content.data_recipes.DesiresRecipeGen;

@@ -3,11 +3,12 @@ package uwu.lopyluna.create_dd.mixins;
 import com.simibubi.create.content.contraptions.MountedFluidStorage;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
+
+import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
+import io.github.fabricators_of_create.porting_lib.util.FluidStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidTank;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -44,7 +45,8 @@ public class MixinMountedFluidStorage {
                     this::onFluidStackChanged));
     }
 
-    @Inject(at = @At("HEAD"), method = "updateFluid(Lnet/minecraftforge/fluids/FluidStack;)V")
+    // TODO: Move this mixin to platform-specific stuff
+    @Inject(at = @At("HEAD"), method = "updateFluid(Lio/github/fabricators_of_create/porting_lib/util/FluidStack;)V")
     public void updateFluid(FluidStack fluid, CallbackInfo ci) {
         tank.setFluid(fluid);
         if (!(blockEntity instanceof FluidReservoirBlockEntity tankR))
@@ -55,7 +57,7 @@ public class MixinMountedFluidStorage {
                     .startWithValue(fillState));
         tankR.getFluidLevel()
                 .chase(fillState, 0.5, LerpedFloat.Chaser.EXP);
-        IFluidTank tankRInventory = tankR.getTankInventory();
+        FluidTank tankRInventory = tankR.getTankInventory();
         if (tankRInventory instanceof SmartFluidTank smartTank)
             smartTank.setFluid(fluid);
     }

@@ -1,13 +1,10 @@
 package uwu.lopyluna.create_dd.registry;
 
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import uwu.lopyluna.create_dd.Desires;
 import uwu.lopyluna.create_dd.content.entities.inert_blazeling.InertBlazeModel;
 import uwu.lopyluna.create_dd.content.entities.inert_blazeling.InertBlazeRenderer;
 
+// TODO: I hate forge
 @Mod.EventBusSubscriber(modid = Desires.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DesiresRegistry {
 

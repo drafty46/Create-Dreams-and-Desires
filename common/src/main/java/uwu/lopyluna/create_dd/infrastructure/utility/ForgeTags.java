@@ -5,8 +5,6 @@ import java.util.function.Supplier;
 
 import org.jetbrains.annotations.Nullable;
 
-import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBlockTags;
-import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -23,8 +21,8 @@ public class ForgeTags {
     public static class Blocks {
 		public static final TagKey<Block> BARRELS = tag("barrels");
 		public static final TagKey<Block> BARRELS_WOODEN = tag("wooden_barrels");
-		public static final TagKey<Block> BOOKSHELVES = ConventionalBlockTags.BOOKSHELVES;
-		public static final TagKey<Block> CHESTS = ConventionalBlockTags.CHESTS;
+		// public static final TagKey<Block> BOOKSHELVES = ConventionalBlockTags.BOOKSHELVES;
+		// public static final TagKey<Block> CHESTS = ConventionalBlockTags.CHESTS;
 		public static final TagKey<Block> CHESTS_ENDER = tag("ender_chests");
 		public static final TagKey<Block> CHESTS_TRAPPED = tag("trapped_chests");
 		public static final TagKey<Block> CHESTS_WOODEN = tag("wooden_chests");
@@ -41,7 +39,7 @@ public class ForgeTags {
 		public static final TagKey<Block> FENCES_NETHER_BRICK = tag("nether_brick_fences");
 		public static final TagKey<Block> FENCES_WOODEN = tag("wooden_fences");
 
-		public static final TagKey<Block> GLASS = ConventionalBlockTags.GLASS_BLOCKS;
+		// public static final TagKey<Block> GLASS = ConventionalBlockTags.GLASS_BLOCKS;
 		public static final TagKey<Block> GLASS_BLACK = tag("black_glass");
 		public static final TagKey<Block> GLASS_BLUE = tag("blue_glass");
 		public static final TagKey<Block> GLASS_BROWN = tag("brown_glass");
@@ -65,7 +63,7 @@ public class ForgeTags {
 		public static final TagKey<Block> GLASS_WHITE = tag("white_glass");
 		public static final TagKey<Block> GLASS_YELLOW = tag("yellow_glass");
 
-		public static final TagKey<Block> GLASS_PANES = ConventionalBlockTags.GLASS_PANES;
+		// public static final TagKey<Block> GLASS_PANES = ConventionalBlockTags.GLASS_PANES;
 		public static final TagKey<Block> GLASS_PANES_BLACK = tag("black_glass_panes");
 		public static final TagKey<Block> GLASS_PANES_BLUE = tag("blue_glass_panes");
 		public static final TagKey<Block> GLASS_PANES_BROWN = tag("brown_glass_panes");
@@ -120,7 +118,7 @@ public class ForgeTags {
 		public static final TagKey<Block> ORES_IRON = tag("iron_ores");
 		public static final TagKey<Block> ORES_LAPIS = tag("lapis_ores");
 		public static final TagKey<Block> ORES_NETHERITE_SCRAP = tag("netherite_scrap_ores");
-		public static final TagKey<Block> ORES_QUARTZ = ConventionalBlockTags.QUARTZ_ORES;
+		// public static final TagKey<Block> ORES_QUARTZ = ConventionalBlockTags.QUARTZ_ORES;
 		public static final TagKey<Block> ORES_REDSTONE = tag("redstone_ores");
 		/**
 		 * Ores in deepslate (or in equivalent blocks in the tag {@link #ORE_BEARING_GROUND_DEEPSLATE}) which could logically use deepslate as recipe input or output
@@ -233,14 +231,14 @@ public class ForgeTags {
 		public static final TagKey<Item> FENCES_NETHER_BRICK = tag("nether_brick_fences");
 		public static final TagKey<Item> FENCES_WOODEN = tag("wooden_fences");
 		public static final TagKey<Item> GEMS = tag("gems");
-		public static final TagKey<Item> GEMS_DIAMOND = ConventionalItemTags.DIAMONDS;
-		public static final TagKey<Item> GEMS_EMERALD = ConventionalItemTags.EMERALDS;
+		// public static final TagKey<Item> GEMS_DIAMOND = ConventionalItemTags.DIAMONDS;
+		// public static final TagKey<Item> GEMS_EMERALD = ConventionalItemTags.EMERALDS;
 		public static final TagKey<Item> GEMS_AMETHYST = tag("amethyst");
-		public static final TagKey<Item> GEMS_LAPIS = ConventionalItemTags.LAPIS;
+		// public static final TagKey<Item> GEMS_LAPIS = ConventionalItemTags.LAPIS;
 		public static final TagKey<Item> GEMS_PRISMARINE = tag("prismarine");
-		public static final TagKey<Item> GEMS_QUARTZ = ConventionalItemTags.QUARTZ;
+		// public static final TagKey<Item> GEMS_QUARTZ = ConventionalItemTags.QUARTZ;
 
-		public static final TagKey<Item> GLASS = ConventionalItemTags.GLASS_BLOCKS;
+		// public static final TagKey<Item> GLASS = ConventionalItemTags.GLASS_BLOCKS;
 		public static final TagKey<Item> GLASS_BLACK = tag("black_glass");
 		public static final TagKey<Item> GLASS_BLUE = tag("blue_glass");
 		public static final TagKey<Item> GLASS_BROWN = tag("brown_glass");
@@ -264,7 +262,7 @@ public class ForgeTags {
 		public static final TagKey<Item> GLASS_WHITE = tag("white_glass");
 		public static final TagKey<Item> GLASS_YELLOW = tag("yellow_glass");
 
-		public static final TagKey<Item> GLASS_PANES = ConventionalItemTags.GLASS_PANES;
+		// public static final TagKey<Item> GLASS_PANES = ConventionalItemTags.GLASS_PANES;
 		public static final TagKey<Item> GLASS_PANES_BLACK = tag("black_glass_panes");
 		public static final TagKey<Item> GLASS_PANES_BLUE = tag("blue_glass_panes");
 		public static final TagKey<Item> GLASS_PANES_BROWN = tag("brown_glass_panes");
@@ -290,8 +288,8 @@ public class ForgeTags {
 		public static final TagKey<Item> INGOTS_BRICK = tag("brick_ingots");
 		public static final TagKey<Item> INGOTS_COPPER = tag("copper_ingots");
 		public static final TagKey<Item> INGOTS_GOLD = tag("gold_ingots");
-		public static final TagKey<Item> INGOTS_IRON = ConventionalItemTags.IRON_INGOTS;
-		public static final TagKey<Item> INGOTS_NETHERITE = ConventionalItemTags.NETHERITE_INGOTS;
+		// public static final TagKey<Item> INGOTS_IRON = ConventionalItemTags.IRON_INGOTS;
+		// public static final TagKey<Item> INGOTS_NETHERITE = ConventionalItemTags.NETHERITE_INGOTS;
 		public static final TagKey<Item> INGOTS_NETHER_BRICK = tag("nether_brick_ingots");
 		public static final TagKey<Item> LEATHER = tag("leather");
 		public static final TagKey<Item> MUSHROOMS = tag("mushrooms");
@@ -325,7 +323,7 @@ public class ForgeTags {
 		 * Ores which on average result in less than one resource worth of materials
 		 */
 		public static final TagKey<Item> ORE_RATES_SPARSE = tag("ore_rates/sparse");
-		public static final TagKey<Item> ORES = ConventionalItemTags.ORES;
+		// public static final TagKey<Item> ORES = ConventionalItemTags.ORES;
 		public static final TagKey<Item> ORES_COAL = tag("coal_ores");
 		public static final TagKey<Item> ORES_COPPER = tag("copper_ores");
 		public static final TagKey<Item> ORES_DIAMOND = tag("diamond_ores");
@@ -334,7 +332,7 @@ public class ForgeTags {
 		public static final TagKey<Item> ORES_IRON = tag("iron_ores");
 		public static final TagKey<Item> ORES_LAPIS = tag("lapis_ores");
 		public static final TagKey<Item> ORES_NETHERITE_SCRAP = tag("netherite_scrap_ores");
-		public static final TagKey<Item> ORES_QUARTZ = ConventionalItemTags.QUARTZ_ORES;
+		// public static final TagKey<Item> ORES_QUARTZ = ConventionalItemTags.QUARTZ_ORES;
 		public static final TagKey<Item> ORES_REDSTONE = tag("redstone_ores");
 		/**
 		 * Ores in deepslate (or in equivalent blocks in the tag {@link #ORE_BEARING_GROUND_DEEPSLATE}) which could logically use deepslate as recipe input or output
@@ -366,7 +364,7 @@ public class ForgeTags {
 		public static final TagKey<Item> SEEDS_MELON = tag("melon_seeds");
 		public static final TagKey<Item> SEEDS_PUMPKIN = tag("pumpkin_seeds");
 		public static final TagKey<Item> SEEDS_WHEAT = tag("wheat_seeds");
-		public static final TagKey<Item> SHEARS = ConventionalItemTags.SHEARS;
+		// public static final TagKey<Item> SHEARS = ConventionalItemTags.SHEARS;
 		public static final TagKey<Item> SLIMEBALLS = tag("slimeballs");
 		public static final TagKey<Item> STAINED_GLASS = tag("stained_glass");
 		public static final TagKey<Item> STAINED_GLASS_PANES = tag("stained_glass_panes");
@@ -382,9 +380,9 @@ public class ForgeTags {
 		public static final TagKey<Item> STORAGE_BLOCKS_LAPIS = tag("lapis_blocks");
 		public static final TagKey<Item> STORAGE_BLOCKS_NETHERITE = tag("netherite_blocks");
 		public static final TagKey<Item> STORAGE_BLOCKS_QUARTZ = tag("quartz_blocks");
-		public static final TagKey<Item> STORAGE_BLOCKS_RAW_COPPER = ConventionalItemTags.RAW_COPPER_BLOCKS;
-		public static final TagKey<Item> STORAGE_BLOCKS_RAW_GOLD = ConventionalItemTags.RAW_GOLD_BLOCKS;
-		public static final TagKey<Item> STORAGE_BLOCKS_RAW_IRON = ConventionalItemTags.RAW_IRON_BLOCKS;
+		// public static final TagKey<Item> STORAGE_BLOCKS_RAW_COPPER = ConventionalItemTags.RAW_COPPER_BLOCKS;
+		// public static final TagKey<Item> STORAGE_BLOCKS_RAW_GOLD = ConventionalItemTags.RAW_GOLD_BLOCKS;
+		// public static final TagKey<Item> STORAGE_BLOCKS_RAW_IRON = ConventionalItemTags.RAW_IRON_BLOCKS;
 		public static final TagKey<Item> STORAGE_BLOCKS_REDSTONE = tag("redstone_blocks");
 		public static final TagKey<Item> STRING = tag("string");
 		/**
@@ -394,23 +392,23 @@ public class ForgeTags {
 		/**
 		 * A tag containing all existing swords.
 		 */
-		public static final TagKey<Item> TOOLS_SWORDS = ConventionalItemTags.SWORDS;
+		// public static final TagKey<Item> TOOLS_SWORDS = ConventionalItemTags.SWORDS;
 		/**
 		 * A tag containing all existing axes.
 		 */
-		public static final TagKey<Item> TOOLS_AXES = ConventionalItemTags.AXES;
+		// public static final TagKey<Item> TOOLS_AXES = ConventionalItemTags.AXES;
 		/**
 		 * A tag containing all existing pickaxes.
 		 */
-		public static final TagKey<Item> TOOLS_PICKAXES = ConventionalItemTags.PICKAXES;
+		// public static final TagKey<Item> TOOLS_PICKAXES = ConventionalItemTags.PICKAXES;
 		/**
 		 * A tag containing all existing shovels.
 		 */
-		public static final TagKey<Item> TOOLS_SHOVELS = ConventionalItemTags.SHOVELS;
+		// public static final TagKey<Item> TOOLS_SHOVELS = ConventionalItemTags.SHOVELS;
 		/**
 		 * A tag containing all existing hoes.
 		 */
-		public static final TagKey<Item> TOOLS_HOES = ConventionalItemTags.HOES;
+		// public static final TagKey<Item> TOOLS_HOES = ConventionalItemTags.HOES;
 		/**
 		 * A tag containing all existing shields.
 		 */
@@ -418,7 +416,7 @@ public class ForgeTags {
 		/**
 		 * A tag containing all existing bows.
 		 */
-		public static final TagKey<Item> TOOLS_BOWS = ConventionalItemTags.BOWS;
+		// public static final TagKey<Item> TOOLS_BOWS = ConventionalItemTags.BOWS;
 		/**
 		 * A tag containing all existing crossbows.
 		 */

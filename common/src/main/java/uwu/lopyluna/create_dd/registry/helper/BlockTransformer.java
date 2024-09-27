@@ -11,6 +11,8 @@ import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
+
+import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -21,8 +23,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
-import net.minecraftforge.common.util.ForgeSoundType;
-import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.DesireUtil;
 import uwu.lopyluna.create_dd.content.blocks.functional.VelvetBlock;
 import uwu.lopyluna.create_dd.registry.DesiresPaletteBlocks;
@@ -55,12 +55,12 @@ public class BlockTransformer {
 
     public static BlockEntry<Block> rubber_decor(String colorId, MaterialColor mapColor, Item dye) {
         SoundType rubberSoundType = RUBBER;
-        TagKey<Item> dyeRubberDecorTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", colorId + "_rubber_decor"));
-        TagKey<Item> rubberDecorTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", "rubber_decors"));
-        TagKey<Block> stairsBlockTag = optionalTag(ForgeRegistries.BLOCKS, new ResourceLocation("minecraft", "stairs"));
-        TagKey<Item> stairsItemTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("minecraft", "stairs"));
-        TagKey<Block> slabsBlockTag = optionalTag(ForgeRegistries.BLOCKS, new ResourceLocation("minecraft", "slabs"));
-        TagKey<Item> slabsItemTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("minecraft", "slabs"));
+        TagKey<Item> dyeRubberDecorTag = optionalTag(Registry.ITEM_REGISTRY, new ResourceLocation("create_dd", colorId + "_rubber_decor"));
+        TagKey<Item> rubberDecorTag = optionalTag(Registry.ITEM_REGISTRY, new ResourceLocation("create_dd", "rubber_decors"));
+        TagKey<Block> stairsBlockTag = optionalTag(Registry.BLOCK_REGISTRY, new ResourceLocation("minecraft", "stairs"));
+        TagKey<Item> stairsItemTag = optionalTag(Registry.ITEM_REGISTRY, new ResourceLocation("minecraft", "stairs"));
+        TagKey<Block> slabsBlockTag = optionalTag(Registry.BLOCK_REGISTRY, new ResourceLocation("minecraft", "slabs"));
+        TagKey<Item> slabsItemTag = optionalTag(Registry.ITEM_REGISTRY, new ResourceLocation("minecraft", "slabs"));
 
         REGISTRATE.block(colorId + "_padded_tiled_rubber", Block::new)
                 .properties(p -> p.color(mapColor)).properties(p -> p.sound(rubberSoundType)).properties(p -> p.strength(0.5f,1.5f))
@@ -116,8 +116,8 @@ public class BlockTransformer {
     }
 
     public static BlockEntry<Block> blueprintBlocks( String colorId, String colorLang, Item dye, CTSpriteShiftEntry connectedTexture, MaterialColor mapColor ) {
-        TagKey<Item> blueprintDecorTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", "blueprints"));
-        TagKey<Block> blueprintDecorBlockTag = optionalTag(ForgeRegistries.BLOCKS, new ResourceLocation("create_dd", "blueprints"));
+        TagKey<Item> blueprintDecorTag = optionalTag(Registry.ITEM_REGISTRY, new ResourceLocation("create_dd", "blueprints"));
+        TagKey<Block> blueprintDecorBlockTag = optionalTag(Registry.BLOCK_REGISTRY, new ResourceLocation("create_dd", "blueprints"));
         return REGISTRATE.block(colorId + "_blueprint_block", Block::new)
                 .transform(BlockTransformer.block(() -> connectedTexture))
                 .initialProperties(() -> Blocks.HAY_BLOCK)
@@ -142,9 +142,9 @@ public class BlockTransformer {
                             .save(p, DesireUtil.asResource("crafting/decor/" + c.getName()));
                 })
                 .properties(p -> p.color(mapColor))
-                .properties(p -> p.sound(new ForgeSoundType(1, 0.85f, () -> SoundEvents.PAINTING_BREAK,
-                        () -> SoundEvents.MOSS_STEP, () -> SoundEvents.PAINTING_PLACE,
-                        () -> SoundEvents.BAMBOO_HIT, () -> SoundEvents.MOSS_STEP)))
+                .properties(p -> p.sound(new SoundType(1, 0.85f, SoundEvents.PAINTING_BREAK,
+                        SoundEvents.MOSS_STEP, SoundEvents.PAINTING_PLACE,
+                        SoundEvents.BAMBOO_HIT, SoundEvents.MOSS_STEP)))
                 .properties(p -> p.strength(0.025f,0.25f))
                 .lang(colorLang + " Blueprint Block")
                 .item()
@@ -154,8 +154,8 @@ public class BlockTransformer {
     }
 
     public static BlockEntry<Block> blueprintBlocks( String colorId, String colorLang, Item dye, CTSpriteShiftEntry connectedTexture, MaterialColor mapColor, String no_underscore ) {
-        TagKey<Item> blueprintDecorTag = optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("create_dd", "blueprints"));
-        TagKey<Block> blueprintDecorBlockTag = optionalTag(ForgeRegistries.BLOCKS, new ResourceLocation("create_dd", "blueprints"));
+        TagKey<Item> blueprintDecorTag = optionalTag(Registry.ITEM_REGISTRY, new ResourceLocation("create_dd", "blueprints"));
+        TagKey<Block> blueprintDecorBlockTag = optionalTag(Registry.BLOCK_REGISTRY, new ResourceLocation("create_dd", "blueprints"));
         return REGISTRATE.block(colorId + "blueprint_block", Block::new)
                 .transform(BlockTransformer.block(() -> connectedTexture))
                 .initialProperties(() -> Blocks.HAY_BLOCK)
@@ -180,9 +180,9 @@ public class BlockTransformer {
                             .save(p, DesireUtil.asResource("crafting/decor/" + c.getName()));
                 })
                 .properties(p -> p.color(mapColor))
-                .properties(p -> p.sound(new ForgeSoundType(1, 0.85f, () -> SoundEvents.PAINTING_BREAK,
-                        () -> SoundEvents.MOSS_STEP, () -> SoundEvents.PAINTING_PLACE,
-                        () -> SoundEvents.BAMBOO_HIT, () -> SoundEvents.MOSS_STEP)))
+                .properties(p -> p.sound(new SoundType(1, 0.85f, SoundEvents.PAINTING_BREAK,
+                        SoundEvents.MOSS_STEP, SoundEvents.PAINTING_PLACE,
+                        SoundEvents.BAMBOO_HIT, SoundEvents.MOSS_STEP)))
                 .properties(p -> p.strength(0.025f,0.25f))
                 .lang(colorLang + "Blueprint Block")
                 .item()

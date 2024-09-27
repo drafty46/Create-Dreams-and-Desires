@@ -1,6 +1,5 @@
 package uwu.lopyluna.create_dd.content.world;
 
-import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.infrastructure.worldgen.LayerPattern;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.world.level.block.Blocks;

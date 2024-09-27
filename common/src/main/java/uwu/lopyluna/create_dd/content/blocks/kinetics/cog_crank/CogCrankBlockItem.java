@@ -44,7 +44,7 @@ public class CogCrankBlockItem extends BlockItem {
     }
     
     @Override
-    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
+    public InteractionResult useOn(UseOnContext context) {
         Level world = context.getLevel();
         BlockPos pos = context.getClickedPos();
         BlockState state = world.getBlockState(pos);
@@ -66,7 +66,7 @@ public class CogCrankBlockItem extends BlockItem {
             }
         }
         
-        return super.onItemUseFirst(stack, context);
+        return super.useOn(context);
     }
     
     @MethodsReturnNonnullByDefault

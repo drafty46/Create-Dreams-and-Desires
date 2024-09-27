@@ -1,15 +1,5 @@
 package uwu.lopyluna.create_dd;
 
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.ConfigScreenHandler;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModContainer;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import uwu.lopyluna.create_dd.infrastructure.client.DebugOutliner;
 import uwu.lopyluna.create_dd.infrastructure.gui.DesiresBaseConfigScreen;
 import uwu.lopyluna.create_dd.infrastructure.ponder.DesirePonderTags;
@@ -17,6 +7,9 @@ import uwu.lopyluna.create_dd.infrastructure.ponder.DesiresPonderIndex;
 import uwu.lopyluna.create_dd.registry.DesiresParticleTypes;
 
 import static uwu.lopyluna.create_dd.Desires.MOD_ID;
+
+import dev.architectury.platform.Mod;
+import dev.architectury.platform.Platform;
 
 @SuppressWarnings({"unused"})
 public class DesireClient {
@@ -41,11 +34,10 @@ public class DesireClient {
     public static class ModBusEvents {
         @SubscribeEvent
         public static void onLoadComplete(FMLLoadCompleteEvent event) {
-            ModContainer createContainer = ModList.get()
-                    .getModContainerById(MOD_ID)
-                    .orElseThrow(() -> new IllegalStateException("Create mod container missing on LoadComplete"));
-            createContainer.registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
-                    () -> new ConfigScreenHandler.ConfigScreenFactory(
+            Mod createContainer = Platform
+                    .getOptionalMod(MOD_ID)
+                    .orElseThrow(() -> new IllegalStateException("Create mod missing (somehow?)!"));
+            createContainer.registerConfigurationScreen(() -> new ConfigScreenHandler.ConfigScreenFactory(
                             (mc, previousScreen) -> DesiresBaseConfigScreen.forDesires(previousScreen)));
         }
     }

@@ -2,12 +2,14 @@ package uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir;
 
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.content.fluids.FlowSource.FluidHandler;
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
 import com.simibubi.create.infrastructure.config.AllConfigs;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -18,13 +20,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -39,8 +34,9 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IHave
 
     private static final int MAX_SIZE = 3;
 
-    protected LazyOptional<IFluidHandler> fluidCapability;
+    protected LazyOptional<FluidHandler> fluidCapability;
     protected boolean forceFluidLevelUpdate;
+    // TODO: Replace with forge's FluidTank
     protected FluidTank tankInventory;
     protected BlockPos controller;
     protected BlockPos lastKnownPos;
@@ -133,12 +129,13 @@ public class FluidReservoirBlockEntity extends SmartBlockEntity implements IHave
         lastKnownPos = worldPosition;
     }
 
+    // TODO: Replace with forge's FluidStack
     protected void onFluidStackChanged(FluidStack newFluidStack) {
         if (!hasLevel())
             return;
 
         FluidType attributes = newFluidStack.getFluid()
-                .getFluidType();
+                .getFluidType(); // TODO
         int luminosity = (int) (attributes.getLightLevel(newFluidStack) / 1.2f);
         boolean reversed = attributes.isLighterThanAir();
         int maxF = (int) ((getFillState() * height) + 1);

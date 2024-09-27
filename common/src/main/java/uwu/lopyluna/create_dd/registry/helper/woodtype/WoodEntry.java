@@ -24,6 +24,7 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
@@ -41,12 +42,11 @@ import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureCo
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.DesireUtil;
 import uwu.lopyluna.create_dd.content.blocks.functional.AxisBlock;
 import uwu.lopyluna.create_dd.content.blocks.functional.Combustible.*;
 import uwu.lopyluna.create_dd.content.blocks.functional.sliding_door.WoodenSlidingDoorBlock;
+import uwu.lopyluna.create_dd.infrastructure.utility.ForgeTags;
 import uwu.lopyluna.create_dd.registry.DesiresCreativeModeTabs;
 import uwu.lopyluna.create_dd.registry.DesiresTags;
 
@@ -157,7 +157,7 @@ public class WoodEntry {
 
         if (anyAll) {
 
-            woodType = WoodType.create(id);
+            woodType = new CustomWoodType(id);
             plank = REGISTRATE.block(id + "_planks", flammable ? p -> CombustibleBlock.create(p, 5, 20) : CombustibleBlock::create)
                     .initialProperties(() -> Blocks.OAK_PLANKS)
                     .lang(name + " Planks")
@@ -300,8 +300,8 @@ public class WoodEntry {
                     .tag(!flammable ? BlockTags.NON_FLAMMABLE_WOOD : DesiresTags.AllBlockTags.FLAMMABLE_WOOD.tag)
                     .tag(BlockTags.FENCES)
                     .tag(BlockTags.WOODEN_FENCES)
-                    .tag(Tags.Blocks.FENCES)
-                    .tag(Tags.Blocks.FENCES_WOODEN)
+                    .tag(ForgeTags.Blocks.FENCES)
+                    .tag(ForgeTags.Blocks.FENCES_WOODEN)
                     .item()
                     .recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 3).define('#', plank.get()).define('S', Items.STICK)
                             .pattern("#S#")
@@ -310,8 +310,8 @@ public class WoodEntry {
                             .unlockedBy("has_planks", has(plank.get())).save(p))
                     .tag(ItemTags.FENCES)
                     .tag(ItemTags.WOODEN_FENCES)
-                    .tag(Tags.Items.FENCES)
-                    .tag(Tags.Items.FENCES_WOODEN)
+                    .tag(ForgeTags.Items.FENCES)
+                    .tag(ForgeTags.Items.FENCES_WOODEN)
                     .tag(!flammable ? ItemTags.NON_FLAMMABLE_WOOD : DesiresTags.AllItemTags.FLAMMABLE_WOOD.tag)
                     .model((c, p) -> p.fenceInventory(c.getName(), plankTextures))
                     .tab(tab)
@@ -324,16 +324,16 @@ public class WoodEntry {
                     .transform(axeOnly())
                     .tag(!flammable ? BlockTags.NON_FLAMMABLE_WOOD : DesiresTags.AllBlockTags.FLAMMABLE_WOOD.tag)
                     .tag(BlockTags.FENCE_GATES)
-                    .tag(Tags.Blocks.FENCE_GATES)
-                    .tag(Tags.Blocks.FENCE_GATES_WOODEN)
+                    .tag(ForgeTags.Blocks.FENCE_GATES)
+                    .tag(ForgeTags.Blocks.FENCE_GATES_WOODEN)
                     .item()
                     .recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 1).define('#', plank.get()).define('S', Items.STICK)
                             .pattern("S#S")
                             .pattern("S#S")
                             .group("wooden_fence_gate")
                             .unlockedBy("has_planks", has(plank.get())).save(p))
-                    .tag(Tags.Items.FENCE_GATES)
-                    .tag(Tags.Items.FENCE_GATES_WOODEN)
+                    .tag(ForgeTags.Items.FENCE_GATES)
+                    .tag(ForgeTags.Items.FENCE_GATES_WOODEN)
                     .tag(!flammable ? ItemTags.NON_FLAMMABLE_WOOD : DesiresTags.AllItemTags.FLAMMABLE_WOOD.tag)
                     .tag()
                     .tab(tab)
@@ -352,7 +352,7 @@ public class WoodEntry {
                             .pattern("##")
                             .group("wooden_pressure_plate")
                             .unlockedBy("has_planks", has(plank.get())).save(p))
-                    .tag(DesiresTags.optionalTag(ForgeRegistries.ITEMS, new ResourceLocation("minecraft", "pressure_plates")))
+                    .tag(DesiresTags.optionalTag(Registry.ITEM_REGISTRY, new ResourceLocation("minecraft", "pressure_plates")))
                     .tag(ItemTags.WOODEN_PRESSURE_PLATES)
                     .tag(!flammable ? ItemTags.NON_FLAMMABLE_WOOD : DesiresTags.AllItemTags.FLAMMABLE_WOOD.tag)
                     .tab(tab)
@@ -612,7 +612,7 @@ public class WoodEntry {
         return key(block).getPath();
     }
     private static ResourceLocation key(Block block) {
-        return ForgeRegistries.BLOCKS.getKey(block);
+        return Registry.BLOCK.getKey(block);
     }
 
     public WoodEntry(WoodType woodType,

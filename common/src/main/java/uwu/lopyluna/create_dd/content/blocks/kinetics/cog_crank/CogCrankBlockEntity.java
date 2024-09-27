@@ -11,14 +11,15 @@ import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel;
 import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.render.SuperByteBuffer;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import uwu.lopyluna.create_dd.registry.DesiresBlocks;
 import uwu.lopyluna.create_dd.registry.DesiresPartialModels;
 
@@ -97,7 +98,7 @@ public class CogCrankBlockEntity extends GeneratingKineticBlockEntity {
         }
     }
     
-    @OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     public SuperByteBuffer getRenderedHandle() {
         BlockState blockState = getBlockState();
         Direction.Axis axis = blockState.getOptionalValue(CogCrankBlock.AXIS).orElse(Direction.Axis.Y);
@@ -105,14 +106,14 @@ public class CogCrankBlockEntity extends GeneratingKineticBlockEntity {
     }
 
 
-    @OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     public Instancer<ModelData> getRenderedHandleInstance(Material<ModelData> material) {
         BlockState blockState = getBlockState();
         Direction.Axis axis = blockState.getOptionalValue(CogCrankBlock.AXIS).orElse(Direction.Axis.Y);
         return material.getModel(DesiresPartialModels.COG_CRANK_HANDLE, blockState, Direction.get(Direction.AxisDirection.POSITIVE, axis).getOpposite());
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     public boolean shouldRenderCog() {
         return true;
     }
@@ -124,7 +125,7 @@ public class CogCrankBlockEntity extends GeneratingKineticBlockEntity {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     public void tickAudio() {
         super.tickAudio();
         if (inUse > 0 && AnimationTickHolder.getTicks() % 10 == 0) {

@@ -5,11 +5,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.Registry;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import uwu.lopyluna.create_dd.Desires;
 
@@ -17,7 +17,8 @@ import java.util.Collection;
 
 public abstract class DesireCreativeModeTab extends CreativeModeTab {
 	public DesireCreativeModeTab(String id) {
-		super(Desires.MOD_ID + "." + id);
+		// fuck you forge: gives you an id of 100 million bazillion bajillion
+		super(100000000, Desires.MOD_ID + "." + id);
 	}
 
 	@Override
@@ -28,7 +29,7 @@ public abstract class DesireCreativeModeTab extends CreativeModeTab {
 	}
 
 	protected Collection<RegistryEntry<Item>> registeredItems() {
-		return Desires.REGISTRATE.getAll(ForgeRegistries.ITEMS.getRegistryKey());
+		return Desires.REGISTRATE.getAll(Registry.ITEM_REGISTRY);
 	}
 
 	public void addBlocks(NonNullList<ItemStack> items) {
