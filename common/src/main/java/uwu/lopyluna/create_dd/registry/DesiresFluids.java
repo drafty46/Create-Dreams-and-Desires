@@ -6,9 +6,6 @@ import com.mojang.math.Vector3f;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.utility.Color;
-import com.tterrag.registrate.builders.FluidBuilder;
-import com.tterrag.registrate.builders.FluidBuilder.FluidTypeFactory;
-import com.tterrag.registrate.util.entry.FluidEntry;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.FogRenderer.FogMode;
@@ -25,9 +22,11 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import org.jetbrains.annotations.NotNull;
 import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
+import uwu.lopyluna.create_dd.infrastructure.registrate_classes.FluidBuilder;
+import uwu.lopyluna.create_dd.infrastructure.registrate_classes.FluidEntry;
+import uwu.lopyluna.create_dd.infrastructure.registrate_classes.SimpleFlowableFluid;
 
 import javax.annotation.Nullable;
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static uwu.lopyluna.create_dd.DesireUtil.randomChance;
@@ -37,32 +36,32 @@ import static uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs.client
 
 public class DesiresFluids {
 	// TODO: There are so many forge extensions in this class I'm going to cry
-
-	public static final FluidEntry<ForgeFlowingFluid.Flowing> CHOCOLATE_MILKSHAKE = newFluid("Chocolate Milkshake",
+	
+	public static final FluidEntry<SimpleFlowableFluid> CHOCOLATE_MILKSHAKE = newFluid("Chocolate Milkshake",
 			0xB2614D, "c", DesiresTags.AllFluidTags.CHOCOLATE.tag)
 			.register();
-	public static final FluidEntry<ForgeFlowingFluid.Flowing> VANILLA_MILKSHAKE = newFluid("Vanilla Milkshake",
+	public static final FluidEntry<SimpleFlowableFluid> VANILLA_MILKSHAKE = newFluid("Vanilla Milkshake",
 			0xEDDABA, "v", DesiresTags.AllFluidTags.VANILLA.tag)
 			.register();
-	public static final FluidEntry<ForgeFlowingFluid.Flowing> STRAWBERRY_MILKSHAKE = newFluid("Strawberry Milkshake",
+	public static final FluidEntry<SimpleFlowableFluid> STRAWBERRY_MILKSHAKE = newFluid("Strawberry Milkshake",
 			0xD57A8B, "s", DesiresTags.AllFluidTags.STRAWBERRY.tag)
 			.register();
-	public static final FluidEntry<ForgeFlowingFluid.Flowing> GLOWBERRY_MILKSHAKE = newFluid("Glowberry Milkshake",
+	public static final FluidEntry<SimpleFlowableFluid> GLOWBERRY_MILKSHAKE = newFluid("Glowberry Milkshake",
 			0xD8A155, "g", DesiresTags.AllFluidTags.GLOWBERRY.tag)
 			.register();
-	public static final FluidEntry<ForgeFlowingFluid.Flowing> PUMPKIN_MILKSHAKE = newFluid("Pumpkin Milkshake",
+	public static final FluidEntry<SimpleFlowableFluid> PUMPKIN_MILKSHAKE = newFluid("Pumpkin Milkshake",
 			0xCB7B38, "p", DesiresTags.AllFluidTags.PUMPKIN.tag)
 			.register();
 
 
-	public static final FluidEntry<ForgeFlowingFluid.Flowing> SAP = newFluid("Sap",
+	public static final FluidEntry<SimpleFlowableFluid> SAP = newFluid("Sap",
 			0xC87E50, "", DesiresTags.AllFluidTags.SAP.tag)
 			.register();
 
 	//CHROMATIC WASTE - 0x753458
 
 	@SafeVarargs
-    public static FluidBuilder<ForgeFlowingFluid.Flowing, CreateRegistrate> newFluid(String name, int hexColor, String type, TagKey<Fluid>... tags) {
+    public static FluidBuilder<SimpleFlowableFluid, CreateRegistrate> newFluid(String name, int hexColor, String type, TagKey<Fluid>... tags) {
 		String id = name.toLowerCase().replace(" ", "_");
 		return REGISTRATE.standardFluid(id, SolidRenderedPlaceableFluidType.create(hexColor, () -> 1f / 4f * (type.equals("c") ?
 						client().chocolateTransparencyMultiplier : type.equals("v") ?

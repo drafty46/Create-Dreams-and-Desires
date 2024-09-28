@@ -4,7 +4,5 @@ mutable field net/minecraft/world/item/AxeItem STRIPPABLES Ljava/util/Map;
 accessible field net/minecraft/client/gui/screens/TitleScreen panorama Lnet/minecraft/client/renderer/PanoramaRenderer;
 accessible field net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity cookingProgress I
 accessible field net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity cookingTotalTime I
-
-#public net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity f_58318_
-#public net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity f_58319_
-#public net.minecraft.world.entity.Entity f_19796_ # random
+accessible field net/minecraft/world/Entity random Lnet/minecraft/util/RandomSource;
+accessible class com/tterrag/registrate/AbstractRegistrate$Registration

@@ -4,6 +4,8 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder.ProcessingRecipeParams;
 
 import net.minecraft.world.level.Level;
+import uwu.lopyluna.create_dd.infrastructure.porting_lib_classes.ItemStackHandler;
+import uwu.lopyluna.create_dd.infrastructure.porting_lib_classes.RecipeWrapper;
 import uwu.lopyluna.create_dd.registry.DesiresRecipeTypes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -33,8 +35,6 @@ public class DragonBreathingRecipe extends ProcessingRecipe<DragonBreathingRecip
 		return 12;
 	}
 
-	// TODO: Remap to forge's RecipeWrapper
-	// TODO: Remap to forge's ItemStackHandler
 	@SuppressWarnings("deprecation")
 	public static class DragonBreathingWrapper extends RecipeWrapper {
 		public DragonBreathingWrapper() {

@@ -4,6 +4,8 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder.ProcessingRecipeParams;
 
 import net.minecraft.world.level.Level;
+import uwu.lopyluna.create_dd.infrastructure.porting_lib_classes.ItemStackHandler;
+import uwu.lopyluna.create_dd.infrastructure.porting_lib_classes.RecipeWrapper;
 import uwu.lopyluna.create_dd.registry.DesiresRecipeTypes;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -33,8 +35,6 @@ public class SandingRecipe extends ProcessingRecipe<SandingRecipe.SandingWrapper
 		return 12;
 	}
 
-	// TODO: Remap to forge's RecipeWrapper
-	// TODO: Remap to forge's ItemStackHandler
 	public static class SandingWrapper extends RecipeWrapper {
 		public SandingWrapper() {
 			super(new ItemStackHandler(1));

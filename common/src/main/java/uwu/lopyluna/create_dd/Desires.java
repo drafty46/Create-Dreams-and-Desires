@@ -3,7 +3,6 @@ package uwu.lopyluna.create_dd;
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.*;
 import com.simibubi.create.content.kinetics.base.IRotate;
-import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipHelper;
@@ -16,8 +15,6 @@ import org.slf4j.Logger;
 import uwu.lopyluna.create_dd.compat.DesiresMods;
 import uwu.lopyluna.create_dd.compat.registry.EncasedCompat;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngineBlock;
-import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
-import uwu.lopyluna.create_dd.infrastructure.data.DesiresDatagen;
 import uwu.lopyluna.create_dd.infrastructure.world.DesireBuiltinRegistration;
 import uwu.lopyluna.create_dd.infrastructure.world.DesiresFeatures;
 import uwu.lopyluna.create_dd.infrastructure.world.DesiresPlacementModifiers;
@@ -37,7 +34,7 @@ public class Desires {
     public static final String VERSION = "1.3a.Beta Mid-Dev";
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final Random RANDOM = Create.RANDOM;
-    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
+    public static final DesiresRegistrate REGISTRATE = DesiresRegistrate.create(MOD_ID);
 
     @Nullable
     public static KineticStats create(Item item) {

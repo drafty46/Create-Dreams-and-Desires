@@ -9,12 +9,16 @@ import com.simibubi.create.content.trains.CubeParticleData;
 import com.simibubi.create.foundation.recipe.RecipeApplier;
 import com.simibubi.create.foundation.utility.Color;
 import com.simibubi.create.foundation.utility.VecHelper;
+import dev.architectury.event.EventFactory;
+import io.github.fabricators_of_create.porting_lib.event.common.EntityEvents;
 import it.unimi.dsi.fastutil.objects.Object2ReferenceOpenHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -156,7 +160,6 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
                 particleAccess.spawnExtraParticle(ParticleTypes.WITCH, .125f);
         }
 
-
         @Override
         public void affectEntity(Entity entity, Level level) {
 
@@ -218,7 +221,7 @@ public class DesireFanProcessingTypes extends AllFanProcessingTypes {
                 double d2 = livingEntity.getZ() + (livingEntity.random.nextDouble() - 0.5D) * 64.0D;
 
                 if (!DesiresTags.AllEntityTags.FAN_PROCESSING_IMMUNE_DRAGON_BREATHING.matches(livingEntity)) livingEntity.hurt(DamageSource.DRAGON_BREATH, 4);
-                net.minecraftforge.event.entity.EntityTeleportEvent.EnderEntity event = net.minecraftforge.event.ForgeEventFactory.onEnderTeleport(livingEntity, d0, d1, d2);
+                EntityTeleportEvent.EnderEntity event = ForgeEventFactory.onEnderTeleport(livingEntity, d0, d1, d2);
                 randomTeleport(livingEntity, new Vec3(event.getTargetX(), event.getTargetY(), event.getTargetZ()), livingEntity.level);
                 livingEntity.level.gameEvent(GameEvent.TELEPORT, livingEntity.position(), GameEvent.Context.of(livingEntity));
                 if (!livingEntity.isSilent()) {
