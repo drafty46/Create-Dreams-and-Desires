@@ -1,0 +1,35 @@
+{
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": true,
+  "key": {
+    "A": {
+      "item": "create:andesite_alloy"
+    },
+    "B": {
+      "tag": "forge:ingots/bury_blend"
+    },
+    "C": {
+      "tag": "forge:ingots/copper"
+    },
+    "D": {
+      "tag": "forge:storage_blocks/diamond"
+    },
+    "I": {
+      "tag": "forge:storage_blocks/copper"
+    },
+    "N": {
+      "item": "create_dd:handheld_nozzle"
+    },
+    "S": {
+      "item": "create:shaft"
+    }
+  },
+  "pattern": [
+    "CASAC",
+    "NBDBN",
+    "IB BI"
+  ],
+  "result": {
+    "item": "create_dd:jetpack"
+  }
+}

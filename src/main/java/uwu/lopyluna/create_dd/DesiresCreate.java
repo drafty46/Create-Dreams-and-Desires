@@ -25,6 +25,7 @@ import org.slf4j.Logger;
 import uwu.lopyluna.create_dd.compat.DesiresMods;
 import uwu.lopyluna.create_dd.compat.registry.EncasedCompat;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.furnace_engine.FurnaceEngineBlock;
+import uwu.lopyluna.create_dd.content.items.equipment.visor_helmet.XrayParticle;
 import uwu.lopyluna.create_dd.infrastructure.config.DesiresConfigs;
 import uwu.lopyluna.create_dd.infrastructure.data.DesiresDatagen;
 import uwu.lopyluna.create_dd.infrastructure.world.DesireBuiltinRegistration;
@@ -79,6 +80,7 @@ public class DesiresCreate {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> DesiresPartialModels::init);
 
         //DesiresAllSoundEvents.prepare();
+        XrayParticle.regParticle.PARTICLES.register(modEventBus);
         DesiresSoundEvents.register(modEventBus);
         DesiresTags.init();
         DesiresCreativeModeTabs.init();
@@ -133,7 +135,6 @@ public class DesiresCreate {
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
-
     }
 
     public static void init(final FMLCommonSetupEvent event) {

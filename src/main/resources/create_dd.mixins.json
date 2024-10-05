@@ -23,6 +23,8 @@
     "MixinMountedStorageManager",
     "MixinRotatedPillarKineticBlock",
     "MixinSimpleKineticBlockEntity",
+    "accessor.AccessorEntity",
+    "accessor.AccessorLivingEntity",
     "accessor.AccessorMountedFluidStorage"
   ],
   "injectors": {

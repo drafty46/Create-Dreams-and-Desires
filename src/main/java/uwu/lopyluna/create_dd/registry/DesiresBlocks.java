@@ -38,7 +38,6 @@ import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.util.ForgeSoundType;
-import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.DesireUtil;
 import uwu.lopyluna.create_dd.content.blocks.contraptions.bore_block.BoreBlock;
 import uwu.lopyluna.create_dd.content.blocks.contraptions.bore_block.BoreBlockMovementBehaviour;
@@ -70,6 +69,7 @@ import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidRese
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileBlock;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileCTBehaviour;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileItem;
+import uwu.lopyluna.create_dd.content.items.equipment.jetpack.JetpackBlock;
 
 import java.util.function.Consumer;
 
@@ -485,6 +485,11 @@ public class DesiresBlocks {
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.transform(customItemModel("_", "block"))
 			.register();
+
+	public static final BlockEntry<JetpackBlock> JETPACK = REGISTRATE.block("jetpack", JetpackBlock::new)
+					.initialProperties(SharedProperties::netheriteMetal)
+					.transform(BuilderTransformers.backtank(DesiresItems.JETPACK::get))
+					.register();
 
 	public static final BlockEntry<ItemStockpileBlock> ITEM_STOCKPILE = REGISTRATE.block("item_stockpile", ItemStockpileBlock::new)
 			.initialProperties(SharedProperties::softMetal)

@@ -34,6 +34,9 @@ public class DesiresPartialModels {
 		//LUMBER_SAW_BLADE_VERTICAL_INACTIVE = block("lumber_saw/blade_vertical_inactive"),
 		//LUMBER_SAW_BLADE_VERTICAL_REVERSED = block("lumber_saw/blade_vertical_reversed"),
 		//WEAKENED_HARVESTER_BLADE = block("weakened_harvester/blade"),
+
+		JETPACK_SHAFT = block("jetpack/block_shaft_input"),
+		JETPACK_COGS = block("jetpack/block_cogs"),
 	
 		ENGINE_PISTON = block("furnace_engine/piston"),
 		ENGINE_LINKAGE = block("furnace_engine/linkage"),

@@ -1,5 +1,6 @@
 package uwu.lopyluna.create_dd.registry;
 
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
@@ -16,6 +17,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import uwu.lopyluna.create_dd.DesiresCreate;
 import uwu.lopyluna.create_dd.DesireUtil;
@@ -27,6 +29,8 @@ import uwu.lopyluna.create_dd.content.items.equipment.deforester_saw.DeforesterS
 import uwu.lopyluna.create_dd.content.items.equipment.excavation_drill.ExcavationDrillItem;
 import uwu.lopyluna.create_dd.content.items.equipment.gilded_rose_tools.*;
 import uwu.lopyluna.create_dd.content.items.equipment.handheld_nozzle.HandheldNozzleItem;
+import uwu.lopyluna.create_dd.content.items.equipment.jetpack.JetpackItem;
+import uwu.lopyluna.create_dd.content.items.equipment.visor_helmet.VisorHelmetItem;
 import uwu.lopyluna.create_dd.content.items.materials.ChromaticCompound;
 import uwu.lopyluna.create_dd.content.items.materials.RefinedRadiance;
 import uwu.lopyluna.create_dd.content.items.materials.ShadowSteel;
@@ -302,6 +306,7 @@ public class DesiresItems {
 			.model(AssetLookup.itemModelWithPartials())
 			.properties(p -> p.rarity(Rarity.UNCOMMON))
 			.tag(DesiresTags.AllItemTags.PICKAXE.tag)
+			.tag(AllTags.forgeItemTag("tools/drill"))
 			.register();
 
 	public static final ItemEntry<ClockworkCrossbow> CLOCKWORK_CROSSBOW = REGISTRATE.item("clockwork_crossbow", ClockworkCrossbow::new)
@@ -324,6 +329,33 @@ public class DesiresItems {
 			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
 			.lang("Handheld Block Zapper")
 			.model(AssetLookup.itemModelWithPartials())
+			.register();
+
+	public static final ItemEntry<JetpackItem.JetpackBlockItem> JETPACK_PLACEABLE = REGISTRATE
+			.item("jetpack_placeable",
+					p -> new JetpackItem.JetpackBlockItem(DesiresBlocks.JETPACK.get(), DesiresItems.JETPACK, p))
+			.model((c, p) -> p.withExistingParent(c.getName(), p.mcLoc("item/barrier")))
+			.register();
+
+	public static final ItemEntry<VisorHelmetItem> VISOR_HELMET = REGISTRATE.item("visor_helmet", VisorHelmetItem::new)
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.properties(p -> p.rarity(Rarity.UNCOMMON))
+			.recipe((c, p) -> ShapedRecipeBuilder.shaped(c.get(), 1)
+                    .pattern("BBB")
+                    .pattern("EDE")
+                    .define('D', Tags.Items.STORAGE_BLOCKS_DIAMOND)
+                    .define('B', AllTags.forgeItemTag("ingots/bury_blend"))
+                    .define('E', AllBlocks.EXPERIENCE_BLOCK.get())
+                    .unlockedBy("has_" + getItemName(AllBlocks.EXPERIENCE_BLOCK.get().asItem()), has(AllBlocks.EXPERIENCE_BLOCK.get()))
+                    .save(p, DesireUtil.asResource("crafting/equipment/" + c.getName())))
+			.tag(AllTags.forgeItemTag("armors/heads"))
+			.register();
+
+	public static final ItemEntry<JetpackItem> JETPACK = REGISTRATE.item("jetpack", p -> new JetpackItem(p, JETPACK_PLACEABLE))
+			.tab(() -> DesiresCreativeModeTabs.BASE_CREATIVE_TAB)
+			.properties(p -> p.rarity(Rarity.UNCOMMON))
+			.model(AssetLookup.customGenericItemModel("_", "item"))
+			.tag(AllTags.forgeItemTag("armors/chestplates"))
 			.register();
 
 	public static final ItemEntry<ModularDrillHeadItem> DRILL_VEIN_HEAD = REGISTRATE.item("drill_vein_head",

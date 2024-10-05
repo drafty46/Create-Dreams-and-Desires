@@ -33,6 +33,9 @@ import uwu.lopyluna.create_dd.content.blocks.logistics.burden_chute.BurdenChuteB
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirBlockEntity;
 import uwu.lopyluna.create_dd.content.blocks.logistics.fluid_reservoir.FluidReservoirRenderer;
 import uwu.lopyluna.create_dd.content.blocks.logistics.item_stockpile.ItemStockpileBlockEntity;
+import uwu.lopyluna.create_dd.content.items.equipment.jetpack.JetpackBlockEntity;
+import uwu.lopyluna.create_dd.content.items.equipment.jetpack.JetpackRenderer;
+import uwu.lopyluna.create_dd.content.items.equipment.jetpack.JetpackInstance;
 
 import static uwu.lopyluna.create_dd.DesiresCreate.REGISTRATE;
 
@@ -156,6 +159,13 @@ public class DesiresBlockEntityTypes {
 			.blockEntity("burden_chute", BurdenChuteBlockEntity::new)
 			.validBlocks(DesiresBlocks.BURDEN_CHUTE)
 			.renderer(() -> ChuteRenderer::new)
+			.register();
+
+	public static final BlockEntityEntry<JetpackBlockEntity> JETPACK = REGISTRATE
+			.blockEntity("jetpack", JetpackBlockEntity::new)
+			.instance(() -> JetpackInstance::new)
+			.validBlocks(DesiresBlocks.JETPACK)
+			.renderer(() -> JetpackRenderer::new)
 			.register();
 
 	public static void register() {}

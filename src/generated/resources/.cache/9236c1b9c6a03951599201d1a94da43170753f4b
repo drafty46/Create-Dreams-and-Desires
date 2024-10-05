@@ -1,4 +1,4 @@
-// 1.19.2	2024-09-25T22:38:45.6336296	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2024-10-05T15:27:43.129655	Registrate Provider for create_dd [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 9452bed2fb7ba829ea35644054add91456d3f5d9 assets/create_dd/blockstates/amethyst_block_pillar.json
 64dc32722d3ad05720fa9a200df1de7179cfd890 assets/create_dd/blockstates/basalt_pillar.json
 5fd6e80fe77786dd8fd0c5cfd6d866b44365aa96 assets/create_dd/blockstates/blackstone_pillar.json
@@ -167,6 +167,7 @@ b40ca72b98ec870f2b0e2f003061d63a610c6765 assets/create_dd/blockstates/industrial
 71108aedbb696f04bc91ce48a982a3d24c64869a assets/create_dd/blockstates/industrial_fan.json
 f0038a2804485c81ab0355f39316d0d0cc92b1b7 assets/create_dd/blockstates/inverse_box.json
 11a8cc2940c27360a875f1293c5f05b71b894033 assets/create_dd/blockstates/item_stockpile.json
+5a37d26107b2de4bc9e33951ad200e14a2dea93a assets/create_dd/blockstates/jetpack.json
 34232bdafcaa4455230ef1ba66aee53dda3d1d78 assets/create_dd/blockstates/kinetic_motor.json
 3cd2427db0e92ee2fcf1336716cb59110b082eb5 assets/create_dd/blockstates/large_cog_crank.json
 3116aa8903f1bcc60ab4816613e3a15483314fc5 assets/create_dd/blockstates/layered_amethyst_block.json
@@ -421,8 +422,8 @@ af62e1b2187e70334a3e36986b368feac281d63d assets/create_dd/blockstates/yellow_pad
 2736c91b94b9dd34ed0a702b4b538e6d63bc5c73 assets/create_dd/blockstates/yellow_padded_rubber_stairs.json
 7ac56fd4064658532ee94e7c8def9f604e9528aa assets/create_dd/blockstates/yellow_padded_tiled_rubber.json
 9952df2744c1791ecccc84a34a105cffe18b76d9 assets/create_dd/blockstates/yellow_velvet_block.json
-a9a33c97acd05119ee88ca95c4459b0721455e4f assets/create_dd/lang/en_ud.json
-9c37824fe7eb9a659797112be1b5fa4de7163aeb assets/create_dd/lang/en_us.json
+39b60a3b63bcb8674b4a15469bf55c25e8467903 assets/create_dd/lang/en_ud.json
+ce11e0fc976a5c2b2c9432c7980b46acb6e633b0 assets/create_dd/lang/en_us.json
 186464982087eb2dd6aa9a5bf09cdb29e6326c49 assets/create_dd/models/block/amethyst_block_pillar.json
 37f5da0e49555aed59846ec90f8286e737feb179 assets/create_dd/models/block/amethyst_block_pillar_horizontal.json
 c9845fd31f14aa8e1a83ffc67249b5486a8ff5cc assets/create_dd/models/block/basalt_pillar.json
@@ -1379,6 +1380,8 @@ bc11f629b02a37ef233219907f537bc28eeae4c4 assets/create_dd/models/item/industrial
 1cefd4d4c8b6950bf64d9c434bd20c97f2b283c5 assets/create_dd/models/item/integrated_mechanism.json
 cfa5b5d57dffc03a603933d70e2664698ca45fb0 assets/create_dd/models/item/inverse_box.json
 61f8379891d13196fa6db84bfdecd62c37f6491a assets/create_dd/models/item/item_stockpile.json
+6be1835e985758dd86831c967075e81eeb5e0d66 assets/create_dd/models/item/jetpack.json
+6c53b1a6ed28929b7a0a090edf6101e610f842fc assets/create_dd/models/item/jetpack_placeable.json
 93571da741da1d67793ed36e30f7e40c36be50e1 assets/create_dd/models/item/kinetic_mechanism.json
 8651aa61c57b543d09992b7484fdd9ca4d8e85fe assets/create_dd/models/item/kinetic_motor.json
 ddfa972ff66672b23123f5f55e77cabb926d6f14 assets/create_dd/models/item/lapis_lazuli_shard.json
@@ -1625,6 +1628,7 @@ a840f1300305d7a5e8fb5724f639883426c48bea assets/create_dd/models/item/stripped_r
 047dce6035e8ba19a5c1c6247b46efd2c754191b assets/create_dd/models/item/stripped_spirit_log.json
 b803c049765efd1d01f3d9cf308658ea3e214b2a assets/create_dd/models/item/stripped_spirit_wood.json
 a5a31b8310e7036281d8eee75863b7ae2129ef87 assets/create_dd/models/item/vanilla_milkshake_bucket.json
+71ef2b125dbaa8db1229af54ec7be1e03cddfdc0 assets/create_dd/models/item/visor_helmet.json
 f605a7aafad27858c5b49b3041bce8e0f75e85dc assets/create_dd/models/item/weathered_limestone.json
 836a31633392385e78bbdc2f85b3e9bfc74c72be assets/create_dd/models/item/weathered_limestone_pillar.json
 73f313eff26d37638dde5d1b8c681b15a39c722d assets/create_dd/models/item/white_asphalt_block.json
@@ -1673,6 +1677,7 @@ af7c8dd345add03d0323da5d9a2420a7e87e0b71 data/create_dd/advancements/recipes/cre
 09a5e0c67801506ce96c03375fb0a3d5715be19d data/create_dd/advancements/recipes/create_dd.base/crafting/diamond_shard_from_diamond.json
 cc505c0516349ce25778a8aefca507708cc9c553 data/create_dd/advancements/recipes/create_dd.base/crafting/equipment/deforester_saw.json
 20d3bca6fc8445c7f141e74db501cacfdc309b1d data/create_dd/advancements/recipes/create_dd.base/crafting/equipment/flipped_deforester_saw.json
+871eab1966ddd1faff0ea9904f5df364ab75b92a data/create_dd/advancements/recipes/create_dd.base/crafting/equipment/visor_helmet.json
 89d98456698cd23b75fbf23f3170fbb2b9be8f46 data/create_dd/advancements/recipes/create_dd.base/crafting/fan_catalyst/blasting_sail.json
 51d56ebc80d6f154d7c7b830b4a57660138db172 data/create_dd/advancements/recipes/create_dd.base/crafting/fan_catalyst/freezing_sail.json
 ebef9afc91072ff8b4a8edf48ee5177781a66690 data/create_dd/advancements/recipes/create_dd.base/crafting/fan_catalyst/haunting_sail.json
@@ -2419,6 +2424,7 @@ f6f448bac779f3f9f66c6105cb9a438fb8639c8e data/create_dd/loot_tables/blocks/incom
 293c651f07a133dde2bdd78f2b374c919a98c089 data/create_dd/loot_tables/blocks/industrial_fan.json
 df6ac5504414ce8deecd0e8cff8f3cb5557680d4 data/create_dd/loot_tables/blocks/inverse_box.json
 5d50471a1557001a54e4f9bf1e70bedc74897f5c data/create_dd/loot_tables/blocks/item_stockpile.json
+1dbf4ac85ca21ef20114125ea5316ece6d056ef5 data/create_dd/loot_tables/blocks/jetpack.json
 0e977c58312368c2cf3c6aebe3cffcdf16d58813 data/create_dd/loot_tables/blocks/kinetic_motor.json
 1d5ae425fc53e8f7e80ef529db44229679d3505d data/create_dd/loot_tables/blocks/large_cog_crank.json
 f4d5738c98cbe41fcb05115343c3b3fc0bed4cab data/create_dd/loot_tables/blocks/layered_amethyst_block.json
@@ -2771,6 +2777,7 @@ ffd63f7ed97ad061f92f001dcd2964b499787ea2 data/create_dd/recipes/crafting/decor/y
 c1443f32f168201ddb43f0bfecd39e9a9fd591c7 data/create_dd/recipes/crafting/diamond_shard_from_diamond.json
 b24fc98d611cd2e863281d0cae78ad4b5b480679 data/create_dd/recipes/crafting/equipment/deforester_saw.json
 e5ca4336e9d8b9f150c964bd98adbe0a2ddcb3a3 data/create_dd/recipes/crafting/equipment/flipped_deforester_saw.json
+fb89c6c496a517e06bd118ec35ac987ee54eefae data/create_dd/recipes/crafting/equipment/visor_helmet.json
 b384bd0cf8ae9228699bd0df22c3ba7fbb1e34d8 data/create_dd/recipes/crafting/fan_catalyst/blasting_sail.json
 95b325d8e99679137d5a7d4e41192b74844a091b data/create_dd/recipes/crafting/fan_catalyst/freezing_sail.json
 6679e8f62127572f453c107360d21861c450dfe8 data/create_dd/recipes/crafting/fan_catalyst/haunting_sail.json
@@ -3335,6 +3342,8 @@ da5f86153fc0eb9912f75f9d6421c5037a0834d8 data/forge/tags/blocks/fences/wooden.js
 36a46f100e3f722bd9e51cc0a64a1ae972512ed6 data/forge/tags/fluids/milkshake/strawberry.json
 10d08f749e4a53b350498a6860526f9173c4aa68 data/forge/tags/fluids/milkshake/vanilla.json
 f9fc6ab1b039ea4776c49ddfcd7669cb6f40cfcf data/forge/tags/fluids/sap.json
+fb811f9eaff3794d118e745dd4fbe0191720e0f1 data/forge/tags/items/armors/chestplates.json
+e4a3d362ce7a38822130ae0e6f488e7c2b90fa1d data/forge/tags/items/armors/heads.json
 7e4d7c190c6e1eecf3f2f90a39f8d744c96ac0bf data/forge/tags/items/buckets/chocolate_milkshake.json
 4ae116ee6ab9921cebc50145539a629bac7e5194 data/forge/tags/items/buckets/glowberry_milkshake.json
 92195f88259b1107178ef7c895fb06f1a795e39d data/forge/tags/items/buckets/pumpkin_milkshake.json
@@ -3362,6 +3371,7 @@ df06f6dc3c209acf8cac8a3802e93d49f8e015f3 data/forge/tags/items/stripped_logs.jso
 89b3b9290e412ecec50184e2abd1e6111acf82f6 data/forge/tags/items/stripped_wood.json
 c60dc8abaf1cb14a8e968bf046353bfe2c8355b1 data/forge/tags/items/tools/axe.json
 0be9e280fa0478c68c5a26eda02ff3ac54dc5104 data/forge/tags/items/tools/crossbow.json
+2bc9f39d9911df916a11f30837ce0a89ca65883d data/forge/tags/items/tools/drill.json
 9af1419c0cd5795da94f8a75a6ed6527fcb24033 data/forge/tags/items/tools/hoe.json
 ac6313eb3c75d8e3c2d8e9b356740da183fd563b data/forge/tags/items/tools/pickaxe.json
 6c8e3bb5924a8d209bea83fedd4b785a982c680c data/forge/tags/items/tools/shovel.json
@@ -3377,7 +3387,7 @@ cabf9369e0804dc187e32d7c0db79b1e318f9c04 data/minecraft/tags/blocks/logs.json
 cc534247c177d61b0ae3fe141372fe8dec446b92 data/minecraft/tags/blocks/logs_that_burn.json
 dfc1c85ed4cdda5b2e7895aa7fa3902085b15b0b data/minecraft/tags/blocks/lush_ground_replaceable.json
 b30195033e8823c263d8d0f49218b9ea6bce22b1 data/minecraft/tags/blocks/mineable/axe.json
-2ba0f547c077d94192261df22d1bf72e9f0d9284 data/minecraft/tags/blocks/mineable/pickaxe.json
+a08709afcb2a48491317300ee79873c8d8ca3e57 data/minecraft/tags/blocks/mineable/pickaxe.json
 dfc1c85ed4cdda5b2e7895aa7fa3902085b15b0b data/minecraft/tags/blocks/moss_replaceable.json
 14fb62ff925bb3c18191775df5581cf413d934ba data/minecraft/tags/blocks/non_flammable_wood.json
 5e20e25bfb9040cdef932af04ce01759d4e56468 data/minecraft/tags/blocks/planks.json

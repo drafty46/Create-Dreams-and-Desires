@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": {
+      "tag": "forge:ingots/bury_blend"
+    },
+    "D": {
+      "tag": "forge:storage_blocks/diamond"
+    },
+    "E": {
+      "item": "create:experience_block"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "EDE"
+  ],
+  "result": {
+    "item": "create_dd:visor_helmet"
+  }
+}

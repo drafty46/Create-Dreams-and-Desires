@@ -15,6 +15,7 @@ import uwu.lopyluna.create_dd.DesireUtil;
 import uwu.lopyluna.create_dd.content.blocks.kinetics.multimeter.GaugeObservedPacket;
 import uwu.lopyluna.create_dd.content.items.equipment.InvertFunctionPacket;
 import uwu.lopyluna.create_dd.content.items.equipment.block_zapper.ConfigureBlockZapperPacket;
+import uwu.lopyluna.create_dd.content.packet.JetpackActivatePacket;
 import uwu.lopyluna.create_dd.content.packet.SConfigureConfigPacket;
 
 import java.util.function.BiConsumer;
@@ -30,18 +31,12 @@ public enum DesiresPackets {
 	// Client to Server
 	OBSERVER_GAUGEOMETER(GaugeObservedPacket.class, GaugeObservedPacket::new, PLAY_TO_SERVER),
 
+	JETPACK_ACTIVATE(JetpackActivatePacket.class, JetpackActivatePacket::new, NetworkDirection.PLAY_TO_SERVER),
 	CONFIGURE_BLOCKZAPPER(ConfigureBlockZapperPacket.class, ConfigureBlockZapperPacket::new, PLAY_TO_SERVER),
 	INVERT_CONFIGURE(InvertFunctionPacket.class, InvertFunctionPacket::new, PLAY_TO_SERVER),
-	//TOOLBOX_EQUIP(ToolboxEquipPacket.class, ToolboxEquipPacket::new, PLAY_TO_SERVER),
-	//TOOLBOX_DISPOSE_ALL(ToolboxDisposeDesiresPacket.class, ToolboxDisposeDesiresPacket::new, PLAY_TO_SERVER),
 
 	// Server to Client
-	S_CONFIGURE_CONFIG(SConfigureConfigPacket.class, SConfigureConfigPacket::new, PLAY_TO_CLIENT),
-	//BEAM_EFFECT(ZapperBeamPacket.class, ZapperBeamPacket::new, PLAY_TO_CLIENT),
-	//POTATO_CANNON(PotatoCannonPacket.class, PotatoCannonPacket::new, PLAY_TO_CLIENT),
-	//SYNC_POTATO_PROJECTILE_TYPES(PotatoProjectileTypeManager.SyncPacket.class,
-	//	PotatoProjectileTypeManager.SyncPacket::new, PLAY_TO_CLIENT),
-	;
+	S_CONFIGURE_CONFIG(SConfigureConfigPacket.class, SConfigureConfigPacket::new, PLAY_TO_CLIENT);
 
 	public static final ResourceLocation CHANNEL_NAME = DesireUtil.asResource("main");
 	public static final int NETWORK_VERSION = 3;
@@ -68,6 +63,10 @@ public enum DesiresPackets {
 
 	public static SimpleChannel getChannel() {
 		return channel;
+	}
+
+	public static <MSG> void sendToServer(MSG message) {
+		DesiresPackets.getChannel().sendToServer(message);
 	}
 
 	public static void sendToNear(Level world, BlockPos pos, int range, Object message) {
@@ -106,5 +105,4 @@ public enum DesiresPackets {
 				.add();
 		}
 	}
-
 }

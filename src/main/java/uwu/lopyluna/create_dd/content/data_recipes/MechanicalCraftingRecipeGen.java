@@ -29,6 +29,20 @@ public class MechanicalCraftingRecipeGen extends CreateRecipeProvider {
 
     GeneratedRecipe
 
+            JETPACK = create(DesiresItems.JETPACK::get).returns(1)
+            .recipe(b -> b
+                    .key('B', AllTags.forgeItemTag("ingots/bury_blend"))
+                    .key('C', Tags.Items.INGOTS_COPPER)
+                    .key('D', Tags.Items.STORAGE_BLOCKS_DIAMOND)
+                    .key('I', Tags.Items.STORAGE_BLOCKS_COPPER)
+                    .key('S', AllBlocks.SHAFT.get())
+                    .key('N', DesiresItems.HANDHELD_NOZZLE.get())
+                    .key('A', AllItems.ANDESITE_ALLOY.get())
+                    .patternLine("CASAC")
+                    .patternLine("NBDBN")
+                    .patternLine("IB BI")
+            ),
+
             HANDHELD_NOZZLE = create(DesiresItems.HANDHELD_NOZZLE::get).returns(1)
             .recipe(b -> b
                     .key('B', AllTags.forgeItemTag("storage_blocks/copper"))
