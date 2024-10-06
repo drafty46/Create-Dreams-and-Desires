@@ -46,7 +46,7 @@ public class DesiresCreate {
     
     public static final String NAME = "Create: Dreams n' Desires";
     public static final String MOD_ID = "create_dd";
-    public static final String VERSION = "1.2a.Beta Mid-Dev";
+    public static final String VERSION = "1.2b.Beta Mid-Dev";
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static final Random RANDOM = Create.RANDOM;
