@@ -12,8 +12,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import uwu.lopyluna.create_dd.infrastructure.client.DebugOutliner;
 import uwu.lopyluna.create_dd.infrastructure.gui.DesiresBaseConfigScreen;
-import uwu.lopyluna.create_dd.infrastructure.ponder.DesirePonderTags;
-import uwu.lopyluna.create_dd.infrastructure.ponder.DesiresPonderIndex;
 import uwu.lopyluna.create_dd.registry.DesiresParticleTypes;
 
 import static uwu.lopyluna.create_dd.DesiresCreate.MOD_ID;
@@ -28,13 +26,14 @@ public class DesireClient {
         modEventBus.addListener(DesiresParticleTypes::registerFactories);
     }
 
+    @SuppressWarnings("removal")
     public static void clientInit(final FMLClientSetupEvent event) {
 
         ModLoadingContext.get().getActiveContainer().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
                 () -> new ConfigScreenHandler.ConfigScreenFactory((minecraft, screen) -> new DesiresBaseConfigScreen(screen, MOD_ID)));
 
-        DesirePonderTags.register();
-        DesiresPonderIndex.register();
+        //DesirePonderTags.register();
+        //DesiresPonderIndex.register();
     }
 
 

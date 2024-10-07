@@ -16,31 +16,31 @@ import static uwu.lopyluna.create_dd.DesiresCreate.MOD_ID;
 public class DesiresOreFeaturesEntries {
 
     public static final OreFeatureConfigEntry GABBRO_BLOB =
-            Objects.requireNonNull(create("gabbro_blob", 64, 0.85F, -64, 0).standardDatagenExt())
+            Objects.requireNonNull(create("gabbro_blob", 64, 0.85F * 0.75f, -64, 0).standardDatagenExt())
                     .withBlocks(Couple.create(AllPaletteStoneTypes.GRANITE.baseBlock, DesiresPaletteStoneTypes.GABBRO.baseBlock))
                     .biomeTag(BiomeTags.IS_OVERWORLD)
                     .parent();
 
     public static final OreFeatureConfigEntry DOLOMITE_BLOB =
-            Objects.requireNonNull(create("dolomite_blob", 64, 0.85F, -64, 0).standardDatagenExt())
+            Objects.requireNonNull(create("dolomite_blob", 64, 0.85F * 0.75f, -64, 0).standardDatagenExt())
                     .withBlocks(Couple.create(AllPaletteStoneTypes.DIORITE.baseBlock, DesiresPaletteStoneTypes.DOLOMITE.baseBlock))
                     .biomeTag(BiomeTags.IS_OVERWORLD)
                     .parent();
 
     public static final OreFeatureConfigEntry STRIATED_ERODED_OVERWORLD =
-            Objects.requireNonNull(create("striated_eroded_overworld", 24, 1 / 36f, -64, 0).layeredDatagenExt())
+            Objects.requireNonNull(create("striated_eroded_overworld", 24, (1 / 36f) * 0.75f, -64, 0).layeredDatagenExt())
                     .withLayerPattern(DesiresLayerPatterns.SPACE_ROCK)
                     .biomeTag(BiomeTags.IS_OVERWORLD)
                     .parent();
 
     public static final OreFeatureConfigEntry STRIATED_ERODED_NETHER =
-            Objects.requireNonNull(create("striated_eroded_nether", 24, 1 / 36f, 0, 100).layeredDatagenExt())
+            Objects.requireNonNull(create("striated_eroded_nether", 24, (1 / 36f) * 0.75f, 0, 100).layeredDatagenExt())
                     .withLayerPattern(DesiresLayerPatterns.SPACE_ROCK)
                     .biomeTag(BiomeTags.IS_NETHER)
                     .parent();
 
     public static final OreFeatureConfigEntry STRIATED_ORES_OCEANS =
-            Objects.requireNonNull(create("striated_ores_oceans", 32, 1 / 18f, -30, 70).layeredDatagenExt())
+            Objects.requireNonNull(create("striated_ores_oceans", 32, (1 / 18f) * 0.75f, -30, 70).layeredDatagenExt())
                     .withLayerPattern(DesiresLayerPatterns.WEATHERED_LIMESTONE)
                     .biomeTag(BiomeTags.IS_OCEAN)
                     .parent();

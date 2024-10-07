@@ -48,6 +48,7 @@ public class DesiresConfigs {
 		return config;
 	}
 
+	@SuppressWarnings("removal")
 	public static void register(ModLoadingContext context) {
 		client = register(DClient::new, ModConfig.Type.CLIENT);
 		common = register(DCommon::new, ModConfig.Type.COMMON);

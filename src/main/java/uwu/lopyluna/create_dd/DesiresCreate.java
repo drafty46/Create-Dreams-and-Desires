@@ -40,7 +40,7 @@ import uwu.lopyluna.create_dd.registry.destinies.ExtrasItems;
 import java.util.Random;
 
 
-@SuppressWarnings({"deprecation", "unused"})
+@SuppressWarnings({"removal", "deprecation", "unused"})
 @Mod(DesiresCreate.MOD_ID)
 public class DesiresCreate {
     

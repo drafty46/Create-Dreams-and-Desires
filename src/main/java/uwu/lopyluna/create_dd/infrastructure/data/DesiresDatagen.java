@@ -9,8 +9,6 @@ import uwu.lopyluna.create_dd.content.data_recipes.DesiresRecipeGen;
 import uwu.lopyluna.create_dd.content.data_recipes.MechanicalCraftingRecipeGen;
 import uwu.lopyluna.create_dd.content.data_recipes.SequencedAssemblyRecipeGen;
 import uwu.lopyluna.create_dd.content.data_tags.DesiresRegistrateTags;
-import uwu.lopyluna.create_dd.infrastructure.ponder.DesirePonderTags;
-import uwu.lopyluna.create_dd.infrastructure.ponder.DesiresPonderIndex;
 import uwu.lopyluna.create_dd.registry.DesiresLangPartial;
 
 import java.util.function.BiConsumer;
@@ -49,7 +47,7 @@ public class DesiresDatagen {
 	}
 
 	private static void providePonderLang() {
-		DesirePonderTags.register();
-		DesiresPonderIndex.register();
+		//DesirePonderTags.register();
+		//DesiresPonderIndex.register();
 	}
 }
